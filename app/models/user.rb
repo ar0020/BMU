@@ -31,12 +31,19 @@ class User < ActiveRecord::Base
       :case_sensitive => false
     },
     :format => %r{[a-zA-Z0-9]} # etc.
-=begin    
+  
   def self.create
-    user = User.where("admin == 1").first
-    if (user == null)
+    count = User.count
+    if (user == 0)
       self.admin = 1
     end
   end
-=end
+  
+  def email_required?
+    false
+  end
+  
+  def email_changed?
+    false
+  end
 end
