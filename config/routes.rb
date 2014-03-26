@@ -1,13 +1,13 @@
 BMU::Application.routes.draw do
+  get "administrator/create"
+  get "administrator/index"
+  namespace :administrator do
+    root to: "admin#index"
+  end
+  
   #get "home/index"
   devise_for :users
   
-  get "admin/create_admin", to:'admin#create_admin'
-  get "admin/delete_admin", to:'admin#delete_admin'
-  get 'admin/index', to:'admin#index'
-  namespace :admin do
-    root to: "admin#index"
-  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

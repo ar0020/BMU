@@ -4,3 +4,6 @@ https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-usin
 
 # Add admin to Devise
 https://github.com/plataformatec/devise/wiki/How-To:-Add-an-Admin-role
+
+# Notes for Strong Parameters
+http://blog.sensible.io/2013/08/17/strong-parameters-by-example.html

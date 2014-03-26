@@ -8,13 +8,31 @@ class ApplicationController < ActionController::Base
 
   # Check if logged in user is an admin
   def admin?
-    if current_user.admin == true
+    if current_user.user_level == 1
+      return true
+    end
+    return false
+  end
+  
+  def teller?
+    if current_user.user_level == 2
+      return true
+    end
+    return false
+  end
+  
+  def customer?
+    if current_user.user_level == 3
       return true
     end
     return false
   end
   
   protected
+  
+  def admin_protect
+    admin?
+  end
 
   # Had to implement this for using username instead of email for devise.
   def configure_permitted_parameters

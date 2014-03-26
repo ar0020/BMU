@@ -1,20 +1,13 @@
-class AdminController < ApplicationController
-  before_filter :authorize_member!
+class AdministratorController < ApplicationController
+  before_filter :admin_protect
   
-  def index
-    
-  end  
-  
-  def create_admin
+  def create
     @user = User.find(params[:id])
     @user.update_attribute :admin, true
     #redirect_to root_path
   end
   
-  def delete_admin
-    @user = User.find(params[:id])
-    @user.update_attribute :admin, false  
-    redirect_to root_path  
+  def index
   end
   
 protected

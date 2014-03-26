@@ -32,13 +32,6 @@ class User < ActiveRecord::Base
     },
     :format => %r{[a-zA-Z0-9]} # etc.
   
-  def self.create
-    count = User.count
-    if (user == 0)
-      self.admin = 1
-    end
-  end
-  
   def email_required?
     false
   end
