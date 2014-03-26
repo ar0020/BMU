@@ -3,7 +3,7 @@ class AdministratorController < ApplicationController
   
   def create
     @user = User.find(params[:id])
-    @user.update_attribute :admin, true
+    @user.update_attribute :user_level, 1
     #redirect_to root_path
   end
   

@@ -1,0 +1,6 @@
+<br/>
+Search Results:<br/>
+
+<% for user in @users %>
+	<%= link_to user.username, {:controller=>:user,:action=>:show,:id=>user.id} %><br/>
+<% end %>

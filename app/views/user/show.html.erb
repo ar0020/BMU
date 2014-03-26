@@ -1,0 +1,8 @@
+<h1>User#show</h1>
+<p>Find me in app/views/user/show.html.erb</p>
+
+<% if admin? %>
+	<%= link_to "Make Admin", :controller=>'administrator', :action=>'create', :id=>@user.id %><br/>
+	<%= link_to "Make Teller", :controller=>'teller', :action=>'create', :id=>@user.id %><br/>
+	<%= link_to "Make Customer", :controller=>'customer', :action=>'create', :id=>@user.id %><br/>
+<% end %>

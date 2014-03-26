@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 		 
 	attr_accessor :login
+	
+	# a user should not be able to cheat their user_level
+	#attr_accessible :user_level
   
   def login=(login)
     @login = login

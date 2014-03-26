@@ -1,4 +1,12 @@
 BMU::Application.routes.draw do
+  get "user/index"
+  post "user/search"
+  get "user/search"
+  get "user/show"
+  #resources :user
+  get "teller/create"
+  get "teller/index"
+  get "customer/create"
   get "administrator/create"
   get "administrator/index"
   namespace :administrator do

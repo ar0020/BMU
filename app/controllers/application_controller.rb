@@ -33,6 +33,24 @@ class ApplicationController < ActionController::Base
   def admin_protect
     admin?
   end
+  
+  def teller_protect
+    teller?
+  end
+  
+  def admin_teller_protect
+    if admin? || teller?
+      return true
+    end
+    return false
+  end
+  
+  def protect
+    if admin? || teller? || customer?
+      return true
+    end
+    return false
+  end
 
   # Had to implement this for using username instead of email for devise.
   def configure_permitted_parameters
