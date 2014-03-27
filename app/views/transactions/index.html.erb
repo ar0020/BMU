@@ -1,0 +1,40 @@
+<h1>My Transactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Account</th>
+      <th>Amount</th>
+      <th>Transaction type</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.user_id %></td>
+        <td><%= transaction.account_id %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= transaction.description %></td>
+        <td><%= link_to 'Show', transaction %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user.teller%>
+    <%= link_to 'New Withdrawal', new_withdrawal_path %> |
+    <%= link_to 'New Deposit', new_deposit_path %> |
+    <%= link_to 'New Transfer', new_transfer_path %>
+<% else %>
+    <%= link_to 'New Transfer', new_transfer_path %>
+<% end %>
+

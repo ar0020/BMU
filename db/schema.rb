@@ -13,6 +13,26 @@
 
 ActiveRecord::Schema.define(version: 20140326163748) do
 
+  create_table "accounts", force: true do |t|
+    t.integer  "user_id"
+    t.float    "current_balance"
+    t.string   "account_type"
+    t.float    "monthly_account_rate"
+    t.boolean  "is_active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transactions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "account_id"
+    t.float    "amount"
+    t.string   "transaction_type"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 # Could not dump table "users" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
 

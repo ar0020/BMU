@@ -1,0 +1,35 @@
+<h1>Listing mortgages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Current balance</th>
+      <th>Account type</th>
+      <th>Monthly account rate</th>
+      <th>Is active</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mortgages.each do |mortgage| %>
+      <tr>
+        <td><%= mortgage.user_id %></td>
+        <td><%= mortgage.current_balance %></td>
+        <td><%= mortgage.account_type %></td>
+        <td><%= mortgage.monthly_account_rate %></td>
+        <td><%= mortgage.is_active %></td>
+        <td><%= link_to 'Show', mortgage %></td>
+        <td><%= link_to 'Edit', edit_mortgage_path(mortgage) %></td>
+        <td><%= link_to 'Destroy', mortgage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mortgage', new_mortgage_path %>

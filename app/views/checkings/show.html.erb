@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @checking.user_id %>
+</p>
+
+<p>
+  <strong>Current balance:</strong>
+  <%= @checking.current_balance %>
+</p>
+
+<p>
+  <strong>Account type:</strong>
+  <%= @checking.account_type %>
+</p>
+
+<p>
+  <strong>Monthly account rate:</strong>
+  <%= @checking.monthly_account_rate %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @checking.is_active %>
+</p>
+
+<%= link_to 'Edit', edit_checking_path(@checking) %> |
+<%= link_to 'Back', checkings_path %>

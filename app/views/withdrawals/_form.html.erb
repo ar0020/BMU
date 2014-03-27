@@ -1,0 +1,26 @@
+<%= form_for(@withdrawal) do |f| %>
+  <% if @withdrawal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@withdrawal.errors.count, "error") %> prohibited this withdrawal from being saved:</h2>
+
+      <ul>
+      <% @withdrawal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :account_number_id %>:
+    <%= f.number_field :account_id %>
+  </div>
+  <div class="field">
+    <%= f.label :amount %>:
+    <%= f.text_field :amount %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

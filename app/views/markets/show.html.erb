@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @market.user_id %>
+</p>
+
+<p>
+  <strong>Current balance:</strong>
+  <%= @market.current_balance %>
+</p>
+
+<p>
+  <strong>Account type:</strong>
+  <%= @market.account_type %>
+</p>
+
+<p>
+  <strong>Monthly account rate:</strong>
+  <%= @market.monthly_account_rate %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @market.is_active %>
+</p>
+
+<%= link_to 'Edit', edit_market_path(@market) %> |
+<%= link_to 'Back', markets_path %>

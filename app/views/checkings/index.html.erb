@@ -1,0 +1,35 @@
+<h1>Listing checkings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Current balance</th>
+      <th>Account type</th>
+      <th>Monthly account rate</th>
+      <th>Is active</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @checkings.each do |checking| %>
+      <tr>
+        <td><%= checking.user_id %></td>
+        <td><%= checking.current_balance %></td>
+        <td><%= checking.account_type %></td>
+        <td><%= checking.monthly_account_rate %></td>
+        <td><%= checking.is_active %></td>
+        <td><%= link_to 'Show', checking %></td>
+        <td><%= link_to 'Edit', edit_checking_path(checking) %></td>
+        <td><%= link_to 'Destroy', checking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Checking', new_checking_path %>
