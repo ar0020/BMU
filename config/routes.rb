@@ -1,5 +1,6 @@
 BMU::Application.routes.draw do
   get "user/index"
+  post "user/index"
   post "user/search"
   get "user/search"
   get "user/show"

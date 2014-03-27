@@ -4,7 +4,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 		 
-	attr_accessor :login
+	attr_accessor :login, :count
+	
+	def self.users(user)
+    results = User.limit(50)
+	  results = results.where("users.username LIKE ?", user.username) unless user.username =''
+    results = results.where("users.email LIKE ?", user.email) unless user.email =''
+    results = results.where("users.id = ?", user.id) unless user.id =''
+    results[0].count = results.except(:limit).count
+	  return results
+	end
 	
 	# a user should not be able to cheat their user_level
 	#attr_accessible :user_level
