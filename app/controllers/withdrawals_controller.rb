@@ -27,7 +27,7 @@ class WithdrawalsController < TransactionsController
         format.html { redirect_to transactions_path, notice: 'Withdrawal was successfully created.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'root' }
+        format.html { render action: 'transactions' }
         format.json { render json: @withdrawal.errors, status: :unprocessable_entity }
       end
     end
