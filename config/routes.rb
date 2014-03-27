@@ -1,12 +1,13 @@
 BMU::Application.routes.draw do
   get "user/index"
   post "user/index"
-  get "user/show"
+  get "user/show/:id", to: 'user#show', as: 'user_show'
   get "teller/create"
   get "teller/index"
   get "customer/create"
   get "administrator/create"
-  get "administrator/index"
+  #get "administrator/index"
+  get 'administrator', to: 'administrator#index'
   namespace :administrator do
     root to: "administrator#index"
   end
@@ -18,7 +19,7 @@ BMU::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  root :to => 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
