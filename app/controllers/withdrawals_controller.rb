@@ -1,8 +1,10 @@
 class WithdrawalsController < TransactionsController
-
   # GET /withdrawals/new
   def new
     @withdrawal = Withdrawal.new
+  end
+
+  def show
   end
 
   # POST /withdrawals
@@ -17,7 +19,7 @@ class WithdrawalsController < TransactionsController
     @account.current_balance -= @withdrawal.amount.abs
 
     respond_to do |format|
-      if @account.is_active
+      if @account.is_active?
         Withdrawal.transaction do
           @withdrawal.save!
           @account.save!
@@ -25,7 +27,7 @@ class WithdrawalsController < TransactionsController
         format.html { redirect_to transactions_path, notice: 'Withdrawal was successfully created.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'transactions' }
+        format.html { render action: 'root' }
         format.json { render json: @withdrawal.errors, status: :unprocessable_entity }
       end
     end
