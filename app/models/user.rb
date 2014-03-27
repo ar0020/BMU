@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 		 
-	attr_accessor :login, :count
+	attr_accessor :login, :count, :level
 	
+	# Search function for User table.
 	def self.users(user)
     results = User.limit(50)
 	  results = results.where("users.username LIKE ?", user.username) unless user.username =''
@@ -13,6 +14,19 @@ class User < ActiveRecord::Base
     results = results.where("users.id = ?", user.id) unless user.id =''
     results[0].count = results.except(:limit).count
 	  return results
+	end
+	
+	# Humanizes user_level for readability
+	def level
+    if self.user_level == 1
+      level= "Admin"
+    elsif self.user_level == 2
+      level= "Teller"
+    elsif self.user_level == 3
+      level= "Customer"
+    else
+      level= "NO LEVEL!"
+    end
 	end
 	
 	# a user should not be able to cheat their user_level

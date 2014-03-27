@@ -45,14 +45,14 @@ class ApplicationController < ActionController::Base
   end
   
   def admin_teller_protect
-    if !admin? || !teller?
+    if !admin? && !teller?
       flash[:notice] = "Admin & Teller Only Function"
       redirect_to :controller=>:home, :action=>:index
     end
   end
   
   def protect
-    if !admin? || !teller? || !customer?
+    if !admin? && !teller? && !customer?
       flash[:notice] = "Contact Administration: No user level assigned."
       redirect_to :controller=>:home, :action=>:index
     end

@@ -3,11 +3,11 @@ BMU::Application.routes.draw do
   post "user/index"
   get "user/show/:id", to: 'user#show', as: 'user_show'
   get "teller/create"
-  get "teller/index"
+  get "teller", to: 'teller#index', as: 'teller_panel'
   get "customer/create"
   get "administrator/create"
   #get "administrator/index"
-  get 'administrator', to: 'administrator#index'
+  get 'administrator', to: 'administrator#index', as: 'admin_panel'
   namespace :administrator do
     root to: "administrator#index"
   end
