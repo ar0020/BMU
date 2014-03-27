@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   # Check if logged in user is an admin
   def admin?
-    if current_user.user_level == 1
+    if user_signed_in? && current_user.user_level == 1
       return true
     end
     return false
@@ -31,25 +31,31 @@ class ApplicationController < ActionController::Base
   protected
   
   def admin_protect
-    admin?
+    if !admin?
+      flash[:notice] = "Admin Only Function"
+      redirect_to :controller=>:home, :action=>:index
+    end
   end
   
   def teller_protect
-    teller?
+    if !teller?
+      flash[:notice] = "Teller Only Function"
+      redirect_to :controller=>:home, :action=>:index
+    end
   end
   
   def admin_teller_protect
-    if admin? || teller?
-      return true
+    if !admin? || !teller?
+      flash[:notice] = "Admin & Teller Only Function"
+      redirect_to :controller=>:home, :action=>:index
     end
-    return false
   end
   
   def protect
-    if admin? || teller? || customer?
-      return true
+    if !admin? || !teller? || !customer?
+      flash[:notice] = "Contact Administration: No user level assigned."
+      redirect_to :controller=>:home, :action=>:index
     end
-    return false
   end
 
   # Had to implement this for using username instead of email for devise.
