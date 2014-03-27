@@ -4,11 +4,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    if current_user.teller || current_user.admin
-      @transactions = Transaction.all
-    else
-      @transactions = Transaction.all
-    end
+    @transactions = Transaction.all
   end
 
   # GET /transactions/1
@@ -26,5 +22,9 @@ class TransactionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
       @transaction = Transaction.find(params[:id])
+    end
+
+    def transaction_params
+      params.require(:transation).permit(:user_id, :account_id, :amount, :transaction_type, :description)
     end
 end

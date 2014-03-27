@@ -14,7 +14,7 @@ class CheckingsController < AccountsController
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
         format.json { render action: 'show', status: :created, location: @account }
       else
-        format.html { render controller: 'account' action: 'new' }
+        format.html { render controller: 'account', action: 'new' }
         format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end

@@ -1,11 +1,11 @@
 BMU::Application.routes.draw do
-  resource :accounts
+  resources :accounts
   post "accounts", to: 'accounts/create', as: 'create_account'
   post "accounts", to: 'checking/create', as: 'create_checking'
-  resource :transactions
-  resource :transfers
-  resource :withdrawals
-  resource :deposits
+  resources :transactions
+  resources :transfers
+  resources :withdrawals
+  resources :deposits
   get "user/index"
   post "user/index"
   get "user/show/:id", to: 'user#show', as: 'user_show'
