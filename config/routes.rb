@@ -1,5 +1,7 @@
 BMU::Application.routes.draw do
   resource :accounts
+  post "accounts", to: 'accounts/create', as: 'create_account'
+  post "accounts", to: 'checking/create', as: 'create_checking'
   resource :transactions
   resource :transfers
   resource :withdrawals
@@ -18,7 +20,7 @@ BMU::Application.routes.draw do
   end
 
   #get "home/index"
-  devise_for :users, :controllers => { :registrations => 'registrations'}
+  devise_for :users, :controllers => { :registrations => 'registrations', :sessions => "sessions"}
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

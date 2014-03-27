@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
 		 
 	attr_accessor :login, :count, :level
 	
+	#def self.user(id)
+	#  return User.where(:id=>id).first
+	#end
+	
 	# Search function for User table.
 	def self.users(user)
     results = User.limit(50)

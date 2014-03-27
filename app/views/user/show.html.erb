@@ -1,7 +1,16 @@
 <h1><%= @user.username%></h1>
 <%= link_to 'Edit profile', edit_user_registration_path %><br/>
 <% if admin? %>
+<fieldset>
+	<legend>Admin Panel</legend>
+	<%= link_to "Create Account", new_accounts_path(:id=>@user.id) %><br/>
 	<%= link_to "Make Admin", :controller=>'administrator', :action=>'create', :id=>@user.id %><br/>
 	<%= link_to "Make Teller", :controller=>'teller', :action=>'create', :id=>@user.id %><br/>
 	<%= link_to "Make Customer", :controller=>'customer', :action=>'create', :id=>@user.id %><br/>
+</fieldset>
+<% end %>
+
+<h2>Accounts</h2>
+<% for account in @accounts %>
+	<%= account.account_type%>
 <% end %>

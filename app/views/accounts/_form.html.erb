@@ -12,25 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :current_balance %><br>
-    <%= f.text_field :current_balance %>
-  </div>
-  <div class="field">
     <%= f.label :account_type %><br>
-    <%= f.text_field :account_type %>
+    <%= f.select(:account_type, :values=>Account::TYPES) %>
   </div>
   <div class="field">
     <%= f.label :monthly_account_rate %><br>
-    <%= f.text_field :monthly_account_rate %>
+    <%= f.number_field :monthly_account_rate, { :value => '0' } %>
   </div>
   <div class="field">
     <%= f.label :is_active %><br>
-    <%= f.check_box :is_active %>
+    <%= f.check_box :is_active, { :checked => true } %>
   </div>
+  <%= f.hidden_field(:user_id)%>
   <div class="actions">
     <%= f.submit %>
   </div>
