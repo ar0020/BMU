@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  #before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :set_account, only: [:show, :edit, :update, :destroy, :enable, :disable]
   before_filter :admin_protect, except: [:show]
 
   # GET /accounts
@@ -53,21 +53,42 @@ class AccountsController < ApplicationController
   # DISABLE /accounts/1
   # DISABLE /accounts/1.json
   def disable
-    @account.is_active = false
+    @account.update_attribute :is_active, false
     respond_to do |format|
-      format.html { redirect_to accounts_url }
+      format.html { redirect_to user_show_path(@account.user_id) }
       format.json { head :no_content }
     end
   end
+  
+  def enable
+    @account.update_attribute :is_active, true
+    respond_to do |format|
+      format.html { redirect_to user_show_path(@account.user_id) }
+      format.json { head :no_content }
+    end
+  end
+  
+  def destroy
+    @transaction = Transaction.where(:account_id=>@account.id).first
+    @user = User.find(@account.user_id)
+    if @transaction.nil?
+      @account.delete
+      flash[:notice] = "Account has been deleted."
+    else
+      flash[:notice] = "No longer able to delete account. Try disabling it."
+    end
+    redirect_to user_show_path(@user)
+  end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_account
-      @account = Account.find(params[:id])
-    end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_account
+    @account = Account.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def account_params
-      params.require(:account).permit(:user_id, :account_type, :monthly_account_rate, :is_active)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def account_params
+    params.require(:account).permit(:user_id, :monthly_account_rate, :is_active)
+  end
 end

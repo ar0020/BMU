@@ -9,20 +9,26 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @accounts.each do |account| %>
-      <tr>
+      <tr class="<%= cycle("odd", "even") -%>">
         <td><%= account.account_type %></td>
         <td><%= number_to_currency(account.current_balance) %></td>
         <td><%= number_to_percentage(account.monthly_account_rate) %></td>
         <td><%= link_to 'Account History', account %></td>
         <% if admin? %>
-        <td><%= link_to 'Edit', account %></td>
-        <td><%= link_to 'Disable', account %></td>
-        <% end %>
+	        <td><%= link_to 'Edit', account %></td>
+	        <% if account.is_active == true -%>
+	        	<td><%= link_to 'Disable', disable_account_path(account) %></td>
+	        <% else -%>
+	        	<td><%= link_to 'Enable', enable_account_path(account) %></td>
+	        <% end -%>
+	        <td><%= link_to "Delete", account_path(account), :method=>:delete, :confirm=>"Are yousure?" %></td>
+	   	<% end %>
       </tr>
     <% end %>
   </tbody>

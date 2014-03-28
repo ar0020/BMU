@@ -1,0 +1,26 @@
+<h2>Transactions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Amount</th>
+      <th>Transaction type</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.account_id %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= link_to 'Show', transaction %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+

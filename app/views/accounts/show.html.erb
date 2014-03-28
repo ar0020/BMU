@@ -9,7 +9,7 @@
   <%= number_to_percentage(@account.monthly_account_rate) %><br>
 </p>
 <% if !@transactions.blank? %>
- <%= render :template => "transactions/index" %>
+ <%= render :partial => "transactions/transactions" %>
 <% else %>
- <h3>No Account History</h3>
+ <h3>No Transaction History</h3>
 <% end %>
