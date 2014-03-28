@@ -1,5 +1,11 @@
 BMU::Application.routes.draw do
   resources :accounts
+  resources :savings
+  resources :checkings
+  resources :mortgages
+  resources :credits
+  resources :markets
+
   post "accounts", to: 'accounts/create', as: 'create_account'
   post "accounts", to: 'checking/create', as: 'create_checking'
 

@@ -4,17 +4,18 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   # GET /accounts.json
-  
+
   def index
     if params[:user]
       @account = Account.new(search_params)
       @accounts = Account.users(@user)
     end
-    @account = Account.new  
+    @account = Account.new
     respond_to do |format|
      format.html #responds with default html file
      format.js #this will be the javascript file we respond with
     end
+    @accounts = Account.all
   end
 
   # GET /accounts/1
@@ -36,9 +37,19 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
     @account.current_balance = 0.00
 
-    if @account.account_type == "Checking"
-      render create_checking(@account)
+    case @account.account_type
+      when "Checking"
+        redirect_to new_checking_path
+      when "Saving"
+        redirect_to new_saving_path
+      when "Market"
+        redirect_to new_market_path
+      when "Credit"
+        redirect_to new_credit_path
+      when "Mortgage"
+        redirect_to new_mortgage_path
     end
+
     respond_to do |format|
       if true #@account.save
         format.html { redirect_to @account, notice: 'Account was successfully created.' }

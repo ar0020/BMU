@@ -3,7 +3,7 @@
 <% if admin? %>
 <fieldset>
 	<legend>Admin Panel</legend>
-	<%= link_to "Create Account", new_accounts_path(:id=>@user.id) %><br/>
+	<%= link_to "Create Account", new_account_path(:id=>@user.id) %><br/>
 	<%= link_to "Make Admin", :controller=>'administrator', :action=>'create', :id=>@user.id %><br/>
 	<%= link_to "Make Teller", :controller=>'teller', :action=>'create', :id=>@user.id %><br/>
 	<%= link_to "Make Customer", :controller=>'customer', :action=>'create', :id=>@user.id %><br/>
