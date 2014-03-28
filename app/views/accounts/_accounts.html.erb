@@ -8,8 +8,10 @@
       <th>Interest Rate</th>
       <th></th>
       <th></th>
-      <th></th>
-      <th></th>
+      <% if admin? or teller? %>
+	      <th></th>
+	      <th></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -28,6 +30,10 @@
 	        	<td><%= link_to 'Enable', enable_account_path(account) %></td>
 	        <% end -%>
 	        <td><%= link_to "Delete", account_path(account), :method=>:delete, :confirm=>"Are yousure?" %></td>
+	   	<% end %>
+	   	<% if teller? %>
+	   		<td><%= link_to "Deposit", new_deposit_to_account_path(account)%></td>
+	   		<td></td>
 	   	<% end %>
       </tr>
     <% end %>

@@ -3,11 +3,13 @@
 <% if admin? %>
 <fieldset>
 	<legend>Admin Panel</legend>
-	<%= link_to "Create Checking Account", new_checking_path(:id=>@user.id) %><br/>
-	<%= link_to "Create Credit Account", new_credit_path(:id=>@user.id) %><br/>
-	<%= link_to "Create Market Account", new_market_path(:id=>@user.id) %><br/>
-	<%= link_to "Create Mortgage Account", new_mortgage_path(:id=>@user.id) %><br/>
-	<%= link_to "Create Savings Account", new_saving_path(:id=>@user.id) %><br/>
+	<% if @user.user_level == 3 %>
+		<%= link_to "Create Checking Account", new_checking_path(:id=>@user.id) %><br/>
+		<%= link_to "Create Credit Account", new_credit_path(:id=>@user.id) %><br/>
+		<%= link_to "Create Market Account", new_market_path(:id=>@user.id) %><br/>
+		<%= link_to "Create Mortgage Account", new_mortgage_path(:id=>@user.id) %><br/>
+		<%= link_to "Create Savings Account", new_saving_path(:id=>@user.id) %><br/>
+	<% end %>
 	<%= link_to "Make Admin", :controller=>'administrator', :action=>'create', :id=>@user.id %><br/>
 	<%= link_to "Make Teller", :controller=>'teller', :action=>'create', :id=>@user.id %><br/>
 	<%= link_to "Make Customer", :controller=>'customer', :action=>'create', :id=>@user.id %><br/>
