@@ -1,7 +1,19 @@
 BMU::Application.routes.draw do
   resources :accounts
-  post "accounts", to: 'accounts/create', as: 'create_account'
-  post "accounts", to: 'checking/create', as: 'create_checking'
+  #get "accounts/new", to: 'accounts#new', as: 'new_accounts'
+  #post "accounts/create", to: 'accounts#create', as: 'create_accounts'
+  resources :checkings
+  #get "checkings/new", to: 'checkings#new', as: 'new_checkings'
+  #post "checkings/create", to: 'checkings#create', as: 'checkings'
+  #get "checkings/show", to: 'checkings#show', as: 'checking'
+  get "credits/new", to: 'credits#new', as: 'new_credits'
+  post "credits/create", to: 'credits#create', as: 'create_credits'
+  get "markets/new", to: 'markets#new', as: 'new_markets'
+  post "markets/create", to: 'markets#create', as: 'create_markets'
+  get "mortgages/new", to: 'mortgages#new', as: 'new_mortgages'
+  post "mortgages/create", to: 'mortgages#create', as: 'create_mortgages'
+  get "regulars/new", to: 'regulars#new', as: 'new_regulars'
+  post "regulars/create", to: 'regulars#create', as: 'create_regulars'
   resources :transactions
   resources :transfers
   resources :withdrawals

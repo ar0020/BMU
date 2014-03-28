@@ -23,7 +23,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @transactions = Transaction.transactions(@account.id)
   end
-
+=begin
   def new
     @user = User.find(params[:id])
     @account = Account.new
@@ -49,7 +49,7 @@ class AccountsController < ApplicationController
       end
     end
   end
-
+=end
 
   # DISABLE /accounts/1
   # DISABLE /accounts/1.json

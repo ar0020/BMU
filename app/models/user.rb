@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 		 
-	attr_accessor :login, :count, :level
+	attr_accessor :login, :level
 	
 	#def self.user(id)
 	#  return User.where(:id=>id).first
@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
 	  results = results.where("users.username LIKE ?", user.username) unless user.username =''
     results = results.where("users.email LIKE ?", user.email) unless user.email =''
     results = results.where("users.id = ?", user.id) unless user.id =''
-    results[0].count = results.except(:limit).count
 	  return results
 	end
 	
