@@ -2,9 +2,7 @@ class WithdrawalsController < TransactionsController
   # GET /withdrawals/new
   def new
     @withdrawal = Withdrawal.new
-  end
 
-  def show
   end
 
   # POST /withdrawals
@@ -19,7 +17,7 @@ class WithdrawalsController < TransactionsController
     @account.current_balance -= @withdrawal.amount.abs
 
     respond_to do |format|
-      if @account.is_active?
+      if @withdrawal.validate_transaction_on_account?
         Withdrawal.transaction do
           @withdrawal.save!
           @account.save!

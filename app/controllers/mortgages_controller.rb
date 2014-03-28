@@ -1,24 +1,21 @@
 class MortgagesController < AccountsController
-  before_action :set_mortgage, only: [:show, :edit, :update]
 
-  # GET /mortgages/1
-  # GET /mortgages/1.json
-  def show
+  def new
+    @user = User.find(params[:id])
+    @mortgage = Mortgage.new
+    @mortgage.user_id = @user.id
   end
 
-  # GET /mortgages/1/edit
-  def edit
-  end
+  def create
+    @mortgage = Mortgage.new(mortgage_params)
+    @mortgage.account_type = "Mortgage"
 
-  # PATCH/PUT /mortgages/1
-  # PATCH/PUT /mortgages/1.json
-  def update
     respond_to do |format|
-      if @mortgage.update(mortgage_params)
-        format.html { redirect_to @mortgage, notice: 'Mortgage was successfully updated.' }
-        format.json { head :no_content }
+      if @mortgage.save
+        format.html { redirect_to root_path, notice: 'Mortgage account was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @account }
       else
-        format.html { render action: 'edit' }
+        format.html { render controller: 'mortgage', action: 'new' }
         format.json { render json: @mortgage.errors, status: :unprocessable_entity }
       end
     end

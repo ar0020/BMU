@@ -17,7 +17,7 @@ class DepositsController < TransactionsController
     @account.current_balance += @deposit.amount.abs
 
     respond_to do |format|
-      if @account.is_active
+      if @deposit.validate_transaction_on_account?
         Deposit.transaction do
           @deposit.save!
           @account.save!

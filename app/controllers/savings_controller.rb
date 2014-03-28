@@ -1,28 +1,21 @@
 class SavingsController < AccountsController
-  before_action :set_saving, only: [:show, :edit, :update]
 
-
-  # GET /savings/1
-  # GET /savings/1.json
-  def show
-
+  def new
+    @user = User.find(params[:id])
+    @saving = Saving.new
+    @saving.user_id = @user.id
   end
 
+  def create
+    @saving = Saving.new(saving_params)
+    @saving.account_type = "Saving"
 
-  # GET /savings/1/edit
-  def edit
-  end
-
-
-  # PATCH/PUT /savings/1
-  # PATCH/PUT /savings/1.json
-  def update
     respond_to do |format|
-      if @saving.update(saving_params)
-        format.html { redirect_to @saving, notice: 'Saving was successfully updated.' }
-        format.json { head :no_content }
+      if @saving.save
+        format.html { redirect_to root_path, notice: 'Saving account was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @account }
       else
-        format.html { render action: 'edit' }
+        format.html { render controller: 'saving', action: 'new' }
         format.json { render json: @saving.errors, status: :unprocessable_entity }
       end
     end

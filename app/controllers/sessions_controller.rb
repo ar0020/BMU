@@ -1,8 +1,7 @@
 class SessionsController  < Devise::SessionsController
   prepend_before_filter :require_no_authentication, only: [ :new, :create ]
   prepend_before_filter :allow_params_authentication!, only: :create
-  prepend_before_filter only: [ :create, :destroy ] { request.env["devise.skip_timeout"] = true }
-
+  prepend_before_filter only: [ :create, :destroy ]# { request.env["devise.skip_timeout"] = true }
   # GET /resource/sign_in
   def new
     self.resource = resource_class.new(sign_in_params)

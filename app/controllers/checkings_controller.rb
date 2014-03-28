@@ -1,44 +1,21 @@
 class CheckingsController < AccountsController
-  before_action :set_checking, only: [:show, :edit, :update, :destroy]
 
+  def new
+    @user = User.find(params[:id])
+    @checking = Checking.new
+    @checking.user_id = @user.id
+  end
 
   def create
-    @account = Account.new(account_params)
-    @account.current_balance = 0.00
+    @checking = Checking.new(checking_params)
+    @checking.account_type = "Checking"
 
-    if @account.account_type == "Checking"
-      render create_checking(@account)
-    end
     respond_to do |format|
-      if true #@account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @account }
+      if @checking.save
+        format.html { redirect_to account_path(@checking), notice: 'Checking account was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @account }
       else
-        format.html { render controller: 'account', action: 'new' }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # GET /checkings/1
-  # GET /checkings/1.json
-  def show
-  end
-
-
-  # GET /checkings/1/edit
-  def edit
-  end
-
-  # PATCH/PUT /checkings/1
-  # PATCH/PUT /checkings/1.json
-  def update
-    respond_to do |format|
-      if @checking.update(checking_params)
-        format.html { redirect_to @checking, notice: 'Checking was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
+        format.html { render controller: 'checking', action: 'new' }
         format.json { render json: @checking.errors, status: :unprocessable_entity }
       end
     end

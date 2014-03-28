@@ -11,6 +11,15 @@ class Account < ActiveRecord::Base
     @accounts = Account.find(offset)
   end
 
+  def self.search(query)
+    if query
+      search_condition = "%" + query + "%"
+      find(:all, :conditions => ["account_type LIKE ? OR user_id LIKE ?", search_condition, search_condition])
+    else
+      find(:all)
+    end
+  end
+
   def rate
   end
 

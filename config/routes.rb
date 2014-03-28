@@ -1,13 +1,11 @@
 BMU::Application.routes.draw do
-  resources :accounts
-  resources :savings
-  resources :checkings
-  resources :mortgages
-  resources :credits
-  resources :markets
 
-  post "accounts", to: 'accounts/create', as: 'create_account'
-  post "accounts", to: 'checking/create', as: 'create_checking'
+  resources :accounts, :only => [:index, :show, :update]
+  resources :savings, :only => [:new, :create]
+  resources :checkings, :only => [:new, :create]
+  resources :mortgages, :only => [:new, :create]
+  resources :credits, :only => [:new, :create]
+  resources :markets, :only => [:new, :create]
 
   resources :transactions, :only => [:index, :show]
   resources :transfers, :only => [:new, :create]

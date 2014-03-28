@@ -1,13 +1,11 @@
-<h1>My Accounts</h1>
+<h2>Accounts</h2>
 
 <table>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Current balance</th>
       <th>Account type</th>
-      <th>Monthly account rate</th>
-      <th>Is active</th>
+      <th>Current balance</th>
+      <th>Interest Rate</th>
       <th></th>
       <th></th>
       <th></th>
@@ -17,19 +15,17 @@
   <tbody>
     <% @accounts.each do |account| %>
       <tr>
-        <td><%= account.user_id %></td>
-        <td><%= account.current_balance %></td>
         <td><%= account.account_type %></td>
-        <td><%= account.monthly_account_rate %></td>
-        <td><%= account.is_active %></td>
-        <td><%= link_to 'Show', account %></td>
-        <td><%= link_to 'Edit', edit_account_path(account) %></td>
-        <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= number_to_currency(account.current_balance) %></td>
+        <td><%= number_to_percentage(account.monthly_account_rate) %></td>
+        <td><%= link_to 'Account History', account %></td>
+        <% if admin? %>
+        <td><%= link_to 'Edit', account %></td>
+        <td><%= link_to 'Disable', account %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
 
-<%= link_to 'New Account', new_account_path %>

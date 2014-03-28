@@ -12,10 +12,9 @@ class AccountsController < ApplicationController
     end
     @account = Account.new
     respond_to do |format|
-     format.html #responds with default html file
-     format.js #this will be the javascript file we respond with
+      format.html #responds with default html file
+      format.js #this will be the javascript file we respond with
     end
-    @accounts = Account.all
   end
 
   # GET /accounts/1
@@ -24,43 +23,6 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @transactions = Transaction.transactions(@account.id)
   end
-
-  def new
-    @user = User.find(params[:id])
-    @account = Account.new
-    @account.user_id = @user.id
-  end
-
-  # POST /accounts
-  # POST /accounts.json
-  def create
-    @account = Account.new(account_params)
-    @account.current_balance = 0.00
-
-    case @account.account_type
-      when "Checking"
-        redirect_to new_checking_path
-      when "Saving"
-        redirect_to new_saving_path
-      when "Market"
-        redirect_to new_market_path
-      when "Credit"
-        redirect_to new_credit_path
-      when "Mortgage"
-        redirect_to new_mortgage_path
-    end
-
-    respond_to do |format|
-      if true #@account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @account }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
 
   # DISABLE /accounts/1
   # DISABLE /accounts/1.json
