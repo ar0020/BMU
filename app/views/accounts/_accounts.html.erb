@@ -33,7 +33,7 @@
 	   	<% end %>
 	   	<% if teller? %>
 	   		<td><%= link_to "Deposit", new_deposit_to_account_path(account)%></td>
-	   		<td></td>
+	   		<td><%= link_to "Withdraw", new_withdrawal_from_account_path(account)%></td>
 	   	<% end %>
       </tr>
     <% end %>

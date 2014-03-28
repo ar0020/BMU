@@ -2,30 +2,23 @@ class WithdrawalsController < TransactionsController
   # GET /withdrawals/new
   def new
     @withdrawal = Withdrawal.new
-
+    if params[:id]
+      @withdrawal.account_id = params[:id]
+    end
   end
 
   # POST /withdrawals
   # POST /withdrawals.json
   def create
-    @withdrawal = Withdrawal.new(withdrawal_params)
-    @account = Account.find(@withdrawal.account_id)
-
+    @withdrawal = Withdrawal.new(deposit_params)
     @withdrawal.user_id = current_user.id
-    @withdrawal.transaction_type = 'Withdrawal'
-
-    @account.current_balance -= @withdrawal.amount.abs
 
     respond_to do |format|
-      if @withdrawal.validate_transaction_on_account?
-        Withdrawal.transaction do
-          @withdrawal.save!
-          @account.save!
-        end
-        format.html { redirect_to transactions_path, notice: 'Withdrawal was successfully created.' }
+      if @withdrawal.deposit
+        format.html { redirect_to transactions_path, notice: 'Deposit was successfully created.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'transactions' }
+        format.html { render action: 'new' }
         format.json { render json: @withdrawal.errors, status: :unprocessable_entity }
       end
     end

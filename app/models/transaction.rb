@@ -6,7 +6,7 @@ class Transaction < ActiveRecord::Base
   CREDIT   = ["Deposit", "Withdrawal", "Transfer"]
   MARKET   = ["Deposit", "Withdrawal"]
   SAVING   = ["Deposit", "Withdrawal"]
-
+  
   def self.transactions(account_id)
     results = Transaction.limit(50)
     results = results.where("transactions.account_id = ?", account_id)

@@ -3,10 +3,10 @@
 <table>
   <thead>
     <tr>
-      <th>Account</th>
+      <th>Account Number</th>
       <th>Amount</th>
-      <th>Transaction type</th>
-      <th></th>
+      <th>Transaction Type</th>
+      <th>Date</th>
     </tr>
   </thead>
 
@@ -14,9 +14,9 @@
     <% @transactions.each do |transaction| %>
       <tr>
         <td><%= transaction.account_id %></td>
-        <td><%= transaction.amount %></td>
+        <td><%= number_to_currency(transaction.amount) %></td>
         <td><%= transaction.transaction_type %></td>
-        <td><%= link_to 'Show', transaction %></td>
+        <td><%= transaction.created_at.strftime("%d %b. %Y : %I:%M%p") %></td>
       </tr>
     <% end %>
   </tbody>

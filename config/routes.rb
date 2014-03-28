@@ -9,10 +9,13 @@ BMU::Application.routes.draw do
   resources :credits, :only => [:new, :create]
   resources :markets, :only => [:new, :create]
 
-  resources :transactions, :only => [:index, :show]
+  resources :transactions, :only => [:index]
   resources :transfers, :only => [:new, :create]
-  resources :withdrawals, :only => [:new, :create]
+  #resources :withdrawals, :only => [:new, :create]
   #resources :deposits, :only => [:new, :create]
+  get 'withdrawals/new', to: 'withdrawals#new', as: 'new_withdrawal'
+  get 'withdrawals/new/:id', to: 'withdrawals#new', as: 'new_withdrawal_from_account'
+  post 'withdrawals/create', to: 'withdrawals#create', as: 'withdrawals'
   get 'deposits/new', to: 'deposits#new', as: 'new_deposit'
   get 'deposits/new/:id', to: 'deposits#new', as: 'new_deposit_to_account'
   post 'deposits/create', to: 'deposits#create', as: 'deposits'

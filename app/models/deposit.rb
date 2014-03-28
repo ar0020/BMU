@@ -17,7 +17,8 @@ class Deposit < Transaction
     user = User.find(self.user_id)
     # Validates that user either owns the account or the user is a teller.
     # Validates this is an active account.
-    if (user.id != account.user_id && user.user_level != 2) || !account.is_active?
+    # Validates that this type of account can be deposited to.
+    if (user.id != account.user_id && user.user_level != 2) || !account.is_active? || self.validate_transaction_on_account?
       return false
     end
     if user.user_level == 2
