@@ -3,11 +3,11 @@
 <% if admin? %>
 <fieldset>
 	<legend>Admin Panel</legend>
-	<%= link_to "Create Checking Account", new_checkings_path(:id=>@user.id) %><br/>
-	<%= link_to "Create Credit Account", new_credits_path(:id=>@user.id) %><br/>
-	<%= link_to "Create Market Account", new_markets_path(:id=>@user.id) %><br/>
-	<%= link_to "Create Mortgage Account", new_mortgages_path(:id=>@user.id) %><br/>
-	<%= link_to "Create Regular Account", new_regulars_path(:id=>@user.id) %><br/>
+	<%= link_to "Create Checking Account", new_checking_path(:id=>@user.id) %><br/>
+	<%= link_to "Create Credit Account", new_credit_path(:id=>@user.id) %><br/>
+	<%= link_to "Create Market Account", new_market_path(:id=>@user.id) %><br/>
+	<%= link_to "Create Mortgage Account", new_mortgage_path(:id=>@user.id) %><br/>
+	<%= link_to "Create Savings Account", new_saving_path(:id=>@user.id) %><br/>
 	<%= link_to "Make Admin", :controller=>'administrator', :action=>'create', :id=>@user.id %><br/>
 	<%= link_to "Make Teller", :controller=>'teller', :action=>'create', :id=>@user.id %><br/>
 	<%= link_to "Make Customer", :controller=>'customer', :action=>'create', :id=>@user.id %><br/>
@@ -15,7 +15,7 @@
 <% end %>
 
 <% if !@accounts.blank? %>
-    <%= render :template => "accounts/accounts" %>
+    <%= render :partial => "/accounts/accounts" %>
 <% else %>
     <h3>No Accounts</h3>
 <% end %>
