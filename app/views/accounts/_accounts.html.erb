@@ -1,0 +1,30 @@
+<h2>Accounts</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account type</th>
+      <th>Current balance</th>
+      <th>Interest Rate</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= account.account_type %></td>
+        <td><%= number_to_currency(account.current_balance) %></td>
+        <td><%= number_to_percentage(account.monthly_account_rate) %></td>
+        <td><%= link_to 'Account History', account %></td>
+        <% if admin? %>
+        <td><%= link_to 'Edit', account %></td>
+        <td><%= link_to 'Disable', account %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>

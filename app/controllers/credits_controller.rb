@@ -2,26 +2,22 @@ class CreditsController < AccountsController
   before_action :set_credit, only: [:show, :edit, :update]
 
 
-  # GET /credits/1
-  # GET /credits/1.json
-  def show
+  def new
+    @user = User.find(params[:id])
+    @credit = Credit.new
+    @credit.user_id = @user.id
   end
 
+  def create
+    @credit = Credit.new(credit_params)
+    @credit.account_type = "Credit"
 
-  # GET /credits/1/edit
-  def edit
-  end
-
-
-  # PATCH/PUT /credits/1
-  # PATCH/PUT /credits/1.json
-  def update
     respond_to do |format|
-      if @credit.update(credit_params)
-        format.html { redirect_to @credit, notice: 'Credit was successfully updated.' }
-        format.json { head :no_content }
+      if @credit.save
+        format.html { redirect_to root_path, notice: 'Credit account was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @account }
       else
-        format.html { render action: 'edit' }
+        format.html { render controller: 'credit', action: 'new' }
         format.json { render json: @credit.errors, status: :unprocessable_entity }
       end
     end

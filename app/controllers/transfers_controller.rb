@@ -27,8 +27,7 @@ class TransfersController < TransactionsController
 
 
     respond_to do |format|
-      if ((@to_account.user_id == @from_account.user_id) &&
-          (@to_account.is_active && @from_account.is_active))
+      if @to_transfer.validate_transaction_on_account? && @from_transfer.validate_transaction_on_account?
         Withdrawal.transaction do
           @to_account.save!
           @from_account.save!

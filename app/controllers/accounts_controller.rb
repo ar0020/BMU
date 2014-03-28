@@ -4,16 +4,16 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   # GET /accounts.json
-  
+
   def index
     if params[:user]
       @account = Account.new(search_params)
       @accounts = Account.users(@user)
     end
-    @account = Account.new  
+    @account = Account.new
     respond_to do |format|
-     format.html #responds with default html file
-     format.js #this will be the javascript file we respond with
+      format.html #responds with default html file
+      format.js #this will be the javascript file we respond with
     end
   end
 
@@ -23,7 +23,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @transactions = Transaction.transactions(@account.id)
   end
-=begin
+  
   def new
     @user = User.find(params[:id])
     @account = Account.new
@@ -49,7 +49,6 @@ class AccountsController < ApplicationController
       end
     end
   end
-=end
 
   # DISABLE /accounts/1
   # DISABLE /accounts/1.json

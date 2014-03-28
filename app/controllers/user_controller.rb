@@ -1,12 +1,13 @@
 class UserController < ApplicationController
   before_filter :admin_teller_protect, :only=>[:index]
-  
+
   def index
     if params[:user]
       @user = User.new(search_params)
       @users = User.users(@user)
+    else
+      @user = User.new
     end
-    @user = User.new  
     respond_to do |format|
      format.html #responds with default html file
      format.js #this will be the javascript file we respond with
@@ -17,7 +18,7 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
     @accounts = Account.where(:user_id => @user.id)
   end
-  
+
   private
 
   def search_params

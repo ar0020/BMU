@@ -1,26 +1,21 @@
 class MarketsController < AccountsController
-  before_action :set_market, only: [:show, :edit, :update]
 
-
-  # GET /markets/1
-  # GET /markets/1.json
-  def show
+  def new
+    @user = User.find(params[:id])
+    @market = Market.new
+    @market.user_id = @user.id
   end
 
-  # GET /markets/1/edit
-  def edit
-  end
+  def create
+    @market = Market.new(market_params)
+    @market.account_type = "Market"
 
-
-  # PATCH/PUT /markets/1
-  # PATCH/PUT /markets/1.json
-  def update
     respond_to do |format|
-      if @market.update(market_params)
-        format.html { redirect_to @market, notice: 'Market was successfully updated.' }
-        format.json { head :no_content }
+      if @market.save
+        format.html { redirect_to root_path, notice: 'Market account was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @account }
       else
-        format.html { render action: 'edit' }
+        format.html { render controller: 'market', action: 'new' }
         format.json { render json: @market.errors, status: :unprocessable_entity }
       end
     end

@@ -1,23 +1,17 @@
 BMU::Application.routes.draw do
-  resources :accounts
-  #get "accounts/new", to: 'accounts#new', as: 'new_accounts'
-  #post "accounts/create", to: 'accounts#create', as: 'create_accounts'
-  resources :checkings
-  #get "checkings/new", to: 'checkings#new', as: 'new_checkings'
-  #post "checkings/create", to: 'checkings#create', as: 'checkings'
-  #get "checkings/show", to: 'checkings#show', as: 'checking'
-  get "credits/new", to: 'credits#new', as: 'new_credits'
-  post "credits/create", to: 'credits#create', as: 'create_credits'
-  get "markets/new", to: 'markets#new', as: 'new_markets'
-  post "markets/create", to: 'markets#create', as: 'create_markets'
-  get "mortgages/new", to: 'mortgages#new', as: 'new_mortgages'
-  post "mortgages/create", to: 'mortgages#create', as: 'create_mortgages'
-  get "regulars/new", to: 'regulars#new', as: 'new_regulars'
-  post "regulars/create", to: 'regulars#create', as: 'create_regulars'
-  resources :transactions
-  resources :transfers
-  resources :withdrawals
-  resources :deposits
+
+  resources :accounts, :only => [:index, :show, :update]
+  resources :savings, :only => [:new, :create]
+  resources :checkings, :only => [:new, :create]
+  resources :mortgages, :only => [:new, :create]
+  resources :credits, :only => [:new, :create]
+  resources :markets, :only => [:new, :create]
+
+  resources :transactions, :only => [:index, :show]
+  resources :transfers, :only => [:new, :create]
+  resources :withdrawals, :only => [:new, :create]
+  resources :deposits, :only => [:new, :create]
+
   get "user/index"
   post "user/index"
   get "user/show/:id", to: 'user#show', as: 'user_show'

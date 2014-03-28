@@ -5,7 +5,7 @@ class CreateAccounts < ActiveRecord::Migration
       t.float :current_balance
       t.string :account_type
       t.float :monthly_account_rate
-      t.boolean :is_active
+      t.boolean :is_active, :default => true
 
       t.timestamps
     end

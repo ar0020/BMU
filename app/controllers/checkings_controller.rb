@@ -1,5 +1,5 @@
 class CheckingsController < AccountsController
-  #before_action :set_checking, only: [:show, :edit, :update, :destroy]
+
 
   def new
     @user = User.find(params[:id])
@@ -33,20 +33,16 @@ class CheckingsController < AccountsController
     @checking ||= Checking.find(params[:id])
   end
 
+  def create
+    @checking = Checking.new(checking_params)
+    @checking.account_type = "Checking"
 
-  # GET /checkings/1/edit
-  def edit
-  end
-
-  # PATCH/PUT /checkings/1
-  # PATCH/PUT /checkings/1.json
-  def update
     respond_to do |format|
-      if @checking.update(checking_params)
-        format.html { redirect_to @checking, notice: 'Checking was successfully updated.' }
-        format.json { head :no_content }
+      if @checking.save
+        format.html { redirect_to account_path(@checking), notice: 'Checking account was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @account }
       else
-        format.html { render action: 'edit' }
+        format.html { render controller: 'checking', action: 'new' }
         format.json { render json: @checking.errors, status: :unprocessable_entity }
       end
     end
