@@ -7,11 +7,11 @@ BMU::Application.routes.draw do
   resources :accounts, :only => [:index, :show, :update, :destroy]
   get 'accounts/enable/:id', to: 'accounts#enable', as: 'enable_account'
   get 'accounts/disable/:id', to: 'accounts#disable', as: 'disable_account'
-  resources :savings, :only => [:new, :create]
-  resources :checkings, :only => [:new, :create]
-  resources :mortgages, :only => [:new, :create]
-  resources :credits, :only => [:new, :create]
-  resources :markets, :only => [:new, :create]
+  resources :savings#, :only => [:new, :create]
+  resources :checkings#, :only => [:new, :create]
+  resources :mortgages#, :only => [:new, :create]
+  resources :credits#, :only => [:new, :create]
+  resources :markets#, :only => [:new, :create]
 
   resources :transactions, :only => [:index]
   resources :transfers, :only => [:new, :create]

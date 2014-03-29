@@ -1,4 +1,11 @@
-
+<% if admin? %>
+<fieldset>
+	<legend>Admin Panel:</legend>
+	Username:
+	<%= link_to @user.username, customer_by_id_path(@user.id) %><br/>
+	<%= render :partial=>'edit_button' %>
+</fieldset>
+<% end %>
 
 <p>
   <strong>Account type:</strong>

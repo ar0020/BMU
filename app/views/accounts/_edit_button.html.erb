@@ -1,0 +1,11 @@
+<% if @account.account_type == "Checking" %>
+	<%= link_to "Edit Checking Account", edit_checking_path(@account) %>
+<% elsif @account.account_type == "Credit" %>
+	<%= link_to "Edit Credit Account", edit_credit_path(@account) %>
+<% elsif @account.account_type == "Market" %>
+	<%= link_to "Edit Market Account", edit_market_path(@account) %>
+<% elsif @account.account_type == "Mortgage" %>
+	<%= link_to "Edit Mortgage Account", edit_mortgage_path(@account) %>
+<% elsif @account.account_type == "Saving" %>
+	<%= link_to "Edit Saving Account", edit_saving_path(@account) %>
+<% end %>

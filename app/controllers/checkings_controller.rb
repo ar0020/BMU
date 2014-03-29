@@ -11,7 +11,7 @@ class CheckingsController < AccountsController
     #@account = Account.new
     #@checking = @account.checking.new(checking_params)
     @checking = Checking.new(checking_params)
-    @checking.current_balance = 0.00
+    #@checking.current_balance = 0.00
     #@checking.account_type = "Checking"
     #@user = User.find(@checking.user_id)
     #@checking = @user.id
@@ -56,6 +56,6 @@ class CheckingsController < AccountsController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def checking_params
-      params.require(:checking).permit(:user_id, :current_balance, :monthly_account_rate, :is_active)
+      params.require(:checking).permit(:user_id, :current_balance, :is_active)
     end
 end
