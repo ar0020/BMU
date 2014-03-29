@@ -34,4 +34,8 @@ class Account < ActiveRecord::Base
     end
     return false
   end
+  
+  def set_type
+    
+  end
 end

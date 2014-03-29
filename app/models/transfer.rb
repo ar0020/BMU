@@ -1,10 +1,5 @@
 class Transfer < Transaction
-  belongs_to :user
-  belongs_to :account
   attr_accessor :to_account_id, :from_account_id
-  validates :user_id, :amount, :transaction_type, :to_account_id, :from_account_id, presence: true
-  validates :amount, :numericality => {:greater_than => 0}
-  validates_associated :user_id, :account_id
 
   def transfer
     self.transaction_type = "Transfer"

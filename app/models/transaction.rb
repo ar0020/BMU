@@ -1,5 +1,9 @@
 class Transaction < ActiveRecord::Base
+  belongs_to :user
   belongs_to :account
+  validates :amount, :numericality => {:greater_than => 0}
+  validates_associated :user, :account
+  validates :user_id, :amount, :transaction_type, :account_id, presence: true
 
   MORTGAGE = ["Deposit"]
   CHECKING = ["Deposit", "Withdrawal", "Transfer"]

@@ -1,10 +1,5 @@
 class Deposit < Transaction
-  belongs_to :user
-  belongs_to :account
-  validates :user_id, :amount, :transaction_type, :account_id, presence: true
-  validates :amount, :numericality => {:greater_than => 0}
-  validates_associated :user_id, :account_id
-
+  
   def deposit
     self.transaction_type = "Deposit"
     self.amount = self.amount.abs # make sure amount is positive

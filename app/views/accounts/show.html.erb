@@ -1,13 +1,34 @@
 <% if admin? %>
 <fieldset>
 	<legend>Admin Panel:</legend>
-	Username:
+	Customer:
 	<%= link_to @user.username, customer_by_id_path(@user.id) %><br/>
+	<% if @account.is_active? %>
+		Account is active.
+	<% else %>
+		Account was deactivated.
+	<% end %><br/>
 	<%= render :partial=>'edit_button' %>
+</fieldset>
+<% end %>
+<% if teller? %>
+<fieldset>
+	<legend>Teller Panel</legend>
+	Customer:
+	<%= link_to @user.username, customer_by_id_path(@user.id) %><br/>
+	<% if @account.is_active? %>
+		Account is active.
+	<% else %>
+		Account was deactivated.
+	<% end %><br/>
+	<%= link_to "Deposit", deposit_by_id_path(@account.id) %> |
+	<%= link_to "Withdraw", withdraw_by_id_path(@account.id) %>
 </fieldset>
 <% end %>
 
 <p>
+  <strong>Account Number:</strong>
+  <%= @account.id %><br>
   <strong>Account type:</strong>
   <%= @account.account_type %><br>
   <strong>Current balance:</strong>

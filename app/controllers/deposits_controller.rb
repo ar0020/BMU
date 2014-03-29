@@ -14,10 +14,11 @@ class DepositsController < TransactionsController
   def create
     @deposit = Deposit.new(deposit_params)
     @deposit.user_id = current_user.id
+    @account = Account.find(@deposit.account_id)
 
     respond_to do |format|
       if @deposit.deposit
-        format.html { redirect_to transactions_path, notice: 'Deposit was successfully created.' }
+        format.html { redirect_to account_path(@deposit.account_id), notice: 'Deposit was successfully created.' }
         format.json { head :no_content }
       else
         format.html { render action: 'new' }

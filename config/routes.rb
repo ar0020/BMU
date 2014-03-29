@@ -4,7 +4,7 @@ BMU::Application.routes.draw do
   get 'bills/start/:id', to: 'bills#enable', as: 'start_recurrence'
   get 'bills/stop/:id', to: 'bills#disable', as: 'stop_recurrence'
 
-  resources :accounts, :only => [:index, :show, :update, :destroy]
+  resources :accounts, :only => [:index, :show, :destroy]
   get 'accounts/enable/:id', to: 'accounts#enable', as: 'enable_account'
   get 'accounts/disable/:id', to: 'accounts#disable', as: 'disable_account'
   resources :savings#, :only => [:new, :create]
@@ -18,10 +18,10 @@ BMU::Application.routes.draw do
   #resources :withdrawals, :only => [:new, :create]
   #resources :deposits, :only => [:new, :create]
   get 'withdrawals/new', to: 'withdrawals#new', as: 'new_withdrawal'
-  get 'withdrawals/new/:id', to: 'withdrawals#new', as: 'new_withdrawal_from_account'
+  get 'withdrawals/new/:id', to: 'withdrawals#new', as: 'withdraw_by_id'
   post 'withdrawals/create', to: 'withdrawals#create', as: 'withdrawals'
   get 'deposits/new', to: 'deposits#new', as: 'new_deposit'
-  get 'deposits/new/:id', to: 'deposits#new', as: 'new_deposit_to_account'
+  get 'deposits/new/:id', to: 'deposits#new', as: 'deposit_by_id'
   post 'deposits/create', to: 'deposits#create', as: 'deposits'
 
   get "user/index"

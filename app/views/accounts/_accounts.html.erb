@@ -32,8 +32,8 @@
 	        <td><%= link_to "Delete", account_path(account), :method=>:delete, :confirm=>"Are yousure?" %></td>
 	   	<% end %>
 	   	<% if teller? %>
-	   		<td><%= link_to "Deposit", new_deposit_to_account_path(account)%></td>
-	   		<td><%= link_to "Withdraw", new_withdrawal_from_account_path(account)%></td>
+	   		<td><%= link_to "Deposit", deposit_by_id_path(account)%></td>
+	   		<td><%= link_to "Withdraw", withdraw_by_id_path(account)%></td>
 	   	<% end %>
       </tr>
     <% end %>

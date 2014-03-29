@@ -1,9 +1,4 @@
 class Withdrawal < Transaction
-  belongs_to :user
-  belongs_to :account
-  validates :user_id, :amount, :transaction_type, :account_id, presence: true
-  validates :amount, :numericality => {:greater_than => 0}
-  validates_associated :user_id, :account_id
 
   def withdrawal
     self.transaction_type = "Withdrawal"
