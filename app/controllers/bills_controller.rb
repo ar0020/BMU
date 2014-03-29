@@ -4,17 +4,28 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.json
   def index
-    @bills = Bill.all
+    if params[:user]
+      @bill = Bill.new(search_params)
+      @bills = Bill.users(@user)
+    end
+    @bill = Bill.new
+    respond_to do |format|
+      format.html #responds with default html file
+      format.js #this will be the javascript file we respond with
+    end
   end
 
   # GET /bills/1
   # GET /bills/1.json
   def show
+    @bills = Bill.find(params[:id])
   end
 
   # GET /bills/new
   def new
+    @user = User.find(params[:id])
     @bill = Bill.new
+    @bill.user_id = @user.id
   end
 
   # GET /bills/1/edit
@@ -48,6 +59,27 @@ class BillsController < ApplicationController
         format.html { render action: 'edit' }
         format.json { render json: @bill.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+
+  # DISABLE /accounts/1
+  # DISABLE /accounts/1.json
+  def disable
+    @bill.update_attribute :is_recurring, false
+    respond_to do |format|
+      format.html { redirect_to user_show_path(@bill.user_id) }
+      format.json { head :no_content }
+    end
+  end
+
+  # ENABLE /accounts/1
+  # ENABLE /accounts/1.json
+  def enable
+    @bill.update_attribute :is_recurring, true
+    respond_to do |format|
+      format.html { redirect_to user_show_path(@bill.user_id) }
+      format.json { head :no_content }
     end
   end
 

@@ -1,0 +1,48 @@
+<h1>Listing bills</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Account</th>
+    <th>Payee name</th>
+    <th>Payee street</th>
+    <th>Payee city</th>
+    <th>Payee state</th>
+    <th>Payee zip</th>
+    <th>Payee account</th>
+    <th>Amount</th>
+    <th>Pay date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @bills.each do |bill| %>
+      <tr>
+        <td><%= bill.account_id %></td>
+        <td><%= bill.payee_name %></td>
+        <td><%= bill.payee_street %></td>
+        <td><%= bill.payee_city %></td>
+        <td><%= bill.payee_state %></td>
+        <td><%= bill.payee_zip %></td>
+        <td><%= bill.payee_account_id %></td>
+        <td><%= bill.amount %></td>
+        <td><%= bill.pay_date %></td>
+        <td><%= link_to 'Show', bill %></td>
+        <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
+        <td><%= link_to 'Delete', bill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if bill.is_recurring == true -%>
+            <td><%= link_to 'Stop Recurrence', stop_recurrence(bill) %></td>
+        <% else -%>
+            <td><%= link_to 'Start Recurrence', start_recurrence(bill) %></td>
+        <% end -%>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bill', new_bill_path %>
