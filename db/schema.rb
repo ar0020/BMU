@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326163748) do
+ActiveRecord::Schema.define(version: 20140329074806) do
 
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(version: 20140326163748) do
     t.string   "account_type"
     t.float    "monthly_account_rate"
     t.boolean  "is_active",            default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bills", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "account_id"
+    t.boolean  "is_recurring"
+    t.string   "payee_name"
+    t.string   "payee_street"
+    t.string   "payee_city"
+    t.string   "payee_state"
+    t.string   "payee_zip"
+    t.integer  "payee_account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

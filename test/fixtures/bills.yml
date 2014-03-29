@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  account_id: 1
+  is_recurring: false
+  payee_name: MyString
+  payee_street: MyString
+  payee_city: MyString
+  payee_state: MyString
+  payee_zip: MyString
+  payee_account_id: 1
+
+two:
+  user_id: 1
+  account_id: 1
+  is_recurring: false
+  payee_name: MyString
+  payee_street: MyString
+  payee_city: MyString
+  payee_state: MyString
+  payee_zip: MyString
+  payee_account_id: 1

@@ -1,0 +1,53 @@
+<%= form_for(@bill) do |f| %>
+  <% if @bill.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bill.errors.count, "error") %> prohibited this bill from being saved:</h2>
+
+      <ul>
+      <% @bill.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :account_id %><br>
+    <%= f.number_field :account_id %>
+  </div>
+  <div class="field">
+    <%= f.label :is_recurring %><br>
+    <%= f.check_box :is_recurring %>
+  </div>
+  <div class="field">
+    <%= f.label :payee_name %><br>
+    <%= f.text_field :payee_name %>
+  </div>
+  <div class="field">
+    <%= f.label :payee_street %><br>
+    <%= f.text_field :payee_street %>
+  </div>
+  <div class="field">
+    <%= f.label :payee_city %><br>
+    <%= f.text_field :payee_city %>
+  </div>
+  <div class="field">
+    <%= f.label :payee_state %><br>
+    <%= f.text_field :payee_state %>
+  </div>
+  <div class="field">
+    <%= f.label :payee_zip %><br>
+    <%= f.text_field :payee_zip %>
+  </div>
+  <div class="field">
+    <%= f.label :payee_account_id %><br>
+    <%= f.number_field :payee_account_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
