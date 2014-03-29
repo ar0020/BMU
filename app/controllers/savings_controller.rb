@@ -1,4 +1,5 @@
 class SavingsController < AccountsController
+  before_filter :admin_protect
 
   def new
     @user = User.find(params[:id])
@@ -8,11 +9,11 @@ class SavingsController < AccountsController
 
   def create
     @saving = Saving.new(saving_params)
-    @saving.account_type = "Saving"
+    #@saving.account_type = "Saving"
 
     respond_to do |format|
       if @saving.save
-        format.html { redirect_to root_path, notice: 'Saving account was successfully created.' }
+        format.html { redirect_to account_path(@saving.id), notice: 'Savings account was successfully created.' }
         #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render controller: 'saving', action: 'new' }

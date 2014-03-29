@@ -1,5 +1,6 @@
 class CreditsController < AccountsController
   before_action :set_credit, only: [:show, :edit, :update]
+  before_filter :admin_protect  
 
 
   def new
@@ -10,11 +11,11 @@ class CreditsController < AccountsController
 
   def create
     @credit = Credit.new(credit_params)
-    @credit.account_type = "Credit"
+    #@credit.account_type = "Credit"
 
     respond_to do |format|
       if @credit.save
-        format.html { redirect_to root_path, notice: 'Credit account was successfully created.' }
+        format.html { redirect_to account_path(@credit.id), notice: 'Credit account was successfully created.' }
         #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render controller: 'credit', action: 'new' }

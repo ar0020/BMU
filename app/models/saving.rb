@@ -6,4 +6,9 @@ class Saving < Account
     self.save!
   end
 
+  private
+  
+  def set_type
+    self.account_type = "Saving"
+  end
 end

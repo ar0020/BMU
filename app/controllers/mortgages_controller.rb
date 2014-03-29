@@ -1,4 +1,5 @@
 class MortgagesController < AccountsController
+  before_filter :admin_protect  
 
   def new
     @user = User.find(params[:id])
@@ -8,11 +9,11 @@ class MortgagesController < AccountsController
 
   def create
     @mortgage = Mortgage.new(mortgage_params)
-    @mortgage.account_type = "Mortgage"
+    #@mortgage.account_type = "Mortgage"
 
     respond_to do |format|
       if @mortgage.save
-        format.html { redirect_to root_path, notice: 'Mortgage account was successfully created.' }
+        format.html { redirect_to account_path(@mortgage.id), notice: 'Mortgage account was successfully created.' }
         #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render controller: 'mortgage', action: 'new' }

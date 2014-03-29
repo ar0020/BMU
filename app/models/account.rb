@@ -5,8 +5,9 @@ class Account < ActiveRecord::Base
 
   validates :user_id, :account_type, :current_balance, :account_type, :monthly_account_rate, :is_active, presence: true
   before_save :check_if_customer
+  before_validation :set_type
 
-  TYPES=["Checking","Credit","Market","Mortgage","Regular"]
+  TYPES=["Checking","Credit","Market","Mortgage","Saving"]
 
   def accounts(offset)
     @accounts = Account.find(offset)

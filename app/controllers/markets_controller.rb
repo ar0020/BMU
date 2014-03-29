@@ -1,4 +1,5 @@
 class MarketsController < AccountsController
+  before_filter :admin_protect  
 
   def new
     @user = User.find(params[:id])
@@ -8,11 +9,11 @@ class MarketsController < AccountsController
 
   def create
     @market = Market.new(market_params)
-    @market.account_type = "Market"
+    #@market.account_type = "Market"
 
     respond_to do |format|
       if @market.save
-        format.html { redirect_to root_path, notice: 'Market account was successfully created.' }
+        format.html { redirect_to account_path(@market.id), notice: 'Market account was successfully created.' }
         #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render controller: 'market', action: 'new' }

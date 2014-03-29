@@ -1,6 +1,6 @@
 class CheckingsController < AccountsController
-
-
+  before_filter :admin_protect  
+  
   def new
     @user = User.find(params[:id])
     @checking = Checking.new
@@ -12,7 +12,7 @@ class CheckingsController < AccountsController
     #@checking = @account.checking.new(checking_params)
     @checking = Checking.new(checking_params)
     @checking.current_balance = 0.00
-    @checking.account_type = "Checking"
+    #@checking.account_type = "Checking"
     #@user = User.find(@checking.user_id)
     #@checking = @user.id
 
