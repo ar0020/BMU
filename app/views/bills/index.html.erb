@@ -12,6 +12,8 @@
       <th>Payee state</th>
       <th>Payee zip</th>
       <th>Payee account</th>
+      <th>Amount</th>
+      <th>Pay date</th>
       <th></th>
       <th></th>
       <th></th>
@@ -30,6 +32,8 @@
         <td><%= bill.payee_state %></td>
         <td><%= bill.payee_zip %></td>
         <td><%= bill.payee_account_id %></td>
+        <td><%= bill.amount %></td>
+        <td><%= bill.pay_date %></td>
         <td><%= link_to 'Show', bill %></td>
         <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
         <td><%= link_to 'Destroy', bill, method: :delete, data: { confirm: 'Are you sure?' } %></td>

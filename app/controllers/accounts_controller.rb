@@ -4,7 +4,6 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   # GET /accounts.json
-
   def index
     if params[:user]
       @account = Account.new(search_params)
@@ -23,7 +22,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @transactions = Transaction.transactions(@account.id)
   end
-  
+
   def new
     @user = User.find(params[:id])
     @account = Account.new
@@ -59,7 +58,7 @@ class AccountsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def enable
     @account.update_attribute :is_active, true
     respond_to do |format|
@@ -67,7 +66,7 @@ class AccountsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def destroy
     @transaction = Transaction.where(:account_id=>@account.id).first
     @user = User.find(@account.user_id)
@@ -81,7 +80,7 @@ class AccountsController < ApplicationController
   end
 
   private
-  
+
   # Use callbacks to share common setup or constraints between actions.
   def set_account
     @account = Account.find(params[:id])

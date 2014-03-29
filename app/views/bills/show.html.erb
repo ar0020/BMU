@@ -45,5 +45,15 @@
   <%= @bill.payee_account_id %>
 </p>
 
+<p>
+  <strong>Amount:</strong>
+  <%= @bill.amount %>
+</p>
+
+<p>
+  <strong>Pay date:</strong>
+  <%= @bill.pay_date %>
+</p>
+
 <%= link_to 'Edit', edit_bill_path(@bill) %> |
 <%= link_to 'Back', bills_path %>

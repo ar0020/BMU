@@ -18,7 +18,7 @@ class BillsControllerTest < ActionController::TestCase
 
   test "should create bill" do
     assert_difference('Bill.count') do
-      post :create, bill: { account_id: @bill.account_id, is_recurring: @bill.is_recurring, payee_account_id: @bill.payee_account_id, payee_city: @bill.payee_city, payee_name: @bill.payee_name, payee_state: @bill.payee_state, payee_street: @bill.payee_street, payee_zip: @bill.payee_zip, user_id: @bill.user_id }
+      post :create, bill: { account_id: @bill.account_id, amount: @bill.amount, is_recurring: @bill.is_recurring, pay_date: @bill.pay_date, payee_account_id: @bill.payee_account_id, payee_city: @bill.payee_city, payee_name: @bill.payee_name, payee_state: @bill.payee_state, payee_street: @bill.payee_street, payee_zip: @bill.payee_zip, user_id: @bill.user_id }
     end
 
     assert_redirected_to bill_path(assigns(:bill))
@@ -35,7 +35,7 @@ class BillsControllerTest < ActionController::TestCase
   end
 
   test "should update bill" do
-    patch :update, id: @bill, bill: { account_id: @bill.account_id, is_recurring: @bill.is_recurring, payee_account_id: @bill.payee_account_id, payee_city: @bill.payee_city, payee_name: @bill.payee_name, payee_state: @bill.payee_state, payee_street: @bill.payee_street, payee_zip: @bill.payee_zip, user_id: @bill.user_id }
+    patch :update, id: @bill, bill: { account_id: @bill.account_id, amount: @bill.amount, is_recurring: @bill.is_recurring, pay_date: @bill.pay_date, payee_account_id: @bill.payee_account_id, payee_city: @bill.payee_city, payee_name: @bill.payee_name, payee_state: @bill.payee_state, payee_street: @bill.payee_street, payee_zip: @bill.payee_zip, user_id: @bill.user_id }
     assert_redirected_to bill_path(assigns(:bill))
   end
 
