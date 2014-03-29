@@ -14,6 +14,9 @@
 
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
+  
+  <div><%= f.label :user_level %><br />
+  <%= f.select(:user_level, User::LEVELS.map { |key,value| [value,key]})  %></div>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>

@@ -1,8 +1,11 @@
 class CustomerController < ApplicationController
 
-  def create
-    @user = User.find(params[:id])
-    @user.update_attribute :user_level, 3
-    redirect_to user_show_path(@user)
+  def index
+    if admin? || teller?
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
+    @accounts = Account.where(:user_id => @user.id)
   end
 end

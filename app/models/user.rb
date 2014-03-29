@@ -5,10 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 		 
 	attr_accessor :login, :level
+	validate :user_level, presence: true, numericality: { only_integer: true, :greater_than=>0, :less_than=>4, :message=>" is an invalid level." }
 	
-	#def self.user(id)
-	#  return User.where(:id=>id).first
-	#end
+	LEVELS=[[1,"Administrator"],[2,"Teller"],[3,"Customer"]]
 	
 	# Search function for User table.
 	def self.users(user)

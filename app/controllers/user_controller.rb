@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_filter :admin_teller_protect, :only=>[:index]
+  before_filter :admin_teller_protect
 
   def index
     if params[:user]
