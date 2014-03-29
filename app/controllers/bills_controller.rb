@@ -68,7 +68,7 @@ class BillsController < ApplicationController
   def disable
     @bill.update_attribute :is_recurring, false
     respond_to do |format|
-      format.html { redirect_to user_show_path(@bill.user_id) }
+      format.html { redirect_to customer_by_id_path(@bill.user_id) }
       format.json { head :no_content }
     end
   end
@@ -78,7 +78,7 @@ class BillsController < ApplicationController
   def enable
     @bill.update_attribute :is_recurring, true
     respond_to do |format|
-      format.html { redirect_to user_show_path(@bill.user_id) }
+      format.html { redirect_to customer_by_id_path(@bill.user_id) }
       format.json { head :no_content }
     end
   end

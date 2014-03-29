@@ -14,11 +14,6 @@ class UserController < ApplicationController
     end
   end
 
-  def show
-    @user = User.find(params[:id])
-    @accounts = Account.where(:user_id => @user.id)
-  end
-
   private
 
   def search_params

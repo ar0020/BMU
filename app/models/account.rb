@@ -4,6 +4,7 @@ class Account < ActiveRecord::Base
         #params.require(:account).permit(:user_id, :current_balance, :account_type, :monthly_account_rate, :is_active)
 
   validates :user_id, :account_type, :current_balance, :account_type, :monthly_account_rate, :is_active, presence: true
+  before_save :check_if_customer
 
   TYPES=["Checking","Credit","Market","Mortgage","Regular"]
 
@@ -22,5 +23,14 @@ class Account < ActiveRecord::Base
 
   def rate
   end
-
+  
+  private
+  
+  def check_if_customer
+    user = User.find(self.user_id)
+    if user.user_level == 3
+      return true
+    end
+    return false
+  end
 end

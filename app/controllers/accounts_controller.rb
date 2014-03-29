@@ -54,7 +54,7 @@ class AccountsController < ApplicationController
   def disable
     @account.update_attribute :is_active, false
     respond_to do |format|
-      format.html { redirect_to user_show_path(@account.user_id) }
+      format.html { redirect_to customer_by_id_path(@account.user_id) }
       format.json { head :no_content }
     end
   end
@@ -62,7 +62,7 @@ class AccountsController < ApplicationController
   def enable
     @account.update_attribute :is_active, true
     respond_to do |format|
-      format.html { redirect_to user_show_path(@account.user_id) }
+      format.html { redirect_to customer_by_id_path(@account.user_id) }
       format.json { head :no_content }
     end
   end
@@ -76,7 +76,7 @@ class AccountsController < ApplicationController
     else
       flash[:notice] = "No longer able to delete account. Try disabling it."
     end
-    redirect_to user_show_path(@user)
+    redirect_to customer_by_id_path(@user)
   end
 
   private

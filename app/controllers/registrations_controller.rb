@@ -110,7 +110,10 @@ class RegistrationsController < Devise::RegistrationsController
   # in your own RegistrationsController.
   def after_sign_up_path_for(resource)
     #after_sign_in_path_for(resource)
-    user_show_path(resource)
+    if resource.user_level == 3
+      customer_by_id_path(resource)
+    end
+    administrator_path
   end
 
   # The path used after sign up for inactive accounts. You need to overwrite

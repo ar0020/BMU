@@ -26,7 +26,6 @@ BMU::Application.routes.draw do
 
   get "user/index"
   post "user/index"
-  get "user/show/:id", to: 'user#show', as: 'user_show'
   get "teller", to: 'teller#index', as: 'teller_panel'
   get "administrator/index"
   get 'administrator', to: 'administrator#index', as: 'admin_panel'
