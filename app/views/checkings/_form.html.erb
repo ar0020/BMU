@@ -11,27 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-<<<<<<< HEAD
-=======
-    <%= f.label :current_balance %><br>
-    <%= f.text_field :current_balance %>
-  </div>
-  <div class="field">
->>>>>>> c9844ec63991a62b10a63eb5860a08b272dc7114
-    <%= f.label :monthly_account_rate %><br>
-    <%= f.number_field :monthly_account_rate, { :value => '0' } %>
-  </div>
-  <div class="field">
-    <%= f.label :is_active %><br>
-    <%= f.check_box :is_active, { :checked => true } %>
-  </div>
-<<<<<<< HEAD
-  <%= f.hidden_field(:user_id)%>
-=======
-  <%= f.hidden_field :user_id%>
->>>>>>> c9844ec63991a62b10a63eb5860a08b272dc7114
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :current_balance %><br>
+      <%= f.text_field :current_balance %>
+    </div>
+    <div class="field">
+      <%= f.label :monthly_account_rate %><br>
+      <%= f.text_field :monthly_account_rate %>
+    </div>
+    <div class="field">
+      <%= f.label :is_active %><br>
+      <%= f.check_box :is_active %>
+    </div>
+    <%= f.hidden_field :user_id%>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

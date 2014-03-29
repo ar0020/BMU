@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :authenticate_user!
-  
+
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   # Check if logged in user is an admin
@@ -13,44 +13,51 @@ class ApplicationController < ActionController::Base
     end
     return false
   end
-  
+
   def teller?
     if current_user.user_level == 2
       return true
     end
     return false
   end
-  
+
   def customer?
     if current_user.user_level == 3
       return true
     end
     return false
   end
-  
+
   protected
-  
+
   def admin_protect
     if !admin?
       flash[:notice] = "Admin Only Function"
       redirect_to :controller=>:home, :action=>:index
     end
   end
-  
+
   def teller_protect
     if !teller?
       flash[:notice] = "Teller Only Function"
       redirect_to :controller=>:home, :action=>:index
     end
   end
-  
+
   def admin_teller_protect
     if !admin? && !teller?
       flash[:notice] = "Admin & Teller Only Function"
       redirect_to :controller=>:home, :action=>:index
     end
   end
-  
+
+  def teller_customer_protect
+    if !teller? && !customer?
+      flash[:notice] = "Teller & Customer Only Function"
+      redirect_to :controller=>:home, :action=>:index
+    end
+  end
+
   def protect
     if !admin? && !teller? && !customer?
       flash[:notice] = "Contact Administration: No user level assigned."

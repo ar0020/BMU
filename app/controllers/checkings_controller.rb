@@ -56,6 +56,6 @@ class CheckingsController < AccountsController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def checking_params
-      params.require(:checking).permit(:user_id, :monthly_account_rate, :is_active)
+      params.require(:checking).permit(:user_id, :current_balance, :monthly_account_rate, :is_active)
     end
 end

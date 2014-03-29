@@ -1,4 +1,6 @@
 class WithdrawalsController < TransactionsController
+  before_filter :teller_protect
+
   # GET /withdrawals/new
   def new
     @withdrawal = Withdrawal.new
@@ -10,12 +12,12 @@ class WithdrawalsController < TransactionsController
   # POST /withdrawals
   # POST /withdrawals.json
   def create
-    @withdrawal = Withdrawal.new(deposit_params)
+    @withdrawal = Withdrawal.new(withdrawal_params)
     @withdrawal.user_id = current_user.id
 
     respond_to do |format|
-      if @withdrawal.deposit
-        format.html { redirect_to transactions_path, notice: 'Deposit was successfully created.' }
+      if @withdrawal.withdrawal
+        format.html { redirect_to transactions_path, notice: 'Withdrawal was successfully created.' }
         format.json { head :no_content }
       else
         format.html { render action: 'new' }
@@ -26,13 +28,8 @@ class WithdrawalsController < TransactionsController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_withdrawal
-      @withdrawal = Withdrawal.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def withdrawal_params
-      params.require(:withdrawal).permit(:user_id, :account_id, :amount, :transaction_type, :description)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def withdrawal_params
+    params.require(:withdrawal).permit(:account_id, :amount)
+  end
 end

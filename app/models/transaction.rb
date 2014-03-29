@@ -6,7 +6,7 @@ class Transaction < ActiveRecord::Base
   CREDIT   = ["Deposit", "Withdrawal", "Transfer"]
   MARKET   = ["Deposit", "Withdrawal"]
   SAVING   = ["Deposit", "Withdrawal"]
-  
+
   def self.transactions(account_id)
     results = Transaction.limit(50)
     results = results.where("transactions.account_id = ?", account_id)
@@ -21,7 +21,7 @@ class Transaction < ActiveRecord::Base
         return false
       elsif @account_type == "Checking" && CHECKING.find(self.transaction_type).any?
         return false
-      elsif @account_type == "Credit" && Credit.find(self.transaction_type).any?
+      elsif @account_type == "Credit" && CREDIT.find(self.transaction_type).any?
         return false
       elsif @account_type == "Market" && MARKET.find(self.transaction_type).any?
         return false

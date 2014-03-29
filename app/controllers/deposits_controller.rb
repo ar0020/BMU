@@ -11,7 +11,6 @@ class DepositsController < TransactionsController
 
   # POST /deposits
   # POST /deposits.json
-  
   def create
     @deposit = Deposit.new(deposit_params)
     @deposit.user_id = current_user.id
@@ -28,11 +27,6 @@ class DepositsController < TransactionsController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_deposit
-    @deposit = Deposit.find(params[:id])
-  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def deposit_params

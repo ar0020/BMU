@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: [:show]
+  before_filter :protect
 
   # GET /transactions
   # GET /transactions.json
@@ -8,12 +8,12 @@ class TransactionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
 
-    def transaction_params
-      params.require(:transation).permit(:user_id, :account_id, :amount, :transaction_type, :description)
-    end
+  def transaction_params
+    params.require(:transaction).permit(:user_id, :account_id, :amount, :transaction_type, :description)
+  end
 end
