@@ -11,7 +11,7 @@ class CreateBills < ActiveRecord::Migration
       t.string :payee_zip
       t.integer :payee_account_id
       t.float :amount
-      t.integer :pay_date
+      t.date :pay_date
 
       t.timestamps
     end
