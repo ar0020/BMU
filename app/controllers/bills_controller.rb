@@ -1,5 +1,5 @@
 class BillsController < ApplicationController
-  before_action :set_bill, only: [:show, :edit, :update, :destroy]
+  before_action :set_bill, only: [:show, :edit, :update, :destroy, :disable, :enable]
 
   # GET /bills
   # GET /bills.json
@@ -23,9 +23,11 @@ class BillsController < ApplicationController
 
   # GET /bills/new
   def new
-    @user = User.find(params[:id])
     @bill = Bill.new
-    @bill.user_id = @user.id
+    if params[:id] && params[:user_id]
+      @bill.account_id = params[:id]
+      @bill.user_id = params[:user_id]
+    end
   end
 
   # GET /bills/1/edit
@@ -39,7 +41,7 @@ class BillsController < ApplicationController
 
     respond_to do |format|
       if @bill.save
-        format.html { redirect_to @bill, notice: 'Bill was successfully created.' }
+        format.html { redirect_to account_path(@bill.account_id), notice: 'Bill was successfully created.' }
         format.json { render action: 'show', status: :created, location: @bill }
       else
         format.html { render action: 'new' }
@@ -67,8 +69,10 @@ class BillsController < ApplicationController
   # DISABLE /accounts/1.json
   def disable
     @bill.update_attribute :is_recurring, false
+    account = Account.find(@bill.account_id)
+    user = User.find(account.user_id)
     respond_to do |format|
-      format.html { redirect_to customer_by_id_path(@bill.user_id) }
+      format.html { redirect_to customer_by_id_path(user.id) }
       format.json { head :no_content }
     end
   end

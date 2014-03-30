@@ -17,7 +17,7 @@ class WithdrawalsController < TransactionsController
 
     respond_to do |format|
       if @withdrawal.withdrawal
-        format.html { redirect_to account_path(@deposit.account_id), notice: 'Withdrawal was successfully created.' }
+        format.html { redirect_to account_path(@withdrawal.account_id), notice: 'Withdrawal was successfully created.' }
         format.json { head :no_content }
       else
         format.html { render action: 'new' }
