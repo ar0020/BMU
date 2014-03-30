@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :from_account_id %>:
-    <%= f.number_field :from_account_id %>
+    <%= f.select( :from_account_id, @accounts.all.collect { |i| [i.id]} ) %>
   </div>
   <div class="field">
     <%= f.label :to_account_id %>:
-    <%= f.number_field :to_account_id %>
+    <%= f.select( :to_account_id, @accounts.all.collect { |i| [i.id]} ) %>
   </div>
   <div class="field">
     <%= f.label :amount %>:

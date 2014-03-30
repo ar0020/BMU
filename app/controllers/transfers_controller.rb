@@ -3,6 +3,12 @@ class TransfersController < TransactionsController
 
   # GET /transfers/new
   def new
+    if teller? && params[:id]
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
+    @accounts = Account.where("accounts.user_id = ?", @user.id)
     @transfer = Transfer.new
   end
 

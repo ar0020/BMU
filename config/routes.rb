@@ -15,6 +15,7 @@ BMU::Application.routes.draw do
 
   resources :transactions, :only => [:index]
   resources :transfers, :only => [:new, :create]
+  get 'transfer/new/:id', to: 'transfers#new', as: 'new_transfer_by_params'
   #resources :withdrawals, :only => [:new, :create]
   #resources :deposits, :only => [:new, :create]
   get 'withdrawals/new', to: 'withdrawals#new', as: 'new_withdrawal'
