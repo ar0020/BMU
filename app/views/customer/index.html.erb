@@ -1,5 +1,9 @@
 <h1><%= @user.username%></h1>
-<%= link_to 'Edit profile', edit_user_registration_path %><br/>
+<% if customer? %>
+	<%= link_to 'Edit profile', edit_user_registration_path %> |
+	<%= link_to 'Create a Transfer', new_transfer_path %> |
+	<%= link_to 'Pay Bill Online', new_bill_path %><br/>
+<% end %>
 <% if admin? %>
 <fieldset>
 	<legend>Admin Panel</legend>

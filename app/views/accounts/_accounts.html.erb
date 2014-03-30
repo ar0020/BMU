@@ -1,8 +1,8 @@
-<h2>Accounts</h2>
 
 <table>
   <thead>
     <tr>
+      <th>Account #</th>
       <th>Account type</th>
       <th>Current balance</th>
       <th>Interest Rate</th>
@@ -16,8 +16,9 @@
   </thead>
 
   <tbody>
-    <% @accounts.each do |account| %>
+    <% for account in @accounts %>
       <tr class="<%= cycle("odd", "even") -%>">
+      	<td><%= account.id %></td>
         <td><%= account.account_type %></td>
         <td><%= number_to_currency(account.current_balance) %></td>
         <td><%= number_to_percentage(account.monthly_account_rate) %></td>
@@ -29,7 +30,7 @@
 	        <% else -%>
 	        	<td><%= link_to 'Enable', enable_account_path(account) %></td>
 	        <% end -%>
-	        <td><%= link_to "Delete", account_path(account), :method=>:delete, :confirm=>"Are you sure?" %></td>
+	        <td><%= link_to "Delete", account_path(account), :method=>:delete, data: { confirm: 'Are you sure?'} %></td>
 	   	<% end %>
 	   	<% if teller? %>
 	   		<td><%= link_to "Deposit", deposit_by_id_path(account)%></td>

@@ -8,6 +8,7 @@ BMU::Application.routes.draw do
   resources :bills
 
   resources :accounts, :only => [:index, :show, :destroy]
+  post "accounts", to: 'accounts#index'
   get 'accounts/enable/:id', to: 'accounts#enable', as: 'enable_account'
   get 'accounts/disable/:id', to: 'accounts#disable', as: 'disable_account'
   resources :savings#, :only => [:new, :create]
@@ -33,8 +34,8 @@ BMU::Application.routes.draw do
   post 'deposits/create', to: 'deposits#create', as: 'deposits'
 
 
-  get "user/index"
-  post "user/index"
+  get "users", to: 'user#index', as: 'users'
+  post "users", to: 'user#index'
   get "teller", to: 'teller#index', as: 'teller_panel'
   get "administrator/index"
   get 'administrator', to: 'administrator#index', as: 'admin_panel'

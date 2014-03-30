@@ -1,15 +1,17 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy, :enable, :disable]
-  before_filter :admin_protect, except: [:show]
+  before_filter :admin_protect, except: [:show, :index]
+  before_filter :admin_teller_protect, only: [:index]
 
   # GET /accounts
   # GET /accounts.json
   def index
-    if params[:user]
+    if params[:account]
       @account = Account.new(search_params)
-      @accounts = Account.users(@user)
+      @accounts = Account.accounts(@account)
+    else
+      @account = Account.new
     end
-    @account = Account.new
     respond_to do |format|
       format.html #responds with default html file
       format.js #this will be the javascript file we respond with
@@ -90,5 +92,9 @@ class AccountsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def account_params
     params.require(:account).permit(:user_id, :monthly_account_rate, :is_active)
+  end
+  
+  def search_params
+    params.require(:account).permit(:id, :username, :account_type, :user_id, :monthly_account_rate, :is_active)
   end
 end

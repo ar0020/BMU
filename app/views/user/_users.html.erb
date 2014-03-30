@@ -4,7 +4,10 @@ Search Results: <br/>
 
 <ol>
 <% for user in @users %>
-	<li><%= link_to user.username, customer_by_id_path(user) %> |
-	<%= user.level %></li>
+	<li>
+		<%= user.id %> |
+		<%= link_to user.username, customer_by_id_path(user) %> |
+		<%= user.level %>
+	</li>
 <% end %>
 </ol>
