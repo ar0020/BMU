@@ -11,25 +11,12 @@
     </div>
   <% end %>
 
-  <% if @bill.user_id.nil? %>
-    <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-    </div>
-  <% else %>
-    User id <%= @bill.user_id %> <br/>
-    <%= f.hidden_field :user_id %>
-  <% end %>
-
-  <% if @bill.user_id.nil? %>
-      <div class="field">
-        <%= f.label :account_id %><br>
-        <%= f.number_field :account_id %>
-      </div>
-  <% else %>
-        Account id <%= @bill.account_id %> <br/>
-      <%= f.hidden_field :account_id %>
-  <% end %>
+  <h3><%= @user.username %></h3>
+  
+  <div class="field">
+    <%= f.label :account_id, "From Account" %><br/>
+    <%= f.select( :account_id, @accounts.all.collect { |i| ["#{i.id} : #{number_to_currency(i.current_balance)}", i.id]} ) %>
+  </div>
 
   <div class="field">
     <%= f.label :payee_name %><br>

@@ -24,10 +24,9 @@ class BillsController < ApplicationController
   # GET /bills/new
   def new
     @bill = Bill.new
-    if params[:id] && params[:user_id]
-      @bill.account_id = params[:id]
-      @bill.user_id = params[:user_id]
-    end
+    @bill.user_id = current_user.id
+    @user = current_user
+    @accounts = Account.where(user_id: current_user.id)
   end
 
   # GET /bills/1/edit
@@ -38,6 +37,9 @@ class BillsController < ApplicationController
   # POST /bills.json
   def create
     @bill = Bill.new(bill_params)
+    @bill.user_id = current_user.id
+    @user = current_user
+    @accounts = Account.where(user_id: current_user.id)
 
     respond_to do |format|
       if @bill.save
@@ -105,6 +107,6 @@ class BillsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bill_params
-      params.require(:bill).permit(:user_id, :account_id, :is_recurring, :payee_name, :payee_street, :payee_city, :payee_state, :payee_zip, :payee_account_id, :amount, :pay_date)
+      params.require(:bill).permit(:account_id, :is_recurring, :payee_name, :payee_street, :payee_city, :payee_state, :payee_zip, :payee_account_id, :amount, :pay_date)
     end
 end
