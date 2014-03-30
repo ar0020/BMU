@@ -69,8 +69,10 @@ class BillsController < ApplicationController
   # DISABLE /accounts/1.json
   def disable
     @bill.update_attribute :is_recurring, false
+    account = Account.find(@bill.account_id)
+    user = User.find(account.user_id)
     respond_to do |format|
-      format.html { redirect_to customer_by_id_path(@bill.user_id) }
+      format.html { redirect_to customer_by_id_path(user.id) }
       format.json { head :no_content }
     end
   end

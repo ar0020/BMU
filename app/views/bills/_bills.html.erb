@@ -3,7 +3,7 @@
 <table>
   <thead>
   <tr>
-    <th>Account</th>
+    <th>From Account</th>
     <th>Payee name</th>
     <th>Payee street</th>
     <th>Payee city</th>
@@ -11,7 +11,7 @@
     <th>Payee zip</th>
     <th>Payee account</th>
     <th>Amount</th>
-    <th>Pay date</th>
+    <th>Date Due</th>
     <th></th>
     <th></th>
     <th></th>
@@ -32,7 +32,6 @@
         <td><%= bill.pay_date %></td>
         <td><%= link_to 'Show', bill %></td>
         <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
-        <td><%= link_to 'Delete', bill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% if bill.is_recurring == true -%>
             <td><%= link_to 'Stop Recurrence', stop_recurrence_path(bill) %></td>
         <% else -%>
