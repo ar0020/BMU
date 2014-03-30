@@ -17,17 +17,14 @@ BMU::Application.routes.draw do
   resources :markets#, :only => [:new, :create]
 
   resources :transactions, :only => [:index]
-<<<<<<< HEAD
   resources :transfers, :only => [:new, :create]
   get 'transfer/new/:id', to: 'transfers#new', as: 'new_transfer_by_params'
-=======
   #resources :transfers, :only => [:new, :create]
->>>>>>> 07b7c9543ecb1aee086d65aa9fcbca79b02378ec
   #resources :withdrawals, :only => [:new, :create]
   #resources :deposits, :only => [:new, :create]
-  get 'transfers/new', to: 'transfers#new', as: 'new_transfer'
+  #get 'transfers/new', to: 'transfers#new', as: 'new_transfer'
   get 'transfers/new/:id', to: 'transfers#new', as: 'transfer_by_id'
-  post 'transfers/create', to: 'transfers#create', as: 'transfers'
+  #post 'transfers/create', to: 'transfers#create', as: 'transfers'
   get 'withdrawals/new', to: 'withdrawals#new', as: 'new_withdrawal'
   get 'withdrawals/new/:id', to: 'withdrawals#new', as: 'withdraw_by_id'
   post 'withdrawals/create', to: 'withdrawals#create', as: 'withdrawals'

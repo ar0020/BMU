@@ -10,13 +10,14 @@ class User < ActiveRecord::Base
 	LEVELS=[[1,"Administrator"],[2,"Teller"],[3,"Customer"]]
 	
 	# Search function for User table.
-	def self.users(user)
+  def self.users(user)
     results = User.limit(50)
-	  results = results.where("users.username LIKE ?", user.username) unless user.username =''
+    results = results.where("users.username LIKE ?", user.username) unless user.username =''
     results = results.where("users.email LIKE ?", user.email) unless user.email =''
-    results = results.where("users.id = ?", user.id) unless user.id =''
-	  return results
-	end
+    results = results.where("users.id = ?", user.id) unless user.id.nil?
+    results = results.where("users.user_level = ?", user.user_level) unless user.user_level.nil?
+    return results
+  end
 	
 	# Humanizes user_level for readability
 	def level

@@ -11,6 +11,9 @@
 
   <div><%= f.label :id %><br/>
   <%= f.number_field :id %></div>
+  
+  <div><%= f.label :user_level %><br/>
+  <%= f.select(:user_level, User::LEVELS.map { |key,value| [value,key]}, {include_blank:true})  %></div>
 
   <div><%= f.submit "Search" %></div>
 <% end %>

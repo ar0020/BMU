@@ -4,7 +4,8 @@ class TransfersController < TransactionsController
   # GET /transfers/new
   def new
     if teller? && params[:id]
-      @user = User.find(params[:id])
+      @account = Account.find(params[:id])
+      @user = User.find(@account.user_id)
     elsif customer?
       @user = current_user
     end
