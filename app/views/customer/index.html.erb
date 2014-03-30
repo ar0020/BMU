@@ -18,3 +18,7 @@
 <% else %>
     <h3>No Accounts</h3>
 <% end %>
+
+<% if !@bills.blank? %>
+    <%= render :partial => "bills/bills" %>
+<% end %>

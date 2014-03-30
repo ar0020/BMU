@@ -29,11 +29,13 @@
 	        <% else -%>
 	        	<td><%= link_to 'Enable', enable_account_path(account) %></td>
 	        <% end -%>
-	        <td><%= link_to "Delete", account_path(account), :method=>:delete, :confirm=>"Are yousure?" %></td>
+	        <td><%= link_to "Delete", account_path(account), :method=>:delete, :confirm=>"Are you sure?" %></td>
 	   	<% end %>
 	   	<% if teller? %>
 	   		<td><%= link_to "Deposit", deposit_by_id_path(account)%></td>
 	   		<td><%= link_to "Withdraw", withdraw_by_id_path(account)%></td>
+            <td><%= link_to "Transfer", transfer_by_id_path(account)%></td>
+            <td><%= link_to "Bill-Pay", bill_by_id_path(:id => account.id, :user_id => current_user.id)%></td>
 	   	<% end %>
       </tr>
     <% end %>

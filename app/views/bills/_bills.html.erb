@@ -1,4 +1,4 @@
-<h1>Listing bills</h1>
+<h2>Listing bills</h2>
 
 <table>
   <thead>
@@ -34,9 +34,9 @@
         <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
         <td><%= link_to 'Delete', bill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% if bill.is_recurring == true -%>
-            <td><%= link_to 'Stop Recurrence', stop_recurrence(bill) %></td>
+            <td><%= link_to 'Stop Recurrence', stop_recurrence_path(bill) %></td>
         <% else -%>
-            <td><%= link_to 'Start Recurrence', start_recurrence(bill) %></td>
+            <td><%= link_to 'Start Recurrence', start_recurrence_path(bill) %></td>
         <% end -%>
       </tr>
   <% end %>
@@ -44,5 +44,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Bill', new_bill_path %>

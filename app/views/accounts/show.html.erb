@@ -22,7 +22,9 @@
 		Account was deactivated.
 	<% end %><br/>
 	<%= link_to "Deposit", deposit_by_id_path(@account.id) %> |
-	<%= link_to "Withdraw", withdraw_by_id_path(@account.id) %>
+	<%= link_to "Withdraw", withdraw_by_id_path(@account.id) %> |
+    <%= link_to "Transfer", transfer_by_id_path(@account.id) %> |
+    <%= link_to "Bill-Pay", bill_by_id_path(:id => @account.id, :user_id => current_user.id) %>
 </fieldset>
 <% end %>
 

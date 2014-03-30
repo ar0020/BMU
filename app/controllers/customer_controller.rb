@@ -7,5 +7,16 @@ class CustomerController < ApplicationController
       @user = current_user
     end
     @accounts = Account.where(:user_id => @user.id)
+
+
+    # This should then find all bills that are recurring and display them.
+    # no idea if this works....
+    if @accounts.each do |account|
+        @bills = Bill.where(" ? = ? AND is_recurring = ? ", account.user_id, @user.id, true)
+      end
+    else
+      @bills = Bill.new
+    end
+
   end
 end
