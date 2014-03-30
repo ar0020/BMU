@@ -5,10 +5,12 @@ class TransfersController < TransactionsController
   def new
     if teller? && params[:id]
       @user = User.find(params[:id])
-    else
+    elsif customer?
       @user = current_user
     end
-    @accounts = Account.where("accounts.user_id = ?", @user.id)
+    if @user
+      @accounts = Account.where("accounts.user_id = ?", @user.id)
+    end
     @transfer = Transfer.new
   end
 

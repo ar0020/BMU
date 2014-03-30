@@ -19,7 +19,9 @@ class Transfer < Transaction
     from_transfer.account_id = self.from_account_id
     # Validates that user either owns both accounts or the user is a teller.
     # Validates that this type of account can be withdrawn from.
-    if (from_account.user_id != to_account.user_id && user.user_level != 2) || (to_transfer.validate_transaction_on_account? && from_transfer.validate_transaction_on_account?)
+    if (from_account.user_id != to_account.user_id && user.user_level != 2) || 
+       (to_transfer.validate_transaction_on_account? && from_transfer.validate_transaction_on_account?) || 
+       (self.to_account_id == self.from_account_id)
       return false
     end
     if user.user_level == 2
