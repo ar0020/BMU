@@ -25,7 +25,7 @@ class Transfer < Transaction
     # Validates that this type of account can be withdrawn from.
     if (from_account.user_id != to_account.user_id && user.user_level != 2) || 
        (to_transfer.validate_transaction_on_account? && from_transfer.validate_transaction_on_account?) || 
-       (self.to_account_id == self.from_account_id)
+       (to_transfer.account_id == from_transfer.account_id)
       return false
     end
     # Set description in database
