@@ -25,3 +25,24 @@ en:
     attributes:
       bill:
         amount_string: "Amount"
+      deposit:
+        amount_string: "Amount"
+      transfer:
+        amount_string: "Amount"
+      withdrawal:
+        amount_string: "Amount"
+      transaction:
+        amount_string: "Amount"
+      account:
+        balance_string: "Current Balance"
+      checking:
+        balance_string: "Current Balance"
+      credit:
+        balance_string: "Current Balance"
+      market:
+        balance_string: "Current Balance"
+      mortgage:
+        balance_string: "Current Balance"
+      saving:
+        balance_string: "Current Balance"
+        
