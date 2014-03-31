@@ -23,8 +23,8 @@
 	<% end %><br/>
 	<%= link_to "Deposit", deposit_by_id_path(@account.id) %> |
 	<%= link_to "Withdraw", withdraw_by_id_path(@account.id) %> |
-  <%= link_to "Transfer", transfer_by_id_path(@account.id) %> |
-  <%= link_to "Bill-Pay", bill_by_id_path(:id => @account.id, :user_id => current_user.id) %></fieldset>
+    <%= link_to "Transfer", transfer_by_id_path(@account.id) %> |
+</fieldset>
 <% end %>
 
 <p>
@@ -34,11 +34,21 @@
   <%= @account.account_type %><br>
   <strong>Current balance:</strong>
   <%= number_to_currency(@account.current_balance) %><br>
-  <strong>Monthly account rate:</strong>
-  <%= number_to_percentage(@account.monthly_account_rate) %><br>
+  <% if @account.account_type != "Checking" %>
+    <strong>Monthly account rate:</strong>
+    <%= number_to_percentage(@account.monthly_account_rate) %><br>
+  <% end %>
 </p>
+
+<% if !@bills.blank? %>
+  <%= render :partial => "bills/bills" %>
+<% end %>
+
+
 <% if !@transactions.blank? %>
  <%= render :partial => "transactions/transactions" %>
 <% else %>
  <h3>No Transaction History</h3>
 <% end %>
+
+

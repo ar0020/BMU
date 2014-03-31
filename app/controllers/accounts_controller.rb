@@ -24,6 +24,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @transactions = Transaction.transactions(@account.id)
     @user = User.find(@account.user_id)
+    @bills = Bill.where(:user_id => @user.id)
   end
 
   def new
@@ -93,7 +94,7 @@ class AccountsController < ApplicationController
   def account_params
     params.require(:account).permit(:user_id, :monthly_account_rate, :is_active)
   end
-  
+
   def search_params
     params.require(:account).permit(:id, :username, :account_type, :user_id, :monthly_account_rate, :is_active)
   end

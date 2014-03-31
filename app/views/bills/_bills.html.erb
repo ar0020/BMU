@@ -1,4 +1,4 @@
-<h2>Listing bills</h2>
+<h2>Bills</h2>
 
 <table>
   <thead>
@@ -36,7 +36,7 @@
             <td><%= link_to 'Stop Recurrence', stop_recurrence_path(bill) %></td>
         <% else -%>
             <td><%= link_to 'Start Recurrence', start_recurrence_path(bill) %></td>
-        <% end -%>
+        <% end %>
       </tr>
   <% end %>
   </tbody>

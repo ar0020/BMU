@@ -31,6 +31,8 @@ class BillsController < ApplicationController
 
   # GET /bills/1/edit
   def edit
+    @user = current_user
+    @accounts = Account.where(user_id: current_user.id)
   end
 
   # POST /bills
