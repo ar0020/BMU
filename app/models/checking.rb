@@ -1,4 +1,7 @@
 class Checking < Account
+  
+  validates :monthly_account_rate, numericality: { equal_to: 0 }
+  
   def rate
   end
   

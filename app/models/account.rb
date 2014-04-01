@@ -8,7 +8,11 @@ class Account < ActiveRecord::Base
             with: /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/,
             message: " is invalid.",
             multiline: true}
-  validates :monthly_account_rate, numericality: { greater_than_or_equal_to: 0 }
+  validates :monthly_account_rate, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+  validates_associated :user
+  validates :account_type, format: {
+            with: /(Credit|Checking|Mortgage|Market|Saving)/
+            }
 
   before_validation :convert_amount
   before_validation :set_type
