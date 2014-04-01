@@ -31,6 +31,6 @@ class DepositsController < TransactionsController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def deposit_params
-    params.require(:deposit).permit(:account_id, :amount_string)
+    params.require(:deposit).permit(:account_id, :amount)
   end
 end

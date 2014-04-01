@@ -33,6 +33,6 @@ class CreditsController < AccountsController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def credit_params
-      params.require(:credit).permit(:user_id, :balance_string, :account_type, :monthly_account_rate, :is_active)
+      params.require(:credit).permit(:user_id, :current_balance, :account_type, :monthly_account_rate, :is_active)
     end
 end
