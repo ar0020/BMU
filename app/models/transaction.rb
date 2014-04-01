@@ -2,8 +2,8 @@ class Transaction < ActiveRecord::Base
   belongs_to :user
   belongs_to :account
   validates :amount, :numericality => {:greater_than => 0}
-  validates_associated :user, :account
-  validates :user_id, :amount_string, :amount, :transaction_type, :account_id, presence: true
+  #validates_associated :user, :account
+  validates :user, :amount_string, :amount, :transaction_type, :account, presence: true
 
   validates :amount_string, format: { 
             with: /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/,
