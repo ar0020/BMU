@@ -31,6 +31,6 @@ class MarketsController < AccountsController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def market_params
-      params.require(:market).permit(:user_id, :current_balance, :account_type, :monthly_account_rate, :is_active)
+      params.require(:market).permit(:user_id, :balance_string, :account_type, :monthly_account_rate, :is_active)
     end
 end

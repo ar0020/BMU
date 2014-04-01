@@ -30,6 +30,6 @@ class WithdrawalsController < TransactionsController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def withdrawal_params
-    params.require(:withdrawal).permit(:account_id, :amount)
+    params.require(:withdrawal).permit(:account_id, :amount_string)
   end
 end

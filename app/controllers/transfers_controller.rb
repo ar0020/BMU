@@ -43,6 +43,6 @@ class TransfersController < TransactionsController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def transfer_params
-      params.require(:transfer).permit(:from_account_id, :to_account_id, :account_id, :amount)
+      params.require(:transfer).permit(:from_account_id, :to_account_id, :account_id, :amount_string)
     end
 end
