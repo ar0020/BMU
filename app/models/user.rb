@@ -4,16 +4,22 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 		 
-	attr_accessor :login, :level
 	validate :user_level, presence: true, numericality: { only_integer: true, :greater_than=>0, :less_than=>4, :message=>" is an invalid level." }
-	
+  validates :username,
+    :uniqueness => {
+      :case_sensitive => false
+    },
+    :format => %r{[a-zA-Z0-9]} # etc.
+    
+  attr_accessor :login, :level#, :encrypted_login
+    
 	LEVELS=[[1,"Administrator"],[2,"Teller"],[3,"Customer"]]
 	
 	# Search function for User table.
   def self.users(user)
     results = User.limit(50)
-    results = results.where("users.username LIKE ?", user.username) unless user.username =''
-    results = results.where("users.email LIKE ?", user.email) unless user.email =''
+    results = results.where("users.username LIKE ?", user.username) unless user.username == ''
+    results = results.where("users.email LIKE ?", user.email) unless user.email == ''
     results = results.where("users.id = ?", user.id) unless user.id.nil?
     results = results.where("users.user_level = ?", user.user_level) unless user.user_level.nil?
     return results
@@ -49,17 +55,16 @@ class User < ActiveRecord::Base
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      login = login.downcase
+      #bcrypt   = ::BCrypt::Password.new(login)
+      #encrypted_login = ::BCrypt::Engine.hash_secret("#{login}#{}", Devise.secret_key)
+      #Devise.secure_compare(username, self.username)
+      where(conditions).where(["lower(username) = :value", { :value => login }]).first
+      #puts encrypted_login
     else
       where(conditions).first
     end
   end
-  
-  validates :username,
-    :uniqueness => {
-      :case_sensitive => false
-    },
-    :format => %r{[a-zA-Z0-9]} # etc.
   
   def email_required?
     false

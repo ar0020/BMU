@@ -14,7 +14,7 @@ class RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-
+    #resource.encrypt()
     resource_saved = resource.save
     yield resource if block_given?
     if resource_saved
@@ -109,11 +109,12 @@ class RegistrationsController < Devise::RegistrationsController
   # The path used after sign up. You need to overwrite this method
   # in your own RegistrationsController.
   def after_sign_up_path_for(resource)
-    #after_sign_in_path_for(resource)
+    after_sign_in_path_for(resource)
     if resource.user_level == 3
       customer_by_id_path(resource)
+    else
+      admin_panel_path
     end
-    administrator_path
   end
 
   # The path used after sign up for inactive accounts. You need to overwrite

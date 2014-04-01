@@ -37,17 +37,14 @@ BMU::Application.routes.draw do
   get "users", to: 'user#index', as: 'users'
   post "users", to: 'user#index'
   get "teller", to: 'teller#index', as: 'teller_panel'
-  get "administrator/index"
+  #get "administrator/index"
   get 'administrator', to: 'administrator#index', as: 'admin_panel'
   get "customer/:id", to: 'customer#index', as: 'customer_by_id'
   get "customer/", to: 'customer#index', as: 'customer'
-  namespace :administrator do
-    root to: "administrator#index"
-  end
 
   #get "home/index"
   devise_for :users, :controllers => { :registrations => 'registrations', :sessions => "sessions"}
-
+  #post 'users/sign_up', to: 'registrations#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
