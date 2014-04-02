@@ -2,8 +2,7 @@
 <table>
   <thead>
     <tr>
-      <th>Account #</th>
-      <th>Account type</th>
+      <th>Account</th>
       <th>Current balance</th>
       <th>Interest Rate</th>
       <th></th>
@@ -16,15 +15,14 @@
   </thead>
 
   <tbody>
+  <h3>Accounts</h3>
     <% for account in @accounts %>
       <tr class="<%= cycle("odd", "even") -%>">
-      	<td><%= account.id %></td>
-        <td><%= account.account_type %></td>
+        <td><%= link_to "#{account.account_type}: #{account.display_account_id}", account %></td>
         <td><%= number_to_currency(account.current_balance) %></td>
         <td><%= number_to_percentage(account.monthly_account_rate) %></td>
-        <td><%= link_to 'Account History', account %></td>
+        <td><%= link_to "View Account", account %></td>
         <% if admin? %>
-	        <td><%= link_to 'Edit', account %></td>
 	        <% if account.is_active == true -%>
 	        	<td><%= link_to 'Disable', disable_account_path(account) %></td>
 	        <% else -%>

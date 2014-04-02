@@ -7,8 +7,10 @@ class BillsController < ApplicationController
     if params[:user]
       @bill = Bill.new(search_params)
       @bills = Bill.users(@user)
+      @account = Account.find(@bill.user_id)
     end
     @bill = Bill.new
+    @account = Account.new
     respond_to do |format|
       format.html #responds with default html file
       format.js #this will be the javascript file we respond with
@@ -76,7 +78,7 @@ class BillsController < ApplicationController
     account = Account.find(@bill.account_id)
     user = User.find(account.user_id)
     respond_to do |format|
-      format.html { redirect_to customer_by_id_path(user.id) }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end
@@ -86,7 +88,7 @@ class BillsController < ApplicationController
   def enable
     @bill.update_attribute :is_recurring, true
     respond_to do |format|
-      format.html { redirect_to customer_by_id_path(@bill.user_id) }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end
