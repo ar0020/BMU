@@ -27,32 +27,6 @@ class AccountsController < ApplicationController
     @bills = Bill.where(:account_id => @account.id)
   end
 
-  def new
-    @user = User.find(params[:id])
-    @account = Account.new
-    @account.user_id = @user.id
-  end
-
-  # POST /accounts
-  # POST /accounts.json
-  def create
-    @account = Account.new(account_params)
-    @account.current_balance = 0.00
-
-    if @account.account_type == "Checking"
-      render create_checking(@account)
-    end
-    respond_to do |format|
-      if true #@account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @account }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DISABLE /accounts/1
   # DISABLE /accounts/1.json
   def disable

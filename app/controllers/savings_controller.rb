@@ -1,4 +1,5 @@
 class SavingsController < AccountsController
+  before_action :set_saving, only: [:edit, :update]
   before_filter :admin_protect
 
   def new
@@ -17,6 +18,24 @@ class SavingsController < AccountsController
         #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render controller: 'saving', action: 'new' }
+        format.json { render json: @saving.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /savings/1/edit
+  def edit
+  end
+
+  # PATCH/PUT /savings/1
+  # PATCH/PUT /savings/1.json
+  def update
+    respond_to do |format|
+      if @saving.update(saving_params)
+        format.html { redirect_to @saving, notice: 'Saving was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
         format.json { render json: @saving.errors, status: :unprocessable_entity }
       end
     end

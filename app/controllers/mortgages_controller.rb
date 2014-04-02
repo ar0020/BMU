@@ -1,5 +1,6 @@
 class MortgagesController < AccountsController
-  before_filter :admin_protect  
+  before_action :set_mortgage, only: [:edit, :update]
+  before_filter :admin_protect
 
   def new
     @user = User.find(params[:id])
@@ -17,6 +18,24 @@ class MortgagesController < AccountsController
         #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render controller: 'mortgage', action: 'new' }
+        format.json { render json: @mortgage.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /mortgages/1/edit
+  def edit
+  end
+
+  # PATCH/PUT /mortgages/1
+  # PATCH/PUT /mortgages/1.json
+  def update
+    respond_to do |format|
+      if @mortgage.update(mortgage_params)
+        format.html { redirect_to @mortgage, notice: 'Mortgage was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
         format.json { render json: @mortgage.errors, status: :unprocessable_entity }
       end
     end

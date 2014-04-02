@@ -1,5 +1,6 @@
 class MarketsController < AccountsController
-  before_filter :admin_protect  
+  before_action :set_market, only: [:edit, :update]
+  before_filter :admin_protect
 
   def new
     @user = User.find(params[:id])
@@ -9,7 +10,6 @@ class MarketsController < AccountsController
 
   def create
     @market = Market.new(market_params)
-    #@market.account_type = "Market"
 
     respond_to do |format|
       if @market.save
@@ -17,6 +17,25 @@ class MarketsController < AccountsController
         #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render controller: 'market', action: 'new' }
+        format.json { render json: @market.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /markets/1/edit
+  def edit
+  end
+
+
+  # PATCH/PUT /markets/1
+  # PATCH/PUT /markets/1.json
+  def update
+    respond_to do |format|
+      if @market.update(market_params)
+        format.html { redirect_to @market, notice: 'Market was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
         format.json { render json: @market.errors, status: :unprocessable_entity }
       end
     end
