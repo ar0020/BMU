@@ -60,7 +60,14 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.4)
     orm_adapter (0.5.0)
+    pdf-core (0.2.5)
     polyglot (0.3.3)
+    prawn (1.0.0)
+      pdf-core (~> 0.2.2)
+      ttfunk (~> 1.1.1)
+    prawnto (0.1.1)
+      prawn
+      rails (>= 2.1)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -105,6 +112,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.1.1)
     turbolinks (2.2.0)
       coffee-rails
     tzinfo (0.3.38)
@@ -122,6 +130,8 @@ DEPENDENCIES
   devise
   jbuilder (~> 1.2)
   jquery-rails
+  prawn (= 1.0.0)
+  prawnto (= 0.1.1)
   rails (= 4.0.2)
   sass-rails (~> 4.0.0)
   sdoc

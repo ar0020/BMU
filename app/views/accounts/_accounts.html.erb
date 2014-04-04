@@ -31,10 +31,14 @@
 	        <td><%= link_to "Delete", account_path(account), :method=>:delete, data: { confirm: 'Are you sure?'} %></td>
 	   	<% end %>
 	   	<% if teller? %>
+            <td><%= link_to "Statment", account_path(account, :format => 'pdf') %></td>
 	   		<td><%= link_to "Deposit", deposit_by_id_path(account)%></td>
 	   		<td><%= link_to "Withdraw", withdraw_by_id_path(account)%></td>
             <td><%= link_to "Transfer", transfer_by_id_path(account)%></td>
 	   	<% end %>
+        <% if customer? %>
+            <td><%= link_to "Statment", account_path(account, :format => 'pdf') %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

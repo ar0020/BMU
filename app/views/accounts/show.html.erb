@@ -30,6 +30,7 @@
 	<%= link_to "Deposit", deposit_by_id_path(@account.id) %> |
 	<%= link_to "Withdraw", withdraw_by_id_path(@account.id) %> |
     <%= link_to "Transfer", transfer_by_id_path(@account.id) %> |
+    <%= link_to "Printable Statment", account_path(@account, :format => 'pdf') %>
 </fieldset>
 <% end %>
 

@@ -45,3 +45,12 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise'
+
+# Used to make printable pdf transaction records
+# This gem was highly recommended by railscast
+# prawnpdf.org/manual.pdf‎
+# set to stable release, for no future problems.
+gem 'prawn',   '= 1.0.0'
+# makes using prawn easier by using the controllers show
+# no added routes
+gem 'prawnto', '= 0.1.1'

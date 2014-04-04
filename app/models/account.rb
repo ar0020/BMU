@@ -73,4 +73,5 @@ class Account < ActiveRecord::Base
   def set_type
     # Blank here, but the 5 subclasses use this function to set their account_type appropriately.
   end
+
 end
