@@ -5,30 +5,29 @@ BMU::Application.routes.draw do
   get 'bills/new', to: 'bills#new', as: 'new_bill'
   get 'bills/new/:id', to: 'bills#new', as: 'bill_by_id'
   post 'bills/create', to: 'bills#create', as: 'bills'
-  resources :bills
+  resources :bills, :only => [:edit, :show, :update, :destroy]
 
-  resources :accounts, :only => [:index, :show, :destroy]
-  post "accounts", to: 'accounts#index'
+  resources :accounts, :only => [:show, :destroy]
+  post 'accounts', to: 'accounts#index'
   get 'accounts/enable/:id', to: 'accounts#enable', as: 'enable_account'
   get 'accounts/disable/:id', to: 'accounts#disable', as: 'disable_account'
-  resources :savings#, :only => [:new, :create]
-  resources :checkings#, :only => [:new, :create]
-  resources :mortgages#, :only => [:new, :create]
-  resources :credits#, :only => [:new, :create]
-  resources :markets#, :only => [:new, :create]
+  resources :savings, :only => [:new, :create, :edit, :update]
+  resources :checkings, :only => [:new, :create, :edit, :update]
+  resources :mortgages, :only => [:new, :create, :edit, :update]
+  resources :credits, :only => [:new, :create, :edit, :update]
+  resources :markets, :only => [:new, :create, :edit, :update]
 
-  resources :transactions, :only => [:index]
-  resources :transfers, :only => [:new, :create]
-  get 'transfer/new/:id', to: 'transfers#new', as: 'new_transfer_by_params'
-  #resources :transfers, :only => [:new, :create]
-  #resources :withdrawals, :only => [:new, :create]
-  #resources :deposits, :only => [:new, :create]
-  #get 'transfers/new', to: 'transfers#new', as: 'new_transfer'
+  #transactions
+  get 'transactions', to: 'transactions#index', as: 'transactions'
+
+  get 'transfers/new', to: 'transfers#new', as: 'new_transfer'
   get 'transfers/new/:id', to: 'transfers#new', as: 'transfer_by_id'
-  #post 'transfers/create', to: 'transfers#create', as: 'transfers'
+  post 'transfers/create', to: 'transfers#create', as: 'transfers'
+
   get 'withdrawals/new', to: 'withdrawals#new', as: 'new_withdrawal'
   get 'withdrawals/new/:id', to: 'withdrawals#new', as: 'withdraw_by_id'
   post 'withdrawals/create', to: 'withdrawals#create', as: 'withdrawals'
+
   get 'deposits/new', to: 'deposits#new', as: 'new_deposit'
   get 'deposits/new/:id', to: 'deposits#new', as: 'deposit_by_id'
   post 'deposits/create', to: 'deposits#create', as: 'deposits'
