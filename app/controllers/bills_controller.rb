@@ -44,6 +44,7 @@ class BillsController < ApplicationController
     @bill.user_id = current_user.id
     @user = current_user
     @accounts = Account.where(user_id: current_user.id)
+    @bill.amount = @bill.amount_string.to_f
 
     respond_to do |format|
       if @bill.save

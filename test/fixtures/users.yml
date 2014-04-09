@@ -4,8 +4,30 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+
+<% 10.times do |n| %>
+user_<%= n %>:
+  username: <%= "admin#{n}" %>
+  email: <%= "admin#{n}@bank.com" %>
+  password: password
+  password_confirmation: password
+  user_level: 1
+<% end %>
+
+<% 100.times do |n| %>
+user_<%= n %>:
+  username: <%= "teller#{n}" %>
+  email: <%= "teller#{n}@bank.com" %>
+  password: password
+  password_confirmation: password
+  user_level: 2
+<% end %>
+
+<% 1000.times do |n| %>
+user_<%= n %>:
+  username: <%= "customer#{n}" %>
+  email: <%= "customer#{n}@bank.com" %>
+  password: password
+  password_confirmation: password
+  user_level: 3
+<% end %>
