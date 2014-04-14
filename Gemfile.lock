@@ -60,7 +60,8 @@ GEM
     multi_json (1.9.2)
     orm_adapter (0.5.0)
     pdf-core (0.2.5)
-    polyglot (0.3.3)
+    pg (0.17.1)
+    polyglot (0.3.4)
     prawn (1.0.0)
       pdf-core (~> 0.2.2)
       ttfunk (~> 1.1.1)
@@ -110,12 +111,8 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-<<<<<<< HEAD
-    turbolinks (2.2.2)
-=======
     ttfunk (1.1.1)
-    turbolinks (2.2.0)
->>>>>>> 35492edaf7065fd31c6d1fb7ab79257150d12b4d
+    turbolinks (2.2.2)
       coffee-rails
     tzinfo (0.3.39)
     uglifier (2.5.0)
@@ -132,12 +129,9 @@ DEPENDENCIES
   devise
   jbuilder (~> 1.2)
   jquery-rails
-<<<<<<< HEAD
   pg
-=======
   prawn (= 1.0.0)
   prawnto (= 0.1.1)
->>>>>>> 35492edaf7065fd31c6d1fb7ab79257150d12b4d
   rails (= 4.0.2)
   sass-rails (~> 4.0.0)
   sdoc
