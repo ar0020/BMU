@@ -7,3 +7,23 @@ https://github.com/plataformatec/devise/wiki/How-To:-Add-an-Admin-role
 
 # Notes for Strong Parameters
 http://blog.sensible.io/2013/08/17/strong-parameters-by-example.html
+
+# Install PostgresSQL command line
+https://help.ubuntu.com/community/PostgreSQL
+# To access postgres as root
+su - postgres  # CTRL-D to logout
+psql postgres
+
+# Might have to copy this to get gems installs to work
+# from inside docker
+HOME=/root
+
+#
+pull docker image
+
+
+./create-dev-persistent.sh
+./dattach bmu-dev
+service postgresql start
+cd /home/app/github/BMU
+passenger start

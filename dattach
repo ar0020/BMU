@@ -1,0 +1,1 @@
+lxc-attach -n `docker ps -notrunc | grep " $1 " | cut -f1 -d" "`

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
-
+  
   # Check if logged in user is an admin
   def admin?
     if user_signed_in? && current_user.user_level == 1
@@ -28,8 +28,9 @@ class ApplicationController < ActionController::Base
     return false
   end
 
+  
   protected
-
+  
   def admin_protect
     if !admin?
       flash[:notice] = "Admin Only Function"

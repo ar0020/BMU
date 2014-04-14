@@ -20,7 +20,7 @@ class SessionsController  < Devise::SessionsController
     elsif teller?
       respond_with resource, location: teller_panel_path
     elsif customer?
-      respond_with resource, location: customer_path(resource)
+      respond_with resource, location: customer_path
     else
       respond_with resource, location: after_sign_in_path_for(resource)
     end

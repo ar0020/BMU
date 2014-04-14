@@ -13,7 +13,7 @@ class UserController < ApplicationController
      format.js #this will be the javascript file we respond with
     end
   end
-
+  
   private
 
   def search_params
