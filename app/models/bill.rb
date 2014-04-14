@@ -29,12 +29,10 @@ class Bill < ActiveRecord::Base
   end
   
   def convert_amount
-    if self.amount_string.nil?
-      match = ""
-      for i in self.amount_string.scan(/\d\.*/)
-        match += i
-      end
-      self.amount = match.to_f
+    match = ""
+    for i in self.amount_string.scan(/\d\.*/)
+      match += i
     end
+    self.amount = match.to_f
   end
 end

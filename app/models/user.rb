@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 		 
 	validate :user_level, presence: true, numericality: { only_integer: true, :greater_than=>0, :less_than=>4, :message=>" is an invalid level." }
-  #validates :username,
-  #  :uniqueness => {
-  #    :case_sensitive => false
-  #  },
-  #  :format => %r{[a-zA-Z0-9]} # etc.
+  validates :username,
+    :uniqueness => {
+      :case_sensitive => false
+    },
+    :format => %r{[a-zA-Z0-9]} # etc.
     
   attr_accessor :login, :level, :encrypted_login
     
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
 	end
   
 
-  def self.synchronous_encrypt_param(param)
+  def synchronous_encrypt_param2(param)
     sha256 = OpenSSL::Digest::SHA256.new
     sha256.digest(param)
     param.encode('UTF-8')
@@ -56,7 +56,10 @@ class User < ActiveRecord::Base
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      login = synchronous_encrypt_param(login)
+      #login = synchronous_encrypt_param(login)
+      sha256 = OpenSSL::Digest::SHA256.new
+      sha256.digest(login)
+      login.encode('UTF-8')
       where(conditions).where(["username = ?", login ]).first
     else
       where(conditions).first
@@ -71,13 +74,18 @@ class User < ActiveRecord::Base
     false
   end
   
-  before_save :encrypt_username
+  before_validation :encrypt_username
   
   def encrypt_username
-    self.username = User.synchronous_encrypt_param(self.username)
+    #self.username = synchronous_encrypt_param(self.username)
+    name = self.username
+    sha256 = OpenSSL::Digest::SHA256.new
+    #name = sha256.digest(name)
+    self.username = name.encode('UTF-8')
   end
 
   private
+  
   def synchronous_encrypt_param2(param)
     # create the cipher for encrypting
     cipher = OpenSSL::Cipher::Cipher.new("aes-256-cbc")
@@ -95,8 +103,6 @@ class User < ActiveRecord::Base
     encrypted = cipher.update(param)
     encrypted << cipher.final
     #encrypted.sink.write(response[:data].force_encoding('ASCII-8BIT').encode('UTF-8'))
-    #encrypted.force_encoding('ASCII-8BIT').encode('UTF-8', :invalid => :replace, :undef => :replace, :replace => '?')
-    #encrypted.force_encoding('iso-8859-1').encode('utf-8')
-    return encrypted
+    return encrypted#.encode('UTF-8')
   end
 end
