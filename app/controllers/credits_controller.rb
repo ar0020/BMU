@@ -1,6 +1,6 @@
 class CreditsController < AccountsController
-  before_action :set_credit, only: [:show, :edit, :update]
-  before_filter :admin_protect  
+  before_action :set_credit, only: [:edit, :update]
+  before_filter :admin_protect
 
 
   def new
@@ -11,7 +11,6 @@ class CreditsController < AccountsController
 
   def create
     @credit = Credit.new(credit_params)
-    #@credit.account_type = "Credit"
 
     respond_to do |format|
       if @credit.save
@@ -19,6 +18,24 @@ class CreditsController < AccountsController
         #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render controller: 'credit', action: 'new' }
+        format.json { render json: @credit.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /credits/1/edit
+  def edit
+  end
+
+  # PATCH/PUT /credits/1
+  # PATCH/PUT /credits/1.json
+  def update
+    respond_to do |format|
+      if @credit.update(credit_params)
+        format.html { redirect_to @credit, notice: 'Credit was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
         format.json { render json: @credit.errors, status: :unprocessable_entity }
       end
     end

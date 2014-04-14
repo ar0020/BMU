@@ -2,9 +2,9 @@ class Account < ActiveRecord::Base
   belongs_to :user
   has_many :transactions
 
-  validates :user, :account_type, :balance_string, :current_balance, 
+  validates :user, :account_type, :balance_string, :current_balance,
             :account_type, :monthly_account_rate, :is_active, presence: true
-  validates :balance_string, format: { 
+  validates :balance_string, format: {
             with: /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/,
             message: " is invalid.",
             multiline: true}
@@ -17,7 +17,7 @@ class Account < ActiveRecord::Base
   before_validation :convert_amount
   before_validation :set_type
   before_save :check_if_customer
-  
+
   attr_accessor :username, :balance_string
 
   TYPES=["Checking","Credit","Market","Mortgage","Saving"]
@@ -35,11 +35,19 @@ class Account < ActiveRecord::Base
   def rate
   end
 
-  def numeric_ending
+  def display_account_id
     number = "#{self.id}"
     number = "%.8i" % number
-    last_four = number[number.length - 4, 4]
-    return last_four
+    last_4 = number[number.length - 4, 4]
+    first_4 = number[0, 4]
+    return "#{first_4}-#{last_4}"
+  end
+
+  def display_account_ending
+    number = "#{self.id}"
+    number = "%.8i" % number
+    last_4 = number[number.length - 4, 4]
+    return last_4
   end
 
   def convert_amount
@@ -51,7 +59,7 @@ class Account < ActiveRecord::Base
       self.current_balance = match.to_f
     end
   end
-  
+
   private
 
   def check_if_customer
@@ -65,4 +73,5 @@ class Account < ActiveRecord::Base
   def set_type
     # Blank here, but the 5 subclasses use this function to set their account_type appropriately.
   end
+
 end

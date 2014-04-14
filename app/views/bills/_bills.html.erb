@@ -4,12 +4,7 @@
   <thead>
   <tr>
     <th>From Account</th>
-    <th>Payee name</th>
-    <th>Payee street</th>
-    <th>Payee city</th>
-    <th>Payee state</th>
-    <th>Payee zip</th>
-    <th>Payee account</th>
+    <th>To</th>
     <th>Amount</th>
     <th>Date Due</th>
     <th></th>
@@ -21,13 +16,8 @@
   <tbody>
   <% @bills.each do |bill| %>
       <tr>
-        <td><%= bill.account_id %></td>
+        <td><%= Account.find(bill.account_id).display_account_id %></td>
         <td><%= bill.payee_name %></td>
-        <td><%= bill.payee_street %></td>
-        <td><%= bill.payee_city %></td>
-        <td><%= bill.payee_state %></td>
-        <td><%= bill.payee_zip %></td>
-        <td><%= bill.payee_account_id %></td>
         <td><%= bill.amount %></td>
         <td><%= bill.pay_date %></td>
         <td><%= link_to 'Show', bill %></td>

@@ -2,6 +2,7 @@ class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy, :enable, :disable]
   before_filter :admin_protect, except: [:show, :index]
   before_filter :admin_teller_protect, only: [:index]
+  prawnto :prawn => {:top_margin => 75}
 
   # GET /accounts
   # GET /accounts.json
@@ -27,38 +28,12 @@ class AccountsController < ApplicationController
     @bills = Bill.where(:account_id => @account.id)
   end
 
-  def new
-    @user = User.find(params[:id])
-    @account = Account.new
-    @account.user_id = @user.id
-  end
-
-  # POST /accounts
-  # POST /accounts.json
-  def create
-    @account = Account.new(account_params)
-    @account.current_balance = 0.00
-
-    if @account.account_type == "Checking"
-      render create_checking(@account)
-    end
-    respond_to do |format|
-      if true #@account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @account }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DISABLE /accounts/1
   # DISABLE /accounts/1.json
   def disable
     @account.update_attribute :is_active, false
     respond_to do |format|
-      format.html { redirect_to customer_by_id_path(@account.user_id) }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end
@@ -66,7 +41,7 @@ class AccountsController < ApplicationController
   def enable
     @account.update_attribute :is_active, true
     respond_to do |format|
-      format.html { redirect_to customer_by_id_path(@account.user_id) }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end
@@ -80,7 +55,7 @@ class AccountsController < ApplicationController
     else
       flash[:notice] = "No longer able to delete account. Try disabling it."
     end
-    redirect_to customer_by_id_path(@user)
+    redirect_to :back
   end
 
   private

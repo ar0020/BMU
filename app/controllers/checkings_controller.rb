@@ -1,6 +1,7 @@
 class CheckingsController < AccountsController
-  before_filter :admin_protect  
-  
+  before_action :set_checking, only: [:edit, :update]
+  before_filter :admin_protect
+
   def new
     @user = User.find(params[:id])
     @checking = Checking.new
@@ -8,34 +9,7 @@ class CheckingsController < AccountsController
   end
 
   def create
-    #@account = Account.new
-    #@checking = @account.checking.new(checking_params)
     @checking = Checking.new(checking_params)
-    #@checking.current_balance = 0.00
-    #@checking.account_type = "Checking"
-    #@user = User.find(@checking.user_id)
-    #@checking = @user.id
-
-    respond_to do |format|
-      if @checking.save
-        format.html { redirect_to @checking, notice: 'Checking account was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @checking }
-      else
-        format.html { render controller: 'checking', action: 'new' }
-        format.json { render json: @checking.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # GET /checkings/1
-  # GET /checkings/1.json
-  def show
-    @checking ||= Checking.find(params[:id])
-  end
-
-  def create
-    @checking = Checking.new(checking_params)
-    @checking.account_type = "Checking"
 
     respond_to do |format|
       if @checking.save
@@ -43,6 +17,24 @@ class CheckingsController < AccountsController
         #format.json { render action: 'show', status: :created, location: @account }
       else
         format.html { render controller: 'checking', action: 'new' }
+        format.json { render json: @checking.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /checkings/1/edit
+  def edit
+  end
+
+  # PATCH/PUT /checkings/1
+  # PATCH/PUT /checkings/1.json
+  def update
+    respond_to do |format|
+      if @checking.update(checking_params)
+        format.html { redirect_to @checking, notice: 'Checking was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
         format.json { render json: @checking.errors, status: :unprocessable_entity }
       end
     end
