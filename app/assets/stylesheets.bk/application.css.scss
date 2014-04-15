@@ -1,0 +1,190 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+/* -------------------- */
+/*  Setup
+/* -------------------- */
+$base-margin: 12px;
+$header-image-size: 200px;
+
+$parchmentColor: #fff3f7;
+$darkPaperColor: #ddd1c4;
+$gringottsRedColor: #b20000;
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+        -ms-border-radius: $radius;
+            border-radius: $radius;
+}
+ 
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header, footer, section, aside, nav, article {
+    display: block;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0 auto;
+    background: $parchmentColor;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+h1, h2 {
+    color: darken($gringottsRedColor, 10%);
+    font-weight: bold;
+}
+
+/* -------------------- */
+/*  Header
+/* -------------------- */
+header {
+    width: 100%;
+    height: 120px;
+    background: $gringottsRedColor;
+    #headerContent {
+        max-width: 800px;
+        margin: 0 auto;
+        img {
+            width: 200px;
+            height: 200px;
+            padding: $base-margin;
+            float: left;
+            z-index: 3;
+        }
+
+        nav {
+            float: right;
+            .navbar-text {
+                padding: $base-margin $base-margin 0 0;
+                color: $parchmentColor;
+                font-size: 14px;
+                // text-shadow: 0 -1px rgba(0, 0, 0, 0.6);
+                text-align: center;
+            }
+            a {
+                display: block;
+                width: 100px;
+                margin: $base-margin/2 0 $base-margin $base-margin*9;
+                padding: $base-margin/2;
+                color: $parchmentColor;
+                font-size: 16px;
+                font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+                font-variant: small-caps;
+                text-decoration: none;
+                // text-shadow: 0 -1px rgba(0, 0, 0, 0.6);
+                @include border-radius(2px);
+                border: 1px solid transparent;
+                background: lighten($gringottsRedColor, 5%);
+                line-height: 100%;
+            }
+
+            a:hover {
+                border-color: $parchmentColor;
+                text-shadow: 0px 0px 2px #ff0;
+            }
+        }
+    }
+}
+
+
+
+
+/* -------------------- */
+/*  Content
+/* -------------------- */
+#content {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: ($header-image-size/2 + 12px);
+    margin-bottom: ($header-image-size/2 + 12px);
+    #home {
+        margin: 0 $base-margin;
+        #prop {
+            padding: $base-margin 0 $base-margin*2 $base-margin*3;
+            background: #fff;
+            border: 1px solid #ddd;
+            @include border-radius(4px);
+            #prop-header {
+                font-size: 60px;
+                line-height: 120%;
+                width: 500px;
+                padding-bottom: $base-margin; 
+            }
+            #prop-statement {
+                width: 500px;
+            }
+        }
+        #features {
+            margin-top: $base-margin;
+            padding: $base-margin 0 $base-margin*2 $base-margin*3;
+            background: #fff;
+            border: 1px solid #ddd;
+            @include border-radius(4px);
+            ul {
+                width: 500px;
+                list-style: none;
+                li {
+                    padding: $base-margin*2 0;
+                    h2 {
+                        padding-bottom: $base-margin;
+                    }
+                }
+            }
+        }
+    }
+
+    #sign-in {
+        min-width: 200px;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: $base-margin*2;
+        background: #fff;
+        border: 1px solid #aaa;
+        @include border-radius(4px);
+        h2 {
+            padding-bottom: $base-margin/2;
+            border-bottom: 1px solid #aaa;
+        }
+
+        div {
+            padding: $base-margin 0;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            margin-top: 4px;
+            padding: 4px;
+            border: 1px solid #333;
+            @include border-radius(4px);
+        }
+
+        input[type="submit"] {
+            padding: 4px;
+        }
+
+        label {
+            font-size: 16px;
+        }
+    }
+}

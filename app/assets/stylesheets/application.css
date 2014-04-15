@@ -11,3 +11,141 @@
  *= require_self
  *= require_tree .
  */
+/* -------------------- */
+/*  Setup
+/* -------------------- */
+* {
+  margin: 0;
+  padding: 0; }
+
+header, footer, section, aside, nav, article {
+  display: block; }
+
+html,
+body {
+  width: 100%;
+  height: 100%; }
+
+body {
+  margin: 0 auto;
+  background: #fff3f7;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; }
+
+h1, h2 {
+  color: #7f0000;
+  font-weight: bold; }
+
+/* -------------------- */
+/*  Header
+/* -------------------- */
+header {
+  width: 100%;
+  height: 120px;
+  background: #b20000; }
+  header #headerContent {
+    max-width: 800px;
+    margin: 0 auto; }
+    header #headerContent img {
+      width: 200px;
+      height: 200px;
+      padding: 12px;
+      float: left;
+      z-index: 3; }
+    header #headerContent nav {
+      float: right; }
+      header #headerContent nav .navbar-text {
+        padding: 12px 12px 0 0;
+        color: #fff3f7;
+        font-size: 14px;
+        text-align: center; }
+      header #headerContent nav a {
+        display: block;
+        width: 100px;
+        margin: 6px 0 12px 108px;
+        padding: 6px;
+        color: #fff3f7;
+        font-size: 16px;
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        font-variant: small-caps;
+        text-decoration: none;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        border-radius: 2px;
+        border: 1px solid transparent;
+        background: #cb0000;
+        line-height: 100%; }
+      header #headerContent nav a:hover {
+        border-color: #fff3f7;
+        text-shadow: 0px 0px 2px #ff0; }
+
+/* -------------------- */
+/*  Content
+/* -------------------- */
+#content {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 112px;
+  margin-bottom: 112px; }
+  #content #home {
+    margin: 0 12px; }
+    #content #home #prop {
+      padding: 12px 0 24px 36px;
+      background: #fff;
+      border: 1px solid #ddd;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      border-radius: 4px; }
+      #content #home #prop #prop-header {
+        font-size: 60px;
+        line-height: 120%;
+        width: 500px;
+        padding-bottom: 12px; }
+      #content #home #prop #prop-statement {
+        width: 500px; }
+    #content #home #features {
+      margin-top: 12px;
+      padding: 12px 0 24px 36px;
+      background: #fff;
+      border: 1px solid #ddd;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      border-radius: 4px; }
+      #content #home #features ul {
+        width: 500px;
+        list-style: none; }
+        #content #home #features ul li {
+          padding: 24px 0; }
+          #content #home #features ul li h2 {
+            padding-bottom: 12px; }
+  #content #sign-in {
+    min-width: 200px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #aaa;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px; }
+    #content #sign-in h2 {
+      padding-bottom: 6px;
+      border-bottom: 1px solid #aaa; }
+    #content #sign-in div {
+      padding: 12px 0; }
+    #content #sign-in input[type="text"],
+    #content #sign-in input[type="password"] {
+      margin-top: 4px;
+      padding: 4px;
+      border: 1px solid #333;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      border-radius: 4px; }
+    #content #sign-in input[type="submit"] {
+      padding: 4px; }
+    #content #sign-in label {
+      font-size: 16px; }

@@ -8,20 +8,27 @@
 </head>
 <body>
 
-<p class="navbar-text pull-right">
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <% if admin? %>
-  	<%= link_to "Admin Panel", admin_panel_path, :class=>'navbar-link' %> |
-  <% elsif teller? %>
-  	<%= link_to "Teller Panel", teller_panel_path, :class=>'navbar-link' %> |
-  <% else %>
-  	<%= link_to "Profile", customer_path, :class=>'navbar-link' %> |
-  <% end %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
+<header>
+    <div id="headerContent">
+        <img src="assets/GringottsSealFilled.png" alt="Gringotts Seal">
+        <nav>
+            <p class="navbar-text pull-right">
+              <% if user_signed_in? %>
+                Logged in as <strong><%= current_user.email %></strong>.
+                <% if admin? %>
+    	            <%= link_to "Admin Panel", admin_panel_path, :class=>'navbar-link' %>
+                <% elsif teller? %>
+    	            <%= link_to "Teller Panel", teller_panel_path, :class=>'navbar-link' %>
+                <% else %>
+    	            <%= link_to "Profile", customer_path, :class=>'navbar-link' %>
+                <% end %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+              <% else %>
+                <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+              <% end %>
+        </nav>
+    </div>
+</header>
 
 <% if notice %>
   <p class="alert alert-notice"><%= notice %></p>
@@ -30,7 +37,7 @@
   <p class="alert alert-error"><%= alert %></p>
 <% end %>
 
-<%= yield %>
+<div id="content"><%= yield %></div>
 
 </body>
 </html>
