@@ -2,14 +2,14 @@ class Account < ActiveRecord::Base
   belongs_to :user
   has_many :transactions
 
-  validates :user, :account_type, :balance_string, :current_balance,
-            :account_type, :monthly_account_rate, :is_active, presence: true
+  validates :user_id, :account_type, :current_balance, :is_active, presence: true
   validates :balance_string, format: {
             with: /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/,
             message: " is invalid.",
             multiline: true}
   validates :monthly_account_rate, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
   #validates_associated :user
+
   validates :account_type, format: {
             with: /(Credit|Checking|Mortgage|Market|Saving)/
             }
@@ -71,6 +71,7 @@ class Account < ActiveRecord::Base
   end
 
   def set_type
+    self.is_active = true
     # Blank here, but the 5 subclasses use this function to set their account_type appropriately.
   end
 

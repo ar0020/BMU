@@ -8,7 +8,7 @@ BMU::Application.routes.draw do
   resources :bills, :only => [:edit, :show, :update, :destroy]
 
   resources :accounts, :only => [:show, :destroy]
-  post 'accounts', to: 'accounts#index'
+  get 'accounts', to: 'accounts#index'
   get 'accounts/enable/:id', to: 'accounts#enable', as: 'enable_account'
   get 'accounts/disable/:id', to: 'accounts#disable', as: 'disable_account'
   resources :savings, :only => [:new, :create, :edit, :update]
@@ -46,7 +46,7 @@ BMU::Application.routes.draw do
   devise_scope :user do
     post 'registrations/sign_up', to: 'registrations#create', as: 'new_registration'
   end
-  
+
   #post 'users/sign_up', to: 'registrations#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
