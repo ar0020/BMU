@@ -17,3 +17,8 @@
 
 # Ignore all of RubyMines idea files
 /.idea
+
+# Ignore node_modules and Gruntfile.js used for Styling
+/node_modules
+package.json
+Gruntfile.js
