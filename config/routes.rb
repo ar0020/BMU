@@ -56,7 +56,7 @@ BMU::Application.routes.draw do
   devise_scope :user do
     post 'registrations/sign_up', to: 'registrations#create', as: 'new_registration'
   end
-  
+
   #post 'users/sign_up', to: 'registrations#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
