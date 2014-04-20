@@ -10,7 +10,7 @@
 
 <header>
     <div id="headerContent">
-        <img src="assets/GringottsSealFilled.png" alt="Gringotts Seal">
+        <%= image_tag("GringottsSealFilled.png", alt:"Gringotts Seal")%>
         <nav>
             <p class="navbar-text pull-right">
               <% if user_signed_in? %>
