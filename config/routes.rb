@@ -1,5 +1,14 @@
 BMU::Application.routes.draw do
 
+  get 'test', to: 'test#index'
+  get 'test/credit_rate', to: 'test#credit_rate'
+  get 'test/market_rate', to: 'test#market_rate'
+  get 'test/mortgage_rate', to: 'test#mortgage_rate'
+  get 'test/saving_rate', to: 'test#saving_rate'
+  get 'test/bill_pay', to: 'test#bill_pay'
+  get 'test/mortgages_behind', to: 'test#mortgages_behind'
+  get 'test/mortgages_not_paid', to: 'test#mortgages_not_paid'
+
   get 'bills/start/:id', to: 'bills#enable', as: 'start_recurrence'
   get 'bills/stop/:id', to: 'bills#disable', as: 'stop_recurrence'
   get 'bills/new', to: 'bills#new', as: 'new_bill'
@@ -8,6 +17,7 @@ BMU::Application.routes.draw do
   resources :bills, :only => [:edit, :show, :update, :destroy]
 
   resources :accounts, :only => [:show, :destroy]
+  get 'accounts', to: 'accounts#index'
   post 'accounts', to: 'accounts#index'
   get 'accounts/enable/:id', to: 'accounts#enable', as: 'enable_account'
   get 'accounts/disable/:id', to: 'accounts#disable', as: 'disable_account'

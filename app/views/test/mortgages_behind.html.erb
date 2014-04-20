@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <td>Account ID</td>
+    <td>User ID</td>
+    <td>Current Balance</td>
+    <td>Balance Paid</td>
+    <td>Amount Due</td>
+  </tr>
+<% for account in @accounts %>
+  <tr>
+    <td><%= link_to account.id, account_path(account) %></td>
+    <td><%= link_to account.user_id, :controller=>:customer, :action=>:index, :id=>account.user_id %></td>
+    <td><%= account.current_balance %></td>
+    <td><%= account.amount_paid %></td>
+    <td><%= account.amount_due %></td>
+    
+  </tr>
+<% end %>

@@ -2,23 +2,23 @@
 SELECT account_id, monthly_account_rate, amount_paid
 FROM
 (
-(
-SELECT ID as account_id, (monthly_account_rate * 12) as yearly_account_rate
-FROM accounts
-WHERE (
-(account_type = "MORTGAGE") AND
-(current_balance != 0) AND
-(created_at > now() - 365)
-)
-
-LEFT OUTER JOIN
-(
-SELECT account_id, sum(amount) as amount_paid
-FROM transactions
-GROUP BY account_id
-WHERE (created_at >= now() - 365)
-)
-ON account_id
+  (
+  SELECT ID as account_id, (monthly_account_rate * 12) as yearly_account_rate
+  FROM accounts
+  WHERE (
+    (account_type = "MORTGAGE") AND
+    (current_balance != 0) AND
+    (created_at > now() - 365)
+  )
+  
+  LEFT OUTER JOIN
+  (
+    SELECT account_id, sum(amount) as amount_paid
+    FROM transactions
+    GROUP BY account_id
+    WHERE (created_at >= now() - 365)
+  )
+  ON account_id
 )
 
 WHERE ( (amount_paid < yearly_account_rate) OR (amount_paid = NULL) );
