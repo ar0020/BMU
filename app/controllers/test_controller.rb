@@ -54,33 +54,4 @@ class TestController < ApplicationController
     }, 'Mortgage%']
   end
   
-  def mortgages_not_paid
-    Mortgage.find_by_sql(%{
-
-      SELECT account_id, monthly_account_rate, amount_paid
-      FROM
-      (
-        (
-          SELECT ID as account_id, monthly_account_rate
-          FROM accounts
-          WHERE (
-            (account_type = "MORTGAGE") AND
-            (current_balance != 0) AND
-            (created_at > now() - 60)
-          )
-        
-          LEFT OUTER JOIN
-          (
-            SELECT account_id, sum(amount) as amount_paid
-            FROM transactions
-            GROUP BY account_id
-            WHERE (created_at >= now() - 60)
-          )
-          ON account_id
-        )
-        
-        WHERE ( (amount_paid < monthly_account_rate) OR (amount_paid = NULL) 
-      );
-    })
-  end
 end

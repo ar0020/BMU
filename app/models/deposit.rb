@@ -18,7 +18,7 @@ class Deposit < Transaction
     # Validates that user either owns the account or the user is a teller.
     # Validates this is an active account.
     # Validates that this type of account can be deposited to.
-    if (user.id != account.user_id && user.user_level != 2) || !account.is_active? #|| self.validate_transaction_on_account?
+    if (user.id != account.user_id && user.user_level != 2) || !account.is_active? || self.validate_transaction_on_account?
       return false
     end
     if user.user_level == 2
@@ -27,9 +27,7 @@ class Deposit < Transaction
     Deposit.transaction do
       Account.transaction do
         self.save!
-        #account.update_attribute(:balance_string, new_balance.to_s)
-        account.current_balance= new_balance
-        account.save!
+        account.update_attribute(:current_balance, new_balance)
         #raise ActiveRecord::Rollback unless self.valid? && account.valid?
       end
     end

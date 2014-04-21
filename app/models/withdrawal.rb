@@ -2,11 +2,16 @@ class Withdrawal < Transaction
 
   def withdrawal
     self.transaction_type = "Withdrawal"
-    self.amount = self.amount_string.to_f # make sure amount is positive
+    convert_amount
+    #self.amount = self.amount_string.to_f # make sure amount is positive
     self.amount = '%.2f' % self.amount # rounds to two digits.
 
     account = Account.find(self.account_id)
-    new_balance = account.current_balance - self.amount
+    if account.account_type == 'Credit' or account.account_type == 'Mortgage'
+      new_balance = account.current_balance + self.amount
+    else
+      new_balance = account.current_balance - self.amount
+    end
 
     # Validates that the user_id entered is a valid id.
     user = User.find(self.user_id)
