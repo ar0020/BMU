@@ -1,7 +1,7 @@
 class Withdrawal < Transaction
 
   def withdrawal
-    self.transaction_type = "Withdrawal"
+    self.transaction_type = "Withdrawal" unless self.transaction_type
     convert_amount
     #self.amount = self.amount_string.to_f # make sure amount is positive
     self.amount = '%.2f' % self.amount # rounds to two digits.

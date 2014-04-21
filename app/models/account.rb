@@ -9,8 +9,6 @@ class Account < ActiveRecord::Base
             message: " is invalid.",
             multiline: true}
 
-  validates :monthly_account_rate, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
-
   validates :account_type, format: {
             with: /(Credit|Checking|Mortgage|Market|Saving)/
             }

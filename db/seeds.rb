@@ -96,7 +96,7 @@ bill = Bill.create( pay_date: Date.today, amount_string: '25.00',
                     payee_city: 'madison', payee_state: 'AL', payee_zip: 35806, 
                     payee_account_id: customer_checking.id,
                     created_at: (DateTime.now - 12.months), updated_at: (DateTime.now - 12.months))
-                     
+#Bill.new.pay_all                    
 # Extra Sample Data 
 =begin
 (1..10).each do |i|

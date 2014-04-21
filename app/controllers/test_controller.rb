@@ -54,4 +54,9 @@ class TestController < ApplicationController
     }, 'Mortgage%']
   end
   
+  def bill_pay
+    Bill.new.pay_all
+    redirect_to admin_panel_path
+  end
+  
 end

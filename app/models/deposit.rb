@@ -1,7 +1,7 @@
 class Deposit < Transaction
 
   def deposit
-    self.transaction_type = "Deposit"
+    self.transaction_type = "Deposit" unless self.transaction_type
     convert_amount
     #self.amount = self.amount_string.to_f # make sure amount is positive
     self.amount = '%.2f' % self.amount # rounds to two digits.
@@ -28,7 +28,7 @@ class Deposit < Transaction
       Account.transaction do
         self.save!
         account.update_attribute(:current_balance, new_balance)
-        #raise ActiveRecord::Rollback unless self.valid? && account.valid?
+        raise ActiveRecord::Rollback unless self.valid? && account.valid?
       end
     end
 

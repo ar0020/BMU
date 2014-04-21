@@ -35,4 +35,29 @@ class Bill < ActiveRecord::Base
     end
     self.amount = match.to_f
   end
+  
+  def pay
+    to_transfer = Transfer.new(from_account_id: self.account_id, to_account_id: self.payee_account_id, amount_string: self.amount.to_s, user_id: self.user_id, transaction_type: 'Bill Deposit')
+    from_transfer = Transfer.new(from_account_id: self.account_id, to_account_id: self.payee_account_id, amount_string: self.amount.to_s, user_id: self.user_id, transaction_type: 'Bill Withdrawal')
+    Transfer.transfer(to_transfer, from_transfer)
+  end
+  
+  def pay_once
+    bills = Bill.where("bills.pay_date = ?", Date.today).where("is_recurring = ?", false)
+    for bill in bills
+      bill.pay
+    end
+  end
+  
+  def pay_recurring
+    bills = Bill.where("extract(DAY FROM bills.pay_date) = ?", Date.today.day).where("is_recurring = ?", true)
+    for bill in bills
+      bill.pay
+    end
+  end
+  
+  def pay_all
+    pay_once
+    pay_recurring
+  end
 end
