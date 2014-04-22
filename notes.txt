@@ -27,3 +27,9 @@ pull docker image
 service postgresql start
 cd /home/app/github/BMU
 passenger start
+
+# Whenever job scheduler
+# tutorial
+http://asciicasts.com/episodes/164-cron-in-ruby
+# this line updates the crontab
+whenever --update-crontab store

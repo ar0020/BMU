@@ -55,3 +55,6 @@ gem 'prawn',   '= 1.0.0'
 # makes using prawn easier by using the controllers show
 # no added routes
 gem 'prawnto', '= 0.1.1'
+
+# Automatically run scripts
+gem 'whenever', :require => false

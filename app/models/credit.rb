@@ -5,7 +5,12 @@ class Credit < Account
   def rate
     #intrest = self.current_balance * self.monthly_account_rate
     #intrest = self.current_balance + intrest
-    self.update_attribute(:current_balance, self.current_balance + (self.current_balance * self.monthly_account_rate) )
+    #self.update_attribute(:current_balance, self.current_balance + (self.current_balance * self.monthly_account_rate) )
+    ActiveRecord::Base.connection.execute(%{
+      UPDATE accounts
+        SET current_balance = current_balance + (current_balance * monthly_account_rate)
+        WHERE account_type = 'Credit'
+    })
   end
 
   private
