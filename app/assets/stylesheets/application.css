@@ -1,16 +1,3 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require_tree .
- */
 /* -------------------- */
 /*  Setup
 /* -------------------- */
@@ -31,9 +18,13 @@ body {
   background: #fff3f7;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; }
 
-h1, h2 {
+h1, h2, h3 {
   color: #7f0000;
   font-weight: bold; }
+
+a {
+  text-decoration: none;
+  color: #7f0000; }
 
 /* -------------------- */
 /*  Header
@@ -78,6 +69,30 @@ header {
       header #headerContent nav a:hover {
         border-color: #fff3f7;
         text-shadow: 0px 0px 2px #ff0; }
+  @media only screen and (max-width: 480px) {
+    header {
+      height: 124px; }
+      header #headerContent img {
+        width: 100px;
+        height: 100px;
+        float: none; } }
+
+.alert {
+  width: 200px;
+  margin: 12px auto;
+  padding: 6px;
+  border: 1px solid #fff;
+  border-top: none;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  text-align: center;
+  opacity: 0.5; }
+  .alert.alert-notice {
+    background: #7aeb85; }
+  .alert.alert-error {
+    background: #ff1919; }
 
 /* -------------------- */
 /*  Content
@@ -87,65 +102,113 @@ header {
   margin: 0 auto;
   margin-top: 112px;
   margin-bottom: 112px; }
-  #content #home {
-    margin: 0 12px; }
-    #content #home #prop {
-      padding: 12px 0 24px 36px;
-      background: #fff;
-      border: 1px solid #ddd;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      -ms-border-radius: 4px;
-      border-radius: 4px; }
-      #content #home #prop #prop-header {
-        font-size: 60px;
-        line-height: 120%;
-        width: 500px;
-        padding-bottom: 12px; }
-      #content #home #prop #prop-statement {
-        width: 500px; }
-    #content #home #features {
-      margin-top: 12px;
-      padding: 12px 0 24px 36px;
-      background: #fff;
-      border: 1px solid #ddd;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      -ms-border-radius: 4px;
-      border-radius: 4px; }
-      #content #home #features ul {
-        width: 500px;
-        list-style: none; }
-        #content #home #features ul li {
-          padding: 24px 0; }
-          #content #home #features ul li h2 {
-            padding-bottom: 12px; }
-  #content #sign-in {
-    min-width: 200px;
-    max-width: 400px;
+  #content .main {
     margin: 0 auto;
+    margin-bottom: 12px;
     padding: 24px;
     background: #fff;
-    border: 1px solid #aaa;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 2px #ddd;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     -ms-border-radius: 4px;
     border-radius: 4px; }
-    #content #sign-in h2 {
+    #content .main #prop-header {
+      font-size: 60px;
+      line-height: 120%;
+      padding-bottom: 12px; }
+      @media only screen and (max-width: 560px) {
+        #content .main #prop-header {
+          font-size: 42px; } }
+    #content .main #prop-statement {
+      line-height: 120%;
+      max-width: 500px; }
+    #content .main ul {
+      max-width: 500px;
+      list-style: none; }
+      #content .main ul li {
+        padding: 24px 0;
+        line-height: 120%; }
+        #content .main ul li h2 {
+          padding-bottom: 12px; }
+    @media only screen and (max-width: 480px) {
+      #content .main {
+        margin: 0 12px;
+        margin-bottom: 12px; } }
+  #content .control-panel {
+    min-width: 200px;
+    max-width: 400px; }
+    #content .control-panel h1 {
       padding-bottom: 6px;
-      border-bottom: 1px solid #aaa; }
-    #content #sign-in div {
-      padding: 12px 0; }
-    #content #sign-in input[type="text"],
-    #content #sign-in input[type="password"] {
-      margin-top: 4px;
-      padding: 4px;
-      border: 1px solid #333;
+      border-bottom: 1px solid #ccc; }
+    #content .control-panel a {
+      display: block;
+      text-align: center;
+      min-width: 100px;
+      padding: 6px;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 1px 2px #ddd;
+      border: 1px solid #ccc;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      border-radius: 4px;
+      margin-top: 12px;
+      -webkit-transition: opacity 3s ease-in-out;
+      -moz-transition: opacity 3s ease-in-out;
+      -ms-transition: opacity 3s ease-in-out;
+      -o-transition: opacity 3s ease-in-out;
+      opacity: 1; }
+  #content #home {
+    margin: 0 12px; }
+    #content #home #prop {
+      padding: 12px 0 24px 36px;
       -webkit-border-radius: 4px;
       -moz-border-radius: 4px;
       -ms-border-radius: 4px;
       border-radius: 4px; }
-    #content #sign-in input[type="submit"] {
-      padding: 4px; }
-    #content #sign-in label {
-      font-size: 16px; }
+    #content #home #features {
+      margin-top: 12px;
+      padding: 12px 0 24px 36px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      border-radius: 4px; }
+  @media only screen and (max-width: 480px) {
+    #content {
+      margin-top: 12px; } }
+
+footer {
+  height: 60px;
+  padding-top: 30px;
+  background: #b20000;
+  text-align: center; }
+  footer p {
+    width: 100%;
+    padding: 0 0 6px 12px;
+    font-size: 11px;
+    color: #fff; }
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+select {
+  margin: 6px 0 6px 0;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  box-shadow: 0 1px -3px #ddd; }
+
+button[type="submit"] {
+  padding: 4px;
+  margin: 0 0 4px 0; }
+
+label {
+  font-size: 16px;
+  font-weight: bold; }

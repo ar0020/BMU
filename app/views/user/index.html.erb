@@ -1,21 +1,23 @@
-<h1>User Index</h1>
-
-<%= form_for(@user, :url => {:action=>:index}, :remote => true) do |f| %>
-
-  <div><%= f.label :username %><br />
-  <%= f.text_field :username, :autofocus => true %></div>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.label :id %><br/>
-  <%= f.number_field :id %></div>
-  
-  <div><%= f.label :user_level %><br/>
-  <%= f.select(:user_level, User::LEVELS.map { |key,value| [value,key]}, {include_blank:true})  %></div>
-
-  <div><%= f.submit "Search" %></div>
-<% end %>
-
-<div id="users_table"></div>
+<div class="main control-panel">
+    <h1>User Index</h1>
+    
+    <%= form_for(@user, :url => {:action=>:index}, :remote => true) do |f| %>
+    
+      <div><%= f.label :username %><br />
+      <%= f.text_field :username, :autofocus => true %></div>
+    
+      <div><%= f.label :email %><br />
+      <%= f.email_field :email %></div>
+    
+      <div><%= f.label :id %><br/>
+      <%= f.number_field :id %></div>
+      
+      <div><%= f.label :user_level %><br/>
+      <%= f.select(:user_level, User::LEVELS.map { |key,value| [value,key]}, {include_blank:true})  %></div>
+    
+      <div><%= f.submit "Search" %></div>
+    <% end %>
+    
+    <div id="users_table"></div>
+</div>
 

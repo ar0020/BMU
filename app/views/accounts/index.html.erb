@@ -1,27 +1,29 @@
-<h2>Accounts Index</h2>
-
-<%= form_for(@account, :url => {:action=>:index}, :remote => true) do |f| %>
-
-  <div><%= f.label :username %><br />
-  <%= f.text_field :username, :autofocus => true %></div>
-
-  <div><%= f.label :user_id, "User #" %><br />
-  <%= f.number_field :user_id %></div>
-
-  <div><%= f.label :id, "Account #" %><br/>
-  <%= f.number_field :id %></div>
-  
-  <div><%= f.label :account_type %><br/>
-  <%= f.select(:account_type, Account::TYPES.map { |key| [key,key]}, {include_blank:true})  %></div>
-
-  <div><%= f.label :monthly_account_rate %><br />
-  <%= f.text_field :monthly_account_rate %></div>
-  
-  <div><%= f.label :is_active %><br/>
-  <%= f.check_box :is_active %></div>
-  
-  <div><%= f.submit "Search" %></div>
-<% end %>
-
-<div id="accounts_table"></div>
+<div class="main control-panel">
+    <h2>Accounts Index</h2>
+    
+    <%= form_for(@account, :url => {:action=>:index}, :remote => true) do |f| %>
+    
+      <div><%= f.label :username %><br />
+      <%= f.text_field :username, :autofocus => true %></div>
+    
+      <div><%= f.label :user_id, "User #" %><br />
+      <%= f.number_field :user_id %></div>
+    
+      <div><%= f.label :id, "Account #" %><br/>
+      <%= f.number_field :id %></div>
+      
+      <div><%= f.label :account_type %><br/>
+      <%= f.select(:account_type, Account::TYPES.map { |key| [key,key]}, {include_blank:true})  %></div>
+    
+      <div><%= f.label :monthly_account_rate %><br />
+      <%= f.text_field :monthly_account_rate %></div>
+      
+      <div><%= f.label :is_active %><br/>
+      <%= f.check_box :is_active %></div>
+      
+      <div><%= f.submit "Search" %></div>
+    <% end %>
+    
+    <div id="accounts_table"></div>
+</div>
 

@@ -1,22 +1,24 @@
-<%= form_for(@checking) do |f| %>
-  <% if @checking.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@checking.errors.count, "error") %> prohibited this checking from being saved:</h2>
-
-      <ul>
-      <% @checking.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+<div class="main control-panel">
+  <%= form_for(@checking) do |f| %>
+    <% if @checking.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@checking.errors.count, "error") %> prohibited this checking from being saved:</h2>
+  
+        <ul>
+        <% @checking.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+      <div class="field">
+        <%= f.label :balance_string, "Initial Balance" %><br>
+        <%= f.text_field :balance_string %>
+      </div>
+      <%= f.hidden_field :user_id%>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
   <% end %>
-
-    <div class="field">
-      <%= f.label :balance_string, "Initial Balance" %><br>
-      <%= f.text_field :balance_string %>
-    </div>
-    <%= f.hidden_field :user_id%>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-<% end %>
+</div>

@@ -1,28 +1,30 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>User:</strong>
-  <%= @bill.user_id %>
-  <strong>Account:</strong>
-  <%= @bill.account_id %>
-  <strong>Is recurring:</strong>
-  <%= @bill.is_recurring %>
-  <strong>Payee name:</strong>
-  <%= @bill.payee_name %>
-  <strong>Payee street:</strong>
-  <%= @bill.payee_street %>
-  <strong>Payee city:</strong>
-  <%= @bill.payee_city %>
-  <strong>Payee state:</strong>
-  <%= @bill.payee_state %>
-  <strong>Payee zip:</strong>
-  <%= @bill.payee_zip %>
-  <strong>Payee account:</strong>
-  <%= @bill.payee_account_id %>
-  <strong>Amount:</strong>
-  <%= @bill.amount %>
-  <strong>Pay date:</strong>
-  <%= @bill.pay_date %>
-</p>
-
-<%= link_to 'Edit', edit_bill_path(@bill) %>
+<div class="main control-panel">
+  <p id="notice"><%= notice %></p>
+  
+  <p>
+    <strong>User:</strong>
+    <%= @bill.user_id %>
+    <strong>Account:</strong>
+    <%= @bill.account_id %>
+    <strong>Is recurring:</strong>
+    <%= @bill.is_recurring %>
+    <strong>Payee name:</strong>
+    <%= @bill.payee_name %>
+    <strong>Payee street:</strong>
+    <%= @bill.payee_street %>
+    <strong>Payee city:</strong>
+    <%= @bill.payee_city %>
+    <strong>Payee state:</strong>
+    <%= @bill.payee_state %>
+    <strong>Payee zip:</strong>
+    <%= @bill.payee_zip %>
+    <strong>Payee account:</strong>
+    <%= @bill.payee_account_id %>
+    <strong>Amount:</strong>
+    <%= @bill.amount %>
+    <strong>Pay date:</strong>
+    <%= @bill.pay_date %>
+  </p>
+  
+  <%= link_to 'Edit', edit_bill_path(@bill) %>
+</div>
