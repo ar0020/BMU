@@ -4,6 +4,9 @@ class UserController < ApplicationController
   def index
     if params[:user]
       @user = User.new(search_params)
+      if teller?
+        @user.user_level = 3
+      end
       @users = User.users(@user)
     else
       @user = User.new
@@ -13,7 +16,7 @@ class UserController < ApplicationController
      format.js #this will be the javascript file we respond with
     end
   end
-  
+
   private
 
   def search_params
