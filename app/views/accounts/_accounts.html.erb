@@ -1,5 +1,6 @@
-
-<table>
+<div class="main control-panel">
+  <h3>Accounts</h3>
+<table>  
   <thead>
     <tr>
       <th>Account</th>
@@ -8,14 +9,14 @@
       <th></th>
       <th></th>
       <% if admin? or teller? %>
-	      <th></th>
-	      <th></th>
+        <th></th>
+        <th></th>
       <% end %>
     </tr>
   </thead>
 
   <tbody>
-  <h3>Accounts</h3>
+
     <% for account in @accounts %>
       <tr class="<%= cycle("odd", "even") -%>">
         <td><%= link_to "#{account.account_type}: #{account.display_account_id}", account %></td>
@@ -27,26 +28,6 @@
             <%= number_to_percentage(account.monthly_account_rate) %>
           <% end %>
         </td>
-      </tr>
-      <tr>
-        <td><%= link_to "View Account", account %></td>
-        <% if admin? %>
-	        <% if account.is_active == true -%>
-	        	<td><%= link_to 'Disable', disable_account_path(account) %></td>
-	        <% else -%>
-	        	<td><%= link_to 'Enable', enable_account_path(account) %></td>
-	        <% end -%>
-	        <td><%= link_to "Delete", account_path(account), :method=>:delete, data: { confirm: 'Are you sure?'} %></td>
-	   	<% end %>
-	   	<% if teller? %>
-            <td><%= link_to "Statment", account_path(account, :format => 'pdf') %></td>
-	   		<td><%= link_to "Deposit", deposit_by_id_path(account)%></td>
-	   		<td><%= link_to "Withdraw", withdraw_by_id_path(account)%></td>
-            <td><%= link_to "Transfer", transfer_by_id_path(account)%></td>
-	   	<% end %>
-        <% if customer? %>
-            <td><%= link_to "Statment", account_path(account, :format => 'pdf') %></td>
-        <% end %>
       </tr>
     <% end %>
   </tbody>

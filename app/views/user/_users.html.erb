@@ -1,12 +1,8 @@
-<br/>
-Search Results: <br/>
-# of matching results ()<br/>
-<table>
+
+
+<h2>Search Results</h2>
+
+
 <% for user in @users %>
-  <tr>
-    <td><%= link_to user.id, customer_by_id_path(user) %> </td>
-    <td><%= user.level %></td>
-  </tr>
+  <%= link_to "#{user.display_account_id} : #{user.level}", customer_by_id_path(user) %>
 <% end %>
-</table>
-		

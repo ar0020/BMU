@@ -3,9 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Account Number</th>
       <th>Amount</th>
-      <th>Transaction Type</th>
+      <th>Type</th>
       <th>Date</th>
     </tr>
   </thead>
@@ -13,10 +12,9 @@
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= transaction.account_id %></td>
         <td><%= number_to_currency(transaction.amount) %></td>
-        <td><%= transaction.transaction_type %></td>
-        <td><%= transaction.created_at.strftime("%d %b. %Y : %I:%M%p") %></td>
+        <td><%= transaction.short_hand_type %></td>
+        <td><%= transaction.created_at.strftime("%d/%m/%Y@%I:%M%P") %></td>
       </tr>
     <% end %>
   </tbody>

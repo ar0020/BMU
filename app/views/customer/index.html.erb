@@ -22,11 +22,12 @@
 </div>
 <% end %>
 
-<div class="main control-panel">
-	<% if !@accounts.blank? %>
-	    <%= render :partial => "/accounts/accounts" %>
-	<% else %>
-	    <h3>No Accounts</h3>
-	<% end %>
-</div>
+<% if !@accounts.blank? %>
+  <%= render :partial => "/accounts/accounts" %>
+<% else %>
+    <div class="main control-panel">
+    <h3>No Accounts</h3>
+    </div>
+<% end %>
+
 
