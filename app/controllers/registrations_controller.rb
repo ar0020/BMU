@@ -29,6 +29,7 @@ class RegistrationsController < Devise::RegistrationsController
       end
     else
       clean_up_passwords resource
+      resource.username.clear
       respond_with resource
     end
   end
