@@ -1,13 +1,12 @@
 <br/>
 Search Results: <br/>
 # of matching results ()<br/>
-
-<ol>
+<table>
 <% for user in @users %>
-	<li>
-		<%= user.id %> |
-		<%= link_to user.username, customer_by_id_path(user) %> |
-		<%= user.level %>
-	</li>
+  <tr>
+    <td><%= link_to user.id, customer_by_id_path(user) %> </td>
+    <td><%= user.level %></td>
+  </tr>
 <% end %>
-</ol>
+</table>
+		

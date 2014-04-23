@@ -2,10 +2,7 @@
     <h2>Accounts Index</h2>
     
     <%= form_for(@account, :url => {:action=>:index}, :remote => true) do |f| %>
-    
-      <div><%= f.label :username %><br />
-      <%= f.text_field :username, :autofocus => true %></div>
-    
+
       <div><%= f.label :user_id, "User #" %><br />
       <%= f.number_field :user_id %></div>
     

@@ -20,7 +20,15 @@
       <tr class="<%= cycle("odd", "even") -%>">
         <td><%= link_to "#{account.account_type}: #{account.display_account_id}", account %></td>
         <td><%= number_to_currency(account.current_balance) %></td>
-        <td><%= number_to_percentage(account.monthly_account_rate) %></td>
+        <td>
+          <% if account.account_type == "Mortgage" %>
+            <%= number_to_currency(account.monthly_account_rate) %>
+          <% else %>
+            <%= number_to_percentage(account.monthly_account_rate) %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
         <td><%= link_to "View Account", account %></td>
         <% if admin? %>
 	        <% if account.is_active == true -%>

@@ -1,22 +1,20 @@
 <% if admin? %>
 <div class="main control-panel">
-  <fieldset>
-    <legend>Admin Panel</legend>
-    Customer:
-      <%= link_to @user.username, customer_by_id_path(@user.id) %><br/>
-    <% if @account.is_active? %>
-      Account is active.
-          <%= link_to 'Disable', disable_account_path(@account)%>
-          <% if Transaction.find_by_account_id(@account.id).blank? %>
-          or
-          <%= link_to 'Delete', account_path(@account), :method=>:delete, data: { confirm: 'Are you sure?'} %>
-          <% end %>
-    <% else %>
-      Account is deactivated.
-          <%= link_to 'Enable', enable_account_path(@account) %>
-    <% end %><br/>
-    <%= render :partial=> 'edit_button' %>
-  </fieldset>
+  <legend>Admin Panel</legend>
+  Customer:
+    <%= link_to @user.id, customer_by_id_path(@user.id) %><br/>
+  <% if @account.is_active? %>
+    Account is active.
+        <%= link_to 'Disable', disable_account_path(@account)%>
+        <% if Transaction.find_by_account_id(@account.id).blank? %>
+        or
+        <%= link_to 'Delete', account_path(@account), :method=>:delete, data: { confirm: 'Are you sure?'} %>
+        <% end %>
+  <% else %>
+    Account is deactivated.
+        <%= link_to 'Enable', enable_account_path(@account) %>
+  <% end %><br/>
+  <%= render :partial=> 'edit_button' %>
 </div>
 <% end %>
 <% if teller? %>
