@@ -2,7 +2,7 @@
 <div class="main control-panel">
   <legend>Admin Panel</legend>
   Customer:
-    <%= link_to @user.id, customer_by_id_path(@user.id) %><br/>
+    <%= link_to @user.display_account_id, customer_by_id_path(@user.id) %><br/>
   <% if @account.is_active? %>
     Account is active.
         <%= link_to 'Disable', disable_account_path(@account)%>
@@ -13,20 +13,18 @@
   <% else %>
     Account is deactivated.
         <%= link_to 'Enable', enable_account_path(@account) %>
-  <% end %><br/>
+  <% end %>
   <%= render :partial=> 'edit_button' %>
 </div>
 <% end %>
 <% if teller? %>
 <div class="main control-panel">
-  <fieldset>
-    <legend>Teller Panel</legend>
-    <%= link_to "#{@user.username} : Home", customer_by_id_path(@user.id) %>
-    <%= link_to "Deposit", deposit_by_id_path(@account.id) %>
-    <%= link_to "Withdraw", withdraw_by_id_path(@account.id) %>
-      <%= link_to "Transfer", transfer_by_id_path(@account.id) %>
-      <%= link_to "Printable Statement", account_path(@account, :format => 'pdf') %></br>
-  </fieldset>
+  <legend>Teller Panel</legend>
+  <%= link_to "#{@user.display_account_id}", customer_by_id_path(@user.id) %>
+  <%= link_to "Deposit", deposit_by_id_path(@account.id) %>
+  <%= link_to "Withdraw", withdraw_by_id_path(@account.id) %>
+  <%= link_to "Transfer", transfer_by_id_path(@account.id) %>
+  <%= link_to "Printable Statement", account_path(@account, :format => 'pdf') %>
 </div>
 <% end %>
 
