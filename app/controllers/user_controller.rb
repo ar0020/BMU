@@ -7,7 +7,7 @@ class UserController < ApplicationController
       if teller?
         @user.user_level = 3
       end
-      @users = User.users(@user)
+      @users = @user.users
     else
       @user = User.new
     end
