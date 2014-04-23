@@ -1,5 +1,5 @@
 <div class="main control-panel">
-	<h1><%= @user.username%></h1>
+	<h1><%= @user.display_account_id%></h1>
 	<% if customer? %>
 		<%= link_to 'Edit profile', edit_user_registration_path %>
 		<%= link_to 'Create a Transfer', new_transfer_path %>
@@ -9,16 +9,14 @@
 
 <% if admin? %>
 <div class="main control-panel">
-	<fieldset>
-		<legend>Admin Panel</legend>
-		<% if @user.user_level == 3 %>
-			<%= link_to "Create Checking Account", new_checking_path(:id=>@user.id) %><br/>
-			<%= link_to "Create Credit Account", new_credit_path(:id=>@user.id) %><br/>
-			<%= link_to "Create Market Account", new_market_path(:id=>@user.id) %><br/>
-			<%= link_to "Create Mortgage Account", new_mortgage_path(:id=>@user.id) %><br/>
-			<%= link_to "Create Savings Account", new_saving_path(:id=>@user.id) %><br/>
-		<% end %>
-	</fieldset>
+	<legend>Admin Panel</legend>
+	<% if @user.user_level == 3 %>
+		<%= link_to "Create Checking Account", new_checking_path(:id=>@user.id) %><br/>
+		<%= link_to "Create Credit Account", new_credit_path(:id=>@user.id) %><br/>
+		<%= link_to "Create Market Account", new_market_path(:id=>@user.id) %><br/>
+		<%= link_to "Create Mortgage Account", new_mortgage_path(:id=>@user.id) %><br/>
+		<%= link_to "Create Savings Account", new_saving_path(:id=>@user.id) %><br/>
+	<% end %>
 </div>
 <% end %>
 
@@ -31,3 +29,6 @@
 <% end %>
 
 
+<div class="main control-panel">
+  <%= render :partial=>'bills/bills'%>
+</div>
