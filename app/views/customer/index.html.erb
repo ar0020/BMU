@@ -1,5 +1,6 @@
 <div class="main control-panel">
-	<h1><%= @user.display_account_id%></h1>
+  <h1><%= @user.display_account_id%></h1>
+  <h1><%= @user.display_username%></h1>
 	<% if customer? %>
 		<%= link_to 'Edit profile', edit_user_registration_path %>
 		<%= link_to 'Create a Transfer', new_transfer_path %>
