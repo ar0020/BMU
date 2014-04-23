@@ -49,10 +49,10 @@
 
     <% if @account.account_type != "Checking" %>
       <strong>Monthly account rate:</strong>
-      <% if account.account_type == "Mortgage" %>
-        <%= number_to_currency(account.monthly_account_rate) %>
+      <% if @account.account_type == "Mortgage" %>
+        <%= number_to_currency(@account.monthly_account_rate) %>
       <% else %>
-        <%= number_to_percentage(account.monthly_account_rate) %>
+        <%= number_to_percentage(@account.monthly_account_rate) %>
       <% end %><br>
     <% end %>
   </p>
