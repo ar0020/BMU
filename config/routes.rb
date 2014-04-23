@@ -1,4 +1,5 @@
 BMU::Application.routes.draw do
+  root to: 'home#index'
 
   get 'test', to: 'test#index'
   get 'test/credit_rate', to: 'test#credit_rate'
@@ -60,7 +61,6 @@ BMU::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root :to => 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

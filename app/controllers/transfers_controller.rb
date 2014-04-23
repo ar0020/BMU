@@ -10,7 +10,7 @@ class TransfersController < TransactionsController
       @user = current_user
     end
     if @user
-      @accounts = Account.where("accounts.user_id = ?", @user.id)
+      @accounts = Account.where(user_id: @user.id)
     end
     @transfer = Transfer.new
     if params[:id]
@@ -27,7 +27,7 @@ class TransfersController < TransactionsController
     end
     @transfer = Transfer.new
     if customer?
-      @accounts = Account.where("accounts.user_id = ?", current_user.id)
+      @accounts = Account.where(user_id: current_user.id)
     end
     @to_transfer.user_id = current_user.id
     @from_transfer.user_id = current_user.id

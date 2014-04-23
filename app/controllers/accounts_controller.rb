@@ -25,7 +25,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @transactions = Transaction.transactions(@account.id)
     @user = User.find(@account.user_id)
-    @bills = Bill.where(:account_id => @account.id)
+    @bills = Bill.where(account_id: @account.id)
   end
 
   # DISABLE /accounts/1

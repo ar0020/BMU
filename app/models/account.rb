@@ -5,12 +5,12 @@ class Account < ActiveRecord::Base
             :account_type, :monthly_account_rate, :is_active, presence: true
 
   validates :balance_string, format: {
-            with: /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/,
+            with: /\A(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$\z/,
             message: " is invalid.",
             multiline: true}
 
   validates :account_type, format: {
-            with: /(Credit|Checking|Mortgage|Market|Saving)/
+            with: /\A(Credit|Checking|Mortgage|Market|Saving)\z/
             }
 
   before_validation :convert_amount
@@ -22,11 +22,12 @@ class Account < ActiveRecord::Base
 
   def self.accounts(account)
     accounts = Account.limit(50)
-    accounts = accounts.where("accounts.user_id = ?", account.user_id) unless account.user_id.nil?
+    accounts = accounts.where(user_id: account.user_id) unless account.user_id.nil?
     accounts = accounts.where(id: account.id) unless account.id.nil?
     #accounts = accounts.where(users: {username: account.username}).joins(:user) unless account.username.empty?
     accounts = accounts.where(account_type: account.account_type) unless account.account_type.empty?
     accounts = accounts.where(monthly_account_rate: account.monthly_account_rate) unless account.monthly_account_rate.nil?
+    accounts = accounts.where(is_active: account.is_active)
     return accounts
   end
 

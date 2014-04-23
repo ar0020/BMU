@@ -6,7 +6,7 @@ class Bill < ActiveRecord::Base
             :payee_city, :payee_state, :payee_zip, :payee_account, 
             :amount_string, :amount, :pay_date, presence: true
   validates :amount_string, format: { 
-            with: /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/,
+            with: /\A(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$\z/,
             message: " is invalid.",
             multiline: true}
   validates :payee_zip, length: { is: 5, wrong_length: " should be 5 numbers long."}
@@ -43,14 +43,15 @@ class Bill < ActiveRecord::Base
   end
   
   def pay_once
-    bills = Bill.where("bills.pay_date = ?", Date.today).where("is_recurring = ?", false)
+    bills = Bill.where(pay_date: Date.today).where(is_recurring: false)
     for bill in bills
       bill.pay
     end
   end
   
   def pay_recurring
-    bills = Bill.where("extract(DAY FROM bills.pay_date) = ?", Date.today.day).where("is_recurring = ?", true)
+    bills = Bill.where("extract(DAY FROM bills.pay_date) = :pay_date", pay_date: Date.today.day).
+                 where("is_recurring = :is_recurring", is_recurring: true)
     for bill in bills
       bill.pay
     end

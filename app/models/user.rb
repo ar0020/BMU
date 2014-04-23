@@ -27,11 +27,11 @@ class User < ActiveRecord::Base
     #tmp_user = User.new(username: self.username, email: self.email, id: self.id, user_level: self.user_level)
     if self.username != ''
       self.encrypt_username
-      results = results.where("users.username LIKE ?", self.username)
+      results = results.where(username: self.username)
     end 
-    results = results.where("users.email LIKE ?", self.email) unless self.email == ''
-    results = results.where("users.id = ?", self.id) unless self.id.nil?
-    results = results.where("users.user_level = ?", self.user_level) unless self.user_level.nil?
+    results = results.where(email: self.email) unless self.email == ''
+    results = results.where(id: self.id) unless self.id.nil?
+    results = results.where(user_level: self.user_level) unless self.user_level.nil?
     return results
   end
 	
