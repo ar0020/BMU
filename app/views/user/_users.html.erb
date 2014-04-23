@@ -1,13 +1,10 @@
-<br/>
-Search Results: <br/>
-# of matching results ()<br/>
+
+<h2>Search Results</h2>
 
 <ol>
 <% for user in @users %>
-	<li>
-		<%= user.id %> |
-		<%= link_to user.username, customer_by_id_path(user) %> |
-		<%= user.level %>
-	</li>
+    <li>
+        <%= link_to "#{user.id} #{user.username} #{user.level}", customer_by_id_path(user) %>
+    </li>
 <% end %>
 </ol>
