@@ -26,7 +26,7 @@ class Deposit < Transaction
     end
     Deposit.transaction do
       Account.transaction do
-        self.save!
+        self.save
         account.update_attribute(:current_balance, new_balance)
         raise ActiveRecord::Rollback unless self.valid? && account.valid?
       end

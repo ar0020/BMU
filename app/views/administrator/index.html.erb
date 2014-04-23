@@ -3,18 +3,18 @@
     <%= link_to "Create User", new_user_registration_path  %><br/>
     <%= link_to "Find User", users_path %><br/>
     <%= link_to "Find Account", accounts_path %><br/>
+    <h3>Mortgages</h3>
+    <%= link_to "Mortgages Behind Payments", "test/mortgages_behind" %><br/>
+
 </div>
 
 <div class="main control-panel">
-  <fieldset>
+
     <legend>Controls for Presentation:</legend>
     <h3>Account rate() functions:</h3>
-    <%= link_to "Credit rate() function", "test/credit_rate", remote: true %><br/>
-    <%= link_to "Market rate() function", "test/market_rate", remote: true %><br/>
-    <%= link_to "Saving rate() function", "test/saving_rate", remote: true %><br/><br/>
+    <%= link_to "Credit rate() function", "test/credit_rate", remote: true %>
+    <%= link_to "Market rate() function", "test/market_rate", remote: true %>
+    <%= link_to "Saving rate() function", "test/saving_rate", remote: true %><br/>
     <h3>Bills</h3>
-    <%= link_to "Pay all Bills", "test/bill_pay" %><br/><br/>
-    <h3>Mortgages</h3>
-    <%= link_to "Mortgage behind payment function", "test/mortgages_behind" %><br/>
-  </fieldset>
+    <%= link_to "Pay all Bills", "test/bill_pay" %><br/>
 </div>

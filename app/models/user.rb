@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
     :format => %r{[a-zA-Z0-9]} # etc.
     
   attr_accessor :login, :level, :encrypted_login
+  
+  has_many :accounts
     
 	LEVELS=[[1,"Administrator"],[2,"Teller"],[3,"Customer"]]
 	
@@ -29,6 +31,15 @@ class User < ActiveRecord::Base
     return results
   end
 	
+
+  def display_account_id
+    number = "#{self.id}"
+    number = "%.8i" % number
+    last_4 = number[number.length - 4, 4]
+    first_4 = number[0, 4]
+    return "#{first_4}-#{last_4}"
+  end
+  
 	# Humanizes user_level for readability
 	def level
     if self.user_level == 1

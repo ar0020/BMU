@@ -2,8 +2,9 @@ class Transfer < Transaction
   attr_accessor :to_account_id, :from_account_id
 
   def self.transfer(to_transfer, from_transfer)
-    to_transfer.transaction_type = "Transfer" if to_transfer.transaction_type.nil?
-    from_transfer.transaction_type = "Transfer" if from_transfer.transaction_type.nil?
+
+    to_transfer.transaction_type = "Transfer"
+    from_transfer.transaction_type = "Transfer"
     # make sure amount is positive
     to_transfer.convert_amount
     from_transfer.convert_amount
@@ -37,8 +38,8 @@ class Transfer < Transaction
     end
     Transfer.transaction do
       Account.transaction do
-        to_transfer.save!
-        from_transfer.save!
+        to_transfer.save
+        from_transfer.save
         to_account.update_attribute(:current_balance, to_balance)
         from_account.update_attribute(:current_balance, from_balance)
         raise ActiveRecord::Rollback unless ((to_transfer.valid? && from_transfer.valid?) && (to_account.valid? && from_account.valid?))

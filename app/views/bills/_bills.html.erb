@@ -1,35 +1,5 @@
 <h2>Bills</h2>
 
-<table>
-  <thead>
-  <tr>
-    <th>From Account</th>
-    <th>To</th>
-    <th>Amount</th>
-    <th>Date Due</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @bills.each do |bill| %>
-      <tr>
-        <td><%= Account.find(bill.account_id).display_account_id %></td>
-        <td><%= bill.payee_name %></td>
-        <td><%= bill.amount %></td>
-        <td><%= bill.pay_date %></td>
-        <td><%= link_to 'Show', bill %></td>
-        <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
-        <% if bill.is_recurring == true -%>
-            <td><%= link_to 'Stop Recurrence', stop_recurrence_path(bill) %></td>
-        <% else -%>
-            <td><%= link_to 'Start Recurrence', start_recurrence_path(bill) %></td>
-        <% end %>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<br>
+<% @bills.each do |bill| %>
+    <%= link_to "Bill to #{bill.payee_name} : Amount #{number_to_currency(bill.amount)} : From #{Account.find(bill.account_id).display_account_id}", bill%>
+<% end %>

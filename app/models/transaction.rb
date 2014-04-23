@@ -5,15 +5,15 @@ class Transaction < ActiveRecord::Base
   #validates_associated :user, :account
   validates :user, :amount_string, :amount, :transaction_type, :account, presence: true
 
-  validates :amount_string, format: { 
+  validates :amount_string, format: {
             with: /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/,
             message: " is invalid.",
             multiline: true}
-            
+
   before_validation :convert_amount
-  
+
   attr_accessor :amount_string
-  
+
   MORTGAGE = ["Deposit"]
   CHECKING = ["Deposit", "Withdrawal", "Transfer"]
   CREDIT   = ["Deposit", "Withdrawal", "Transfer"]
@@ -46,12 +46,18 @@ class Transaction < ActiveRecord::Base
     end
   end
 
-  
+
   def convert_amount
     match = ""
     for i in self.amount_string.scan(/\d\.*/)
       match += i
     end
     self.amount = match.to_f
+  end
+
+  def short_hand_type
+    return("DEPO") if self.transaction_type == "Deposit"
+    return("WITH") if self.transaction_type == "Withdrawal"
+    return("XFER") if self.transaction_type == "Transfer"
   end
 end
