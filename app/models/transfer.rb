@@ -20,8 +20,17 @@ class Transfer < Transaction
     to_account = Account.find(to_transfer.account_id)
     from_account = Account.find(from_transfer.account_id)
     # Validates that the user_id entered is valid.
-    to_balance = to_account.current_balance + to_transfer.amount
-    from_balance = from_account.current_balance - from_transfer.amount
+    if to_account.account_type == "Morgage" or to_account.account_type == "Credit"
+      to_balance = to_account.current_balance - to_transfer.amount 
+    else     
+      to_balance = to_account.current_balance + to_transfer.amount 
+    end
+    
+    if from_account.account_type == "Mortgage" or from_account.account_type == "Credit"
+      from_balance = from_account.current_balance + from_transfer.amount
+    else      
+      from_balance = from_account.current_balance - from_transfer.amount
+    end
     # Validates that the user_id entered is valid.
     user = User.find(from_transfer.user_id)
   # Validates that user either owns both accounts or the user is a teller.

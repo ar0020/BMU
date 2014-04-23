@@ -55,7 +55,7 @@ class AccountsController < ApplicationController
     else
       flash[:notice] = "No longer able to delete account. Try disabling it."
     end
-    redirect_to :back
+    redirect_to :controller=>:customer, :action=>:index, :id=>@user.id
   end
 
   private
