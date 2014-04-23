@@ -17,6 +17,5 @@ class CustomerController < ApplicationController
                          OR
                          is_recurring = ?
                         ", Date.today, false, true)
-
   end
 end

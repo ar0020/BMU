@@ -22,12 +22,16 @@ class User < ActiveRecord::Base
 	LEVELS=[[1,"Administrator"],[2,"Teller"],[3,"Customer"]]
 	
 	# Search function for User table.
-  def self.users(user)
+  def users
     results = User.limit(50)
-    results = results.where("users.username LIKE ?", user.username) unless user.username == ''
-    results = results.where("users.email LIKE ?", user.email) unless user.email == ''
-    results = results.where("users.id = ?", user.id) unless user.id.nil?
-    results = results.where("users.user_level = ?", user.user_level) unless user.user_level.nil?
+    #tmp_user = User.new(username: self.username, email: self.email, id: self.id, user_level: self.user_level)
+    if self.username != ''
+      self.encrypt_username
+      results = results.where("users.username LIKE ?", self.username)
+    end 
+    results = results.where("users.email LIKE ?", self.email) unless self.email == ''
+    results = results.where("users.id = ?", self.id) unless self.id.nil?
+    results = results.where("users.user_level = ?", self.user_level) unless self.user_level.nil?
     return results
   end
 	
@@ -53,13 +57,6 @@ class User < ActiveRecord::Base
     end
 	end
   
-
-  def synchronous_encrypt_param2(param)
-    sha256 = OpenSSL::Digest::SHA256.new
-    sha256.digest(param)
-    param.encode('UTF-8')
-    return param
-  end
   
   #### This is the correct method you override with the code above
   #### def self.find_for_database_authentication(warden_conditions)
@@ -67,11 +64,9 @@ class User < ActiveRecord::Base
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      #login = synchronous_encrypt_param(login)
-      sha256 = OpenSSL::Digest::SHA256.new
-      sha256.digest(login)
-      login.encode('UTF-8')
-      where(conditions).where(["username = ?", login ]).first
+      user = User.new(username: login)
+      user.encrypt_username
+      where(conditions).where(["username = ?", user.username ]).first
     else
       where(conditions).first
     end
@@ -88,32 +83,14 @@ class User < ActiveRecord::Base
   before_validation :encrypt_username
   
   def encrypt_username
-    #self.username = synchronous_encrypt_param(self.username)
-    name = self.username
-    sha256 = OpenSSL::Digest::SHA256.new
-    #name = sha256.digest(name)
-    self.username = name.encode('UTF-8')
+    cipher = Cipher.new  ["K", "D", "w", "X", "H", "3", "e", "1", "S", "B", "g", "a", "y", "v", "I", "6", "u", "W", "C", "0", "9", "b", "z", "T", "A", "q", "U", "4", "O", "o", "E", "N", "r", "n", "m", "d", "k", "x", "P", "t", "R", "s", "J", "L", "f", "h", "Z", "j", "Y", "5", "7", "l", "p", "c", "2", "8", "M", "V", "G", "i", " ", "Q", "F"]
+    crypted = cipher.encrypt self.username
+    self.username = crypted
   end
-
-  private
   
-  def synchronous_encrypt_param2(param)
-    # create the cipher for encrypting
-    cipher = OpenSSL::Cipher::Cipher.new("aes-256-cbc")
-    cipher.encrypt
-    
-    # you will need to store these for later, in order to decrypt your data
-    key = Digest::SHA1.hexdigest("supersecrethexdigestpasswordthatnoonewilleverknow")
-    iv = cipher.random_iv
-    
-    # load them into the cipher
-    cipher.key = key
-    cipher.iv = iv
-    
-    # encrypt the message
-    encrypted = cipher.update(param)
-    encrypted << cipher.final
-    #encrypted.sink.write(response[:data].force_encoding('ASCII-8BIT').encode('UTF-8'))
-    return encrypted#.encode('UTF-8')
+  def display_username
+    cipher = Cipher.new  ["K", "D", "w", "X", "H", "3", "e", "1", "S", "B", "g", "a", "y", "v", "I", "6", "u", "W", "C", "0", "9", "b", "z", "T", "A", "q", "U", "4", "O", "o", "E", "N", "r", "n", "m", "d", "k", "x", "P", "t", "R", "s", "J", "L", "f", "h", "Z", "j", "Y", "5", "7", "l", "p", "c", "2", "8", "M", "V", "G", "i", " ", "Q", "F"]
+    decrypted = cipher.decrypt self.username
+    return decrypted
   end
 end
