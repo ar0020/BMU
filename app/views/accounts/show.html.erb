@@ -27,7 +27,7 @@
     <%= link_to "Deposit", deposit_by_id_path(@account.id) %>
     <%= link_to "Withdraw", withdraw_by_id_path(@account.id) %>
       <%= link_to "Transfer", transfer_by_id_path(@account.id) %>
-      <%= link_to "Printable Statment", account_path(@account, :format => 'pdf') %></br>
+      <%= link_to "Printable Statement", account_path(@account, :format => 'pdf') %></br>
   </fieldset>
 </div>
 <% end %>
@@ -57,7 +57,7 @@
     <% end %>
   </p>
     <% if customer? %>
-      <%= link_to "Statment", account_path(@account, :format => 'pdf') %>
+      <%= link_to "Statement", account_path(@account, :format => 'pdf') %>
     <% end %>
 </div>
 
