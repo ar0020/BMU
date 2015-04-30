@@ -1,7 +1,5 @@
 class CreditsController < AccountsController
   before_action :set_credit, only: [:edit, :update]
-  before_filter :admin_protect
-
 
   def new
     @user = User.find(params[:id])

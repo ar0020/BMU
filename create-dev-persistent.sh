@@ -1,1 +1,0 @@
-docker run -d -p 3000:3000 -p 5432:5432 -name="bmu-dev" -v /home/vagrant/github:/home/app/github neoky/bmu /sbin/init

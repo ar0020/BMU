@@ -1,0 +1,6 @@
+<h2>Search Results</h2>
+
+
+<% for user in @users %>
+  <%= link_to "#{user.display_account_id} : #{user.level} : #{user.display_username}", customer_by_id_path(user) %>
+<% end %>

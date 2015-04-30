@@ -1,7 +1,5 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy, :enable, :disable]
-  before_filter :admin_protect, except: [:show, :index]
-  before_filter :admin_teller_protect, only: [:index]
   prawnto :prawn => {:top_margin => 75}
 
   # GET /accounts

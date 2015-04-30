@@ -1,6 +1,5 @@
 class MortgagesController < AccountsController
   before_action :set_mortgage, only: [:edit, :update]
-  before_filter :admin_protect
 
   def new
     @user = User.find(params[:id])

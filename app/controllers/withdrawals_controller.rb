@@ -1,5 +1,4 @@
 class WithdrawalsController < TransactionsController
-  before_filter :teller_protect
 
   # GET /withdrawals/new
   def new

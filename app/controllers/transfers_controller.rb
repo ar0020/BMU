@@ -1,5 +1,4 @@
 class TransfersController < TransactionsController
-  before_filter :teller_customer_protect
 
   # GET /transfers/new
   def new

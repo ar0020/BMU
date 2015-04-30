@@ -1,5 +1,4 @@
 class TransactionsController < ApplicationController
-  before_filter :protect
 
   # GET /transactions
   # GET /transactions.json

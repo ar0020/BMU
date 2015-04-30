@@ -1,6 +1,5 @@
 class MarketsController < AccountsController
   before_action :set_market, only: [:edit, :update]
-  before_filter :admin_protect
 
   def new
     @user = User.find(params[:id])

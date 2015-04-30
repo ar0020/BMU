@@ -1,5 +1,4 @@
 class DepositsController < TransactionsController
-  before_filter :teller_protect
 
   # GET /deposits/new
   def new

@@ -2,74 +2,16 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :authenticate_user!
+  before_filter :require_login
+  helper_method :current_user
 
-  before_filter :configure_permitted_parameters, if: :devise_controller?
+  private
+    def current_user
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    end
+
+    def require_login
+      redirect_to new_sessions_path unless current_user
+    end
   
-  # Check if logged in user is an admin
-  def admin?
-    if user_signed_in? && current_user.user_level == 1
-      return true
-    end
-    return false
-  end
-
-  def teller?
-    if current_user.user_level == 2
-      return true
-    end
-    return false
-  end
-
-  def customer?
-    if current_user.user_level == 3
-      return true
-    end
-    return false
-  end
-
-  
-  protected
-  
-  def admin_protect
-    if !admin?
-      flash[:notice] = "Admin Only Function"
-      redirect_to :controller=>:home, :action=>:index
-    end
-  end
-
-  def teller_protect
-    if !teller?
-      flash[:notice] = "Teller Only Function"
-      redirect_to :controller=>:home, :action=>:index
-    end
-  end
-
-  def admin_teller_protect
-    if !admin? && !teller?
-      flash[:notice] = "Admin & Teller Only Function"
-      redirect_to :controller=>:home, :action=>:index
-    end
-  end
-
-  def teller_customer_protect
-    if !teller? && !customer?
-      flash[:notice] = "Teller & Customer Only Function"
-      redirect_to :controller=>:home, :action=>:index
-    end
-  end
-
-  def protect
-    if !admin? && !teller? && !customer?
-      flash[:notice] = "Contact Administration: No user level assigned."
-      redirect_to :controller=>:home, :action=>:index
-    end
-  end
-
-  # Had to implement this for using username instead of email for devise.
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :remember_me, :user_level) }
-    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
-  end
 end

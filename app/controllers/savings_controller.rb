@@ -1,6 +1,5 @@
 class SavingsController < AccountsController
   before_action :set_saving, only: [:edit, :update]
-  before_filter :admin_protect
 
   def new
     @user = User.find(params[:id])
